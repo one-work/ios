@@ -7,12 +7,12 @@ import WebKit
 /// which will send the selected index of the tapped menu item back to the web.
 final class MenuComponent: BridgeComponent {
   override class var name: String { "menu" }
-  
+
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
       return
     }
-    
+
     switch event {
     case .display:
       handleDisplayEvent(message: message)

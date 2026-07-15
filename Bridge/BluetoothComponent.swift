@@ -3,16 +3,15 @@ import HotwireNative
 import UIKit
 import WebKit
 
-/// Bridge component to display a native bottom sheet menu,
-/// which will send the selected index of the tapped menu item back to the web.
-final class MenuComponent: BridgeComponent {
+/// 蓝牙逻辑
+final class BluetoothComponent: BridgeComponent {
   override class var name: String { "menu" }
-  
+
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
       return
     }
-    
+
     switch event {
     case .display:
       handleDisplayEvent(message: message)
@@ -78,7 +77,7 @@ final class MenuComponent: BridgeComponent {
 
 // MARK: Events
 
-private extension MenuComponent {
+private extension BluetoothComponent {
   enum Event: String {
     case display
   }
@@ -86,7 +85,7 @@ private extension MenuComponent {
 
 // MARK: Message data
 
-private extension MenuComponent {
+private extension BluetoothComponent {
   struct Source: Decodable {
     let x: Double
     let y: Double
