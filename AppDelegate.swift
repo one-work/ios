@@ -22,11 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   private func configureHotwire() {
-    // Load the path configuration
-    Hotwire.loadPathConfiguration(from: [
-      .file(Bundle.main.url(forResource: "path-configuration", withExtension: "json")!),
-      .server(Demo.current.appendingPathComponent("configurations/ios_v1.json"))
-    ])
+    Hotwire.loadPathConfiguration(
+      from: [
+        .file(Bundle.main.url(forResource: "path-configuration", withExtension: "json")!),
+        .server(Demo.current.appendingPathComponent("configurations/ios_v1.json"))
+      ]
+    )
 
     // Set an optional custom user agent application prefix.
     Hotwire.config.applicationUserAgentPrefix = "Hotwire Demo;"
