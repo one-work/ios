@@ -9,11 +9,11 @@ extension HotwireTab {
       .bridgeComponents,
       .resources
     ]
-    
+
     if Demo.current == Demo.local {
       tabs.append(.bugsAndFixes)
     }
-    
+
     return tabs
   }()
 
@@ -25,13 +25,13 @@ extension HotwireTab {
 
   static let bridgeComponents = HotwireTab(
     title: "Bridge Components",
-    image: UIImage(systemName: "widget.small")!,
+    image: .init(systemName: "widget.small")!,
     url: Demo.current.appendingPathComponent("components")
   )
 
   static let resources = HotwireTab(
     title: "Resources",
-    image: UIImage(systemName: "questionmark.text.page")!,
+    image: .init(systemName: "questionmark.text.page")!,
     url: Demo.current.appendingPathComponent("resources")
   )
 
