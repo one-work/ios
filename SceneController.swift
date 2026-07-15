@@ -43,7 +43,7 @@ extension SceneController: NavigatorDelegate {
       return .accept
     }
   }
-  
+
   func visitableDidFailRequest(_ visitable: any Visitable, error: HotwireNativeError, retryHandler: RetryBlock?) {
     switch error {
     case .http(.client(.unauthorized)):
