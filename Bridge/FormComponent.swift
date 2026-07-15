@@ -55,7 +55,6 @@ final class FormComponent: BridgeComponent {
 }
 
 // MARK: Events
-
 private extension FormComponent {
   enum Event: String {
     case connect
@@ -65,7 +64,6 @@ private extension FormComponent {
 }
 
 // MARK: Message data
-
 private extension FormComponent {
   struct MessageData: Decodable {
     let submitTitle: String
