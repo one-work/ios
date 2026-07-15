@@ -5,7 +5,7 @@ import WebKit
 
 final class SceneController: UIResponder {
   var window: UIWindow?
-  
+
   private let rootURL = Demo.current
   private lazy var tabBarController = HotwireTabBarController(
     navigatorDelegate: self,
@@ -13,7 +13,7 @@ final class SceneController: UIResponder {
   )
   
   // MARK: - Authentication
-  
+
   private func promptForAuthentication() {
     // Clean up empty screen from 401 response.
     tabBarController.activeNavigator.pop(animated: false)
@@ -30,7 +30,6 @@ extension SceneController: UIWindowSceneDelegate {
     window = UIWindow(windowScene: windowScene)
     window?.rootViewController = tabBarController
     window?.makeKeyAndVisible()
-    
     tabBarController.load(HotwireTab.all)
   }
 }
@@ -39,12 +38,7 @@ extension SceneController: NavigatorDelegate {
   func handle(proposal: VisitProposal, from navigator: Navigator) -> ProposalResult {
     switch proposal.viewController {
     case NumbersViewController.pathConfigurationIdentifier:
-      return .acceptCustom(NumbersViewController(
-        url: proposal.url,
-        navigator: navigator
-      )
-      )
-      
+      return .acceptCustom(NumbersViewController(url: proposal.url, navigator: navigator))
     default:
       return .accept
     }
