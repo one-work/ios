@@ -18,32 +18,31 @@ final class MenuComponent: BridgeComponent {
       handleDisplayEvent(message: message)
     }
   }
-  
+
   // MARK: Private
-  
   private var viewController: UIViewController? {
     delegate?.destination as? UIViewController
   }
-  
+
   private func handleDisplayEvent(message: Message) {
     guard let data: MessageData = message.data() else { return }
     showAlertSheet(with: data.title, items: data.items, source: data.source)
   }
-  
+
   private func showAlertSheet(with title: String, items: [Item], source: Source) {
     let alertController = UIAlertController(
       title: title,
       message: nil,
       preferredStyle: .actionSheet
     )
-    
+
     for item in items {
       let action = UIAlertAction(title: item.title, style: .default) { [unowned self] _ in
         onItemSelected(item: item)
       }
       alertController.addAction(action)
     }
-    
+
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     alertController.addAction(cancelAction)
     
@@ -60,7 +59,7 @@ final class MenuComponent: BridgeComponent {
       // so we need to account for the inset at the top.
       let contentInsetTop = webView.scrollView.adjustedContentInset.top
       let y = source.y + Double(contentInsetTop)
-      
+
       popoverController.sourceRect = CGRect(
         x: source.x, y: y, width: source.width, height: source.height
       )
@@ -68,7 +67,7 @@ final class MenuComponent: BridgeComponent {
     
     viewController?.present(alertController, animated: true)
   }
-  
+
   private func onItemSelected(item: Item) {
     reply(
       to: Event.display.rawValue,

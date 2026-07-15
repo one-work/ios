@@ -6,7 +6,7 @@ import UIKit
 /// which will submit the form on the page when tapped.
 final class FormComponent: BridgeComponent {
   override class var name: String { "form" }
-  
+
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
       return
@@ -21,34 +21,33 @@ final class FormComponent: BridgeComponent {
       handleSubmitDisabled()
     }
   }
-  
+
   // MARK: Private
-  
   private weak var submitBarButtonItem: UIBarButtonItem?
   private var viewController: UIViewController? {
     delegate?.destination as? UIViewController
   }
-  
+
   private func handleConnectEvent(message: Message) {
     guard let data: MessageData = message.data() else { return }
     configureBarButton(with: data.submitTitle)
   }
-  
+
   private func handleSubmitEnabled() {
     submitBarButtonItem?.isEnabled = true
   }
-  
+
   private func handleSubmitDisabled() {
     submitBarButtonItem?.isEnabled = false
   }
-  
+
   private func configureBarButton(with title: String) {
     guard let viewController else { return }
-    
+
     let action = UIAction { [unowned self] _ in
       reply(to: Event.connect.rawValue)
     }
-    
+
     let item = UIBarButtonItem(title: title, primaryAction: action)
     viewController.navigationItem.rightBarButtonItem = item
     submitBarButtonItem = item
