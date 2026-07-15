@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       FormComponent.self,
       MenuComponent.self,
       OverflowMenuComponent.self,
+      BluetoothComponent.self
     ])
 
     // Set configuration options
