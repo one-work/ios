@@ -16,37 +16,25 @@ extension HotwireTab {
     
     return tabs
   }()
-  
+
   static let navigation = HotwireTab(
     title: "Navigation",
     image: .init(systemName: "arrow.left.arrow.right")!,
     url: Demo.current
   )
-  
+
   static let bridgeComponents = HotwireTab(
     title: "Bridge Components",
-    image: {
-      if #available(iOS 17.4, *) {
-        return UIImage(systemName: "widget.small")!
-      } else {
-        return UIImage(systemName: "square.grid.2x2")!
-      }
-    }(),
+    image: UIImage(systemName: "widget.small")!,
     url: Demo.current.appendingPathComponent("components")
   )
-  
+
   static let resources = HotwireTab(
     title: "Resources",
-    image: {
-      if #available(iOS 17.4, *) {
-        return UIImage(systemName: "questionmark.text.page")!
-      } else {
-        return UIImage(systemName: "book.closed")!
-      }
-    }(),
+    image: UIImage(systemName: "questionmark.text.page")!,
     url: Demo.current.appendingPathComponent("resources")
   )
-  
+
   static let bugsAndFixes = HotwireTab(
     title: "Bugs & Fixes",
     image: .init(systemName: "ladybug")!,
