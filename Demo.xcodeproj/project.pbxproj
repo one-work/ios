@@ -20,7 +20,7 @@
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
 		84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A617FE2D5AA88B00694AEE /* Tabs.swift */; };
 		D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */; };
-		D888F3E130088337001CEFB6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3E030088337001CEFB6 /* BluetoothManager.swift */; };
+		D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3E33008C635001CEFB6 /* BluetoothManager.swift */; };
 		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +40,7 @@
 		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
 		84A617FE2D5AA88B00694AEE /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothComponent.swift; sourceTree = "<group>"; };
-		D888F3E030088337001CEFB6 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		D888F3E33008C635001CEFB6 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,11 +93,11 @@
 		844BA7BA2B9A4893008F48DB /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
+				D888F3E33008C635001CEFB6 /* BluetoothManager.swift */,
 				D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */,
 				844BA7A32B9A488A008F48DB /* FormComponent.swift */,
 				844BA7AB2B9A488A008F48DB /* MenuComponent.swift */,
 				844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */,
-				D888F3E030088337001CEFB6 /* BluetoothManager.swift */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -192,7 +192,7 @@
 				D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */,
 				844BA7B72B9A488A008F48DB /* NumbersViewController.swift in Sources */,
 				844BA7B82B9A488A008F48DB /* Demo.swift in Sources */,
-				D888F3E130088337001CEFB6 /* BluetoothManager.swift in Sources */,
+				D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */,
 				84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */,
 				844BA78B2B9A4843008F48DB /* AppDelegate.swift in Sources */,
 				844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */,

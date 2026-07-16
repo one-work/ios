@@ -1,81 +1,57 @@
-import Foundation
 import HotwireNative
-import UIKit
-import WebKit
+import Foundation
 
-/// 蓝牙逻辑
 final class BluetoothComponent: BridgeComponent {
-  override class var name: String { "bluetooth" }
-  private let bluetoothManager = BluetoothManager()
-
-  override func onReceive(message: Message) {
-    guard let event = Event(rawValue: message.event) else {
-      return
+    public override class var name: String { "bluetooth" }
+    
+    private lazy var bluetoothManager: BluetoothManager = {
+        let manager = BluetoothManager()
+        manager.onDevicesFound = { [weak self] devices in
+            self?.reply(to: "search", with: ["devices": devices])
+        }
+        manager.onConnected = { [weak self] success in
+            self?.reply(to: "connect_device", with: success)
+        }
+        manager.onDataSent = { [weak self] result in
+            self?.reply(to: "send_data", with: result)
+        }
+        return manager
+    }()
+    
+    public override func onReceive(message: Message) {
+        switch message.event {
+        case "connect":
+            bluetoothManager.initialize()
+            reply(to: "connect")
+            
+        case "search":
+            bluetoothManager.startScan()
+            
+        case "connect_device":
+            if let data: ConnectDeviceData = message.data() {
+                bluetoothManager.connect(to: data.address)
+            }
+            
+        case "send_data":
+            if let data: SendData = message.data() {
+                bluetoothManager.send(data: data.data)
+            }
+            
+        default:
+            break
+        }
     }
-
-    switch event {
-    case .display:
-      handleDisplayEvent(message: message)
-    }
-  }
-
-  // MARK: Private
-  private var viewController: UIViewController? {
-    delegate?.destination as? UIViewController
-  }
-
-  private func handleDisplayEvent(message: Message) {
-    guard let data: MessageData = message.data() else { return }
-    showAlertSheet(with: data.title, items: data.items)
-  }
-
-  private func showAlertSheet(with title: String, items: [Item]) {
-    let alertController = UIAlertController(
-      title: title,
-      message: nil,
-      preferredStyle: .actionSheet
-    )
-
-    for item in items {
-      let action = UIAlertAction(title: item.title, style: .default) { [unowned self] _ in
-        onItemSelected(item: item)
-      }
-      alertController.addAction(action)
-    }
-
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-    alertController.addAction(cancelAction)
-  }
-
-  private func onItemSelected(item: Item) {
-    reply(
-      to: Event.display.rawValue,
-      with: SelectionMessageData(selectedIndex: item.index)
-    )
-  }
 }
 
-// MARK: Events
-private extension BluetoothComponent {
-  enum Event: String {
-    case display
-  }
-}
+// MARK: - Data Models
 
-// MARK: Message data
 private extension BluetoothComponent {
-  struct MessageData: Decodable {
-    let title: String
-    let items: [Item]
-
-  }
-  
-  struct Item: Decodable {
-    let title: String
-    let index: Int
-  }
-  
-  struct SelectionMessageData: Encodable {
-    let selectedIndex: Int
-  }
+    struct ConnectDeviceData: Decodable {
+        let address: String
+    }
+    
+    struct SendData: Decodable {
+        let address: String
+        let data: String
+    }
 }
