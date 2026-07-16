@@ -19,12 +19,12 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   private var targetPeripheral: CBPeripheral?
   private var targetCharacteristic: CBCharacteristic?
   private var scanTimer: Timer?
-  
+
   // MARK: - Initialization
   func initialize() {
     centralManager = CBCentralManager(delegate: self, queue: nil)
   }
-  
+
   // MARK: - Scan
   func startScan() {
     discoveredPeripherals.removeAll()
@@ -32,14 +32,14 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
       withServices: nil,
       options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
     )
-    
+
     scanTimer?.invalidate()
     scanTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
       self?.centralManager?.stopScan()
       self?.sendDeviceList()
     }
   }
-  
+
   private func sendDeviceList() {
     let devices: [DeviceInfo] = discoveredPeripherals.map { peripheral in
       return DeviceInfo(
@@ -49,7 +49,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     }
     onDevicesFound?(devices)
   }
-  
+
   // MARK: - Connect
   func connect(to uuidString: String) {
     guard let peripheral = discoveredPeripherals.first(where: {
@@ -58,7 +58,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
       onConnected?(false)
       return
     }
-    
+
     targetPeripheral = peripheral
     centralManager?.connect(peripheral, options: nil)
   }
@@ -70,12 +70,12 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
       onDataSent?(SendResultData(success: false, error: "未连接设备"))
       return
     }
-    
+
     guard let sendData = data.data(using: .utf8) else {
       onDataSent?(SendResultData(success: false, error: "数据编码失败"))
       return
     }
-    
+
     peripheral.writeValue(sendData, for: characteristic, type: .withResponse)
     onDataSent?(SendResultData(success: true, error: nil))
   }
@@ -83,7 +83,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   // MARK: - CBCentralManagerDelegate
   
   func centralManagerDidUpdateState(_ central: CBCentralManager) {}
-  
+
   func centralManager(
     _ central: CBCentralManager,
     didDiscover peripheral: CBPeripheral,
@@ -95,7 +95,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
       discoveredPeripherals.append(peripheral)
     }
   }
-  
+
   func centralManager(
     _ central: CBCentralManager,
     didConnect peripheral: CBPeripheral
@@ -104,7 +104,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     peripheral.discoverServices(nil)
     onConnected?(true)
   }
-  
+
   func centralManager(
     _ central: CBCentralManager,
     didFailToConnect peripheral: CBPeripheral,
@@ -148,7 +148,6 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 }
 
 // MARK: - 设备信息结构体
-
 struct DeviceInfo: Encodable {
   let name: String
   let address: String
