@@ -2,10 +2,66 @@ import Foundation
 import HotwireNative
 import UIKit
 import WebKit
+import CoreBluetooth
 
 /// 蓝牙逻辑
-final class BluetoothComponent: BridgeComponent {
-  override class var name: String { "menu" }
+final class BluetoothComponent: BridgeComponent, CBCentralManagerDelegate {
+  func isKind(of aClass: AnyClass) -> Bool {
+    <#code#>
+  }
+  
+  func isMember(of aClass: AnyClass) -> Bool {
+    <#code#>
+  }
+  
+  func conforms(to aProtocol: Protocol) -> Bool {
+    <#code#>
+  }
+  
+  
+  @MainActor required init(destination: any BridgeDestination, delegate: any BridgingDelegate) {
+    fatalError("init(destination:delegate:) has not been implemented")
+  }
+  func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    <#code#>
+  }
+  
+  func isEqual(_ object: Any?) -> Bool {
+    <#code#>
+  }
+  
+  let hash: Int
+  
+  let superclass: AnyClass?
+  
+  func `self`() -> Self {
+    <#code#>
+  }
+  
+  func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
+    <#code#>
+  }
+  
+  func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+    <#code#>
+  }
+  
+  func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
+    <#code#>
+  }
+  
+  func isProxy() -> Bool {
+    <#code#>
+  }
+  
+  
+  func responds(to aSelector: Selector!) -> Bool {
+    <#code#>
+  }
+  
+  let description: String
+  
+  override class var name: String { "bluetooth" }
 
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
