@@ -5,62 +5,7 @@ import WebKit
 import CoreBluetooth
 
 /// 蓝牙逻辑
-final class BluetoothComponent: BridgeComponent, CBCentralManagerDelegate {
-  func isKind(of aClass: AnyClass) -> Bool {
-    <#code#>
-  }
-  
-  func isMember(of aClass: AnyClass) -> Bool {
-    <#code#>
-  }
-  
-  func conforms(to aProtocol: Protocol) -> Bool {
-    <#code#>
-  }
-  
-  
-  @MainActor required init(destination: any BridgeDestination, delegate: any BridgingDelegate) {
-    fatalError("init(destination:delegate:) has not been implemented")
-  }
-  func centralManagerDidUpdateState(_ central: CBCentralManager) {
-    <#code#>
-  }
-  
-  func isEqual(_ object: Any?) -> Bool {
-    <#code#>
-  }
-  
-  let hash: Int
-  
-  let superclass: AnyClass?
-  
-  func `self`() -> Self {
-    <#code#>
-  }
-  
-  func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-    <#code#>
-  }
-  
-  func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-    <#code#>
-  }
-  
-  func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-    <#code#>
-  }
-  
-  func isProxy() -> Bool {
-    <#code#>
-  }
-  
-  
-  func responds(to aSelector: Selector!) -> Bool {
-    <#code#>
-  }
-  
-  let description: String
-  
+final class BluetoothComponent: BridgeComponent {
   override class var name: String { "bluetooth" }
 
   override func onReceive(message: Message) {
@@ -131,8 +76,80 @@ final class BluetoothComponent: BridgeComponent, CBCentralManagerDelegate {
   }
 }
 
-// MARK: Events
+extension BluetoothComponent : CBCentralManagerDelegate {
+  func isEqual(_ object: Any?) -> Bool {
+    <#code#>
+  }
+  
+  var hash: Int {
+    <#code#>
+  }
+  
+  var superclass: AnyClass? {
+    <#code#>
+  }
+  
+  func `self`() -> Self {
+    <#code#>
+  }
+  
+  func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
+    <#code#>
+  }
+  
+  func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+    <#code#>
+  }
+  
+  func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
+    <#code#>
+  }
+  
+  func isProxy() -> Bool {
+    <#code#>
+  }
+  
+  func isKind(of aClass: AnyClass) -> Bool {
+    <#code#>
+  }
+  
+  func isMember(of aClass: AnyClass) -> Bool {
+    <#code#>
+  }
+  
+  func conforms(to aProtocol: Protocol) -> Bool {
+    <#code#>
+  }
+  
+  func responds(to aSelector: Selector!) -> Bool {
+    <#code#>
+  }
+  
+  var description: String {
+    <#code#>
+  }
+  
+  func centralManagerDidUpdateState(central: CBCentralManager){
+          switch central.state {
+          case CBCentralManagerState.poweredOn:
+              //扫描周边蓝牙外设.
+              //写nil表示扫描所有蓝牙外设，如果传上面的kServiceUUID,那么只能扫描出FFEO这个服务的外设。
+              //CBCentralManagerScanOptionAllowDuplicatesKey为true表示允许扫到重名，false表示不扫描重名的。
+              self.manager.scanForPeripheralsWithServices(nil, options:[CBCentralManagerScanOptionAllowDuplicatesKey: false])
+              print("蓝牙已打开,请扫描外设")
+              discoverDevice()
+              
+          case CBCentralManagerState.Unauthorized:
+              print("这个应用程序是无权使用蓝牙低功耗")
+          case CBCentralManagerState.PoweredOff:
+              print("蓝牙目前已关闭")
+          default:
+              print("中央管理器没有改变状态")
+          }
+      }
+}
 
+// MARK: Events
 private extension BluetoothComponent {
   enum Event: String {
     case display
@@ -140,7 +157,6 @@ private extension BluetoothComponent {
 }
 
 // MARK: Message data
-
 private extension BluetoothComponent {
   struct Source: Decodable {
     let x: Double
