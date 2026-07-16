@@ -26,10 +26,10 @@ final class BluetoothComponent: BridgeComponent {
 
   private func handleDisplayEvent(message: Message) {
     guard let data: MessageData = message.data() else { return }
-    showAlertSheet(with: data.title, items: data.items, source: data.source)
+    showAlertSheet(with: data.title, items: data.items)
   }
 
-  private func showAlertSheet(with title: String, items: [Item], source: Source) {
+  private func showAlertSheet(with title: String, items: [Item]) {
     let alertController = UIAlertController(
       title: title,
       message: nil,
@@ -45,27 +45,6 @@ final class BluetoothComponent: BridgeComponent {
 
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     alertController.addAction(cancelAction)
-    
-    // Set popoverController for devices that support them (iPad, iOS 26+)
-    if let popoverController = alertController.popoverPresentationController,
-       let vc = viewController as? Visitable,
-       let sourceView = viewController?.view,
-       let webView = vc.visitableView.webView
-    {
-      popoverController.sourceView = sourceView
-      
-      // The source coordinates come from the bridge component relative to the web page content.
-      // The web view's scroll view has content insets for the navigation bar,
-      // so we need to account for the inset at the top.
-      let contentInsetTop = webView.scrollView.adjustedContentInset.top
-      let y = source.y + Double(contentInsetTop)
-
-      popoverController.sourceRect = CGRect(
-        x: source.x, y: y, width: source.width, height: source.height
-      )
-    }
-    
-    viewController?.present(alertController, animated: true)
   }
 
   private func onItemSelected(item: Item) {
@@ -85,17 +64,10 @@ private extension BluetoothComponent {
 
 // MARK: Message data
 private extension BluetoothComponent {
-  struct Source: Decodable {
-    let x: Double
-    let y: Double
-    let width: Double
-    let height: Double
-  }
-  
   struct MessageData: Decodable {
     let title: String
     let items: [Item]
-    let source: Source
+
   }
   
   struct Item: Decodable {
