@@ -3,12 +3,12 @@ import Foundation
 
 final class BluetoothManager: NSObject, CBCentralManagerDelegate {
   private var centralManager: CBCentralManager?
-  
+
   override init() {
     super.init()
     centralManager = CBCentralManager(delegate: self, queue: nil)
   }
-  
+
   func centralManagerDidUpdateState(_ central: CBCentralManager) {
     switch central.state {
     case .poweredOn:
@@ -23,7 +23,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate {
       break
     }
   }
-  
+
   func centralManager(
     _ central: CBCentralManager,
     didDiscover peripheral: CBPeripheral,
