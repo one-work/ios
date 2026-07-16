@@ -26,7 +26,7 @@ extension HotwireTab {
   static let bridgeComponents = HotwireTab(
     title: "Bridge Components",
     image: .init(systemName: "widget.small")!,
-    url: Demo.current.appendingPathComponent("components")
+    url: Demo.current.appendingPathComponent("bluetooth")
   )
 
   static let resources = HotwireTab(

@@ -82,7 +82,6 @@ private struct SendData: Decodable {
 }
 
 // MARK: - 发送数据模型（Encodable）
-
 private struct SearchResult: Encodable {
   let devices: [DeviceInfo]
 }
