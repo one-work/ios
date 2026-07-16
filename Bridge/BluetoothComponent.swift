@@ -2,11 +2,11 @@ import Foundation
 import HotwireNative
 import UIKit
 import WebKit
-import CoreBluetooth
 
 /// 蓝牙逻辑
 final class BluetoothComponent: BridgeComponent {
   override class var name: String { "bluetooth" }
+  private let bluetoothManager = BluetoothManager()
 
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
