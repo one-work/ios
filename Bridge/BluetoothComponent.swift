@@ -29,7 +29,6 @@ final class BluetoothComponent: BridgeComponent {
     let manager = BluetoothManager()
     manager.onDevicesFound = { [weak self] devices in
       guard let self = self else { return }
-      // 使用 Codable 结构体
       let payload = SearchResult(devices: devices)
       self.reply(to: "search", with: payload)
     }

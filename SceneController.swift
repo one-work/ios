@@ -13,7 +13,6 @@ final class SceneController: UIResponder {
   )
   
   // MARK: - Authentication
-
   private func promptForAuthentication() {
     // Clean up empty screen from 401 response.
     tabBarController.activeNavigator.pop(animated: false)
