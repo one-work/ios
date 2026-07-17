@@ -48,14 +48,14 @@ final class BluetoothComponent: BridgeComponent {
 
     self.bluetoothManager = manager
   }
-  
+
   private func handleConnectDevice(_ message: Message) {
     let data: ConnectDeviceData? = message.data()
     guard let address = data?.address else { return }
     setupBluetoothManager()
     bluetoothManager.connect(to: address)
   }
-  
+
   private func handleSendData(_ message: Message) {
     let data: SendData? = message.data()
     guard let text = data?.data else { return }
