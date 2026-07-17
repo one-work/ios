@@ -64,19 +64,15 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
   
   // MARK: - Send Data
-  func send(data: String) {
+  func send(bytes: [UInt8]) {
     guard let peripheral = targetPeripheral,
           let characteristic = targetCharacteristic else {
       onDataSent?(SendResultData(success: false, error: "未连接设备"))
       return
     }
 
-    guard let sendData = data.data(using: .utf8) else {
-      onDataSent?(SendResultData(success: false, error: "数据编码失败"))
-      return
-    }
-
-    peripheral.writeValue(sendData, for: characteristic, type: .withResponse)
+    let packet = Data(bytes)
+    peripheral.writeValue(packet, for: characteristic, type: .withResponse)
     onDataSent?(SendResultData(success: true, error: nil))
   }
   

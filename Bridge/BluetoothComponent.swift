@@ -60,7 +60,7 @@ final class BluetoothComponent: BridgeComponent {
     let data: SendData? = message.data()
     guard let text = data?.data else { return }
     setupBluetoothManager()
-    bluetoothManager.send(data: text)
+    bluetoothManager.send(bytes: text)
   }
 }
 
@@ -71,7 +71,7 @@ private struct ConnectDeviceData: Decodable {
 
 private struct SendData: Decodable {
   let address: String
-  let data: String
+  let data: [UInt8]
 }
 
 // MARK: - 发送数据模型（Encodable）
