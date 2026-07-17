@@ -25,7 +25,7 @@ final class BluetoothComponent: BridgeComponent {
 
   private func setupBluetoothManager() {
     guard bluetoothManager == nil else { return }
-    
+
     let manager = BluetoothManager()
     manager.onDevicesFound = { [weak self] devices in
       guard let self = self else { return }

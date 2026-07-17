@@ -81,7 +81,6 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
   
   // MARK: - CBCentralManagerDelegate
-  
   func centralManagerDidUpdateState(_ central: CBCentralManager) {}
 
   func centralManager(
@@ -112,9 +111,8 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   ) {
     onConnected?(false)
   }
-  
+
   // MARK: - CBPeripheralDelegate
-  
   func peripheral(
     _ peripheral: CBPeripheral,
     didDiscoverServices error: Error?
@@ -124,7 +122,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
       peripheral.discoverCharacteristics(nil, for: service)
     }
   }
-  
+
   func peripheral(
     _ peripheral: CBPeripheral,
     didDiscoverCharacteristicsFor service: CBService,
@@ -133,7 +131,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     guard let characteristics = service.characteristics else { return }
     targetCharacteristic = characteristics.first(where: { $0.properties.contains(.write) })
   }
-  
+
   func peripheral(
     _ peripheral: CBPeripheral,
     didWriteValueFor characteristic: CBCharacteristic,

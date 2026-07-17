@@ -6,6 +6,6 @@ struct Demo {
   static let example = URL(string: "https://hotwire-native-demo.dev")!
 
   static var current: URL {
-    example
+    remote
   }
 }
