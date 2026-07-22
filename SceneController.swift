@@ -16,7 +16,7 @@ final class SceneController: UIResponder {
   private func promptForAuthentication() {
     // Clean up empty screen from 401 response.
     tabBarController.activeNavigator.pop(animated: false)
-    
+
     let authURL = rootURL.appendingPathComponent("/session/new")
     tabBarController.activeNavigator.route(authURL)
   }
@@ -25,7 +25,7 @@ final class SceneController: UIResponder {
 extension SceneController: UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = scene as? UIWindowScene else { return }
-    
+
     window = UIWindow(windowScene: windowScene)
     window?.rootViewController = tabBarController
     window?.makeKeyAndVisible()
