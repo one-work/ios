@@ -7,7 +7,7 @@ struct SendResultData {
 }
 
 final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-  
+
   // MARK: - Callbacks
   var onDevicesFound: (([DeviceInfo]) -> Void)?
   var onConnected: ((Bool) -> Void)?
@@ -21,7 +21,8 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   private var scanTimer: Timer?
 
   // MARK: - Initialization
-  func initialize() {
+  override init() {
+    super.init()
     centralManager = CBCentralManager(delegate: self, queue: nil)
   }
 

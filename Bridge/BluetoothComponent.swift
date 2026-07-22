@@ -10,9 +10,9 @@ final class BluetoothComponent: BridgeComponent {
     
     switch message.event {
     case "connect":
-      bluetoothManager.initialize()
       let address = UserDefaults.standard.string(forKey: "address")
-      reply(to: "connect", with: address)
+      print("connect address: \(address ?? "nil")")
+      reply(to: "connect", with: ConnectStatus(address: address))
     case "search":
       bluetoothManager.startScan()
     case "connect_device":
@@ -85,4 +85,8 @@ private struct ConnectResult: Encodable {
 private struct SendResult: Encodable {
   let success: Bool
   let error: String?
+}
+
+private struct ConnectStatus: Encodable {
+  let address: String?
 }
