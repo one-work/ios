@@ -6,13 +6,14 @@ final class BluetoothComponent: BridgeComponent {
   private var bluetoothManager: BluetoothManager!
 
   public override func onReceive(message: Message) {
+    setupBluetoothManager()
+    
     switch message.event {
     case "connect":
-      setupBluetoothManager()
       bluetoothManager.initialize()
-      reply(to: "connect")
+      let address = UserDefaults.standard.string(forKey: "address")
+      reply(to: "connect", with: address)
     case "search":
-      setupBluetoothManager()
       bluetoothManager.startScan()
     case "connect_device":
       handleConnectDevice(message)
@@ -51,14 +52,13 @@ final class BluetoothComponent: BridgeComponent {
   private func handleConnectDevice(_ message: Message) {
     let data: ConnectDeviceData? = message.data()
     guard let address = data?.address else { return }
-    setupBluetoothManager()
+    UserDefaults.standard.set(address, forKey: "address")
     bluetoothManager.connect(to: address)
   }
 
   private func handleSendData(_ message: Message) {
     let data: SendData? = message.data()
     guard let text = data?.data else { return }
-    setupBluetoothManager()
     bluetoothManager.send(bytes: text)
   }
 }
