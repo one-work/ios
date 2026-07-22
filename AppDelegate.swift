@@ -50,14 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // 1. (可选) 共享 ProcessPool 以共享 Cookie
       // config.processPool = MySharedManager.shared.processPool
       
-      let jsSource = """
-      document.addEventListener("turbo:load", function() {
-          console.log("全局注入的 JS 在每次 Turbo 跳转后都执行了！");
-          // 你的业务逻辑，例如重新初始化某些 UI 库
-      });
-      """
-      
-      let userScript = WKUserScript(source: jsSource,injectionTime: .atDocumentStart,forMainFrameOnly: true)
+      let url = Bundle.main.url(forResource: "init", withExtension: "js")!
+      let source = try! String(contentsOf: url, encoding: .utf8)
+      let userScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
       config.userContentController.addUserScript(userScript)
 
       let webView = WKWebView(frame: .zero, configuration: config)
