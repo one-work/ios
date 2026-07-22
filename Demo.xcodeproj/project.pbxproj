@@ -22,6 +22,7 @@
 		D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */; };
 		D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3E33008C635001CEFB6 /* BluetoothManager.swift */; };
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
+		D8985B6130118C180049165C /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = D8985B6030118C0B0049165C /* init.js */; };
 		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothComponent.swift; sourceTree = "<group>"; };
 		D888F3E33008C635001CEFB6 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		D8985B6030118C0B0049165C /* init.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		844BA7892B9A4843008F48DB /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D8985B6030118C0B0049165C /* init.js */,
 				D89586BC300A0926007E1FF8 /* .gitignore */,
 				844BA7BA2B9A4893008F48DB /* Bridge */,
 				844BA7AD2B9A488A008F48DB /* Demo.swift */,
@@ -179,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D89586BD300A092D007E1FF8 /* .gitignore in Resources */,
+				D8985B6130118C180049165C /* init.js in Resources */,
 				844BA7942B9A4844008F48DB /* Assets.xcassets in Resources */,
 				844BA7B92B9A488A008F48DB /* path-configuration.json in Resources */,
 				844BA7972B9A4844008F48DB /* Base in Resources */,

@@ -45,12 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Hotwire.config.showDoneButtonOnModals = true
     Hotwire.config.animateReplaceActions = true
     
-    // 在 App 启动时配置
+    // 注入 js
     Hotwire.config.makeCustomWebView = { config in
       // 1. (可选) 共享 ProcessPool 以共享 Cookie
       // config.processPool = MySharedManager.shared.processPool
       
-      // 2. 准备要注入的 JS (必须监听 turbo:load 以适配 Hotwire 的页面内跳转)
       let jsSource = """
       document.addEventListener("turbo:load", function() {
           console.log("全局注入的 JS 在每次 Turbo 跳转后都执行了！");
@@ -58,17 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       });
       """
       
-      // 3. 创建 UserScript (注意：监听事件必须用 .atDocumentStart)
-      let userScript = WKUserScript(
-          source: jsSource,
-          injectionTime: .atDocumentStart,
-          forMainFrameOnly: true
-      )
-      
-      // 4. 将脚本添加到当前 config 中
+      let userScript = WKUserScript(source: jsSource,injectionTime: .atDocumentStart,forMainFrameOnly: true)
       config.userContentController.addUserScript(userScript)
-      
-      // 5. 返回配置好的 WebView 给 Hotwire
+
       let webView = WKWebView(frame: .zero, configuration: config)
       if #available(iOS 16.4, *) {
         webView.isInspectable = true
