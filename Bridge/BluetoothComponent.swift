@@ -24,17 +24,20 @@ final class BluetoothComponent: BridgeComponent {
   }
 
   private func setupBluetoothManager() {
-    BluetoothManager.shared.onDevicesFound = { [weak self] devices in
+    BluetoothManager.shared.onDevicesFound = {
+      [weak self] devices in
       guard let self = self else { return }
       let payload = SearchResult(devices: devices)
       self.reply(to: "search", with: payload)
     }
-    BluetoothManager.shared.onConnected = { [weak self] success in
+    BluetoothManager.shared.onConnected = {
+      [weak self] success in
       guard let self = self else { return }
       let payload = ConnectResult(success: success)
       self.reply(to: "connect_device", with: payload)
     }
-    BluetoothManager.shared.onDataSent = { [weak self] result in
+    BluetoothManager.shared.onDataSent = {
+      [weak self] result in
       guard let self = self else { return }
       let payload = SendResult(success: result.success, error: result.error)
       self.reply(to: "send_data", with: payload)
