@@ -4,6 +4,7 @@ import WebKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     configureAppearance()
     configureHotwire()
@@ -46,10 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Hotwire.config.animateReplaceActions = true
     
     // 注入 js
-    Hotwire.config.makeCustomWebView = { config in
-      // 1. (可选) 共享 ProcessPool 以共享 Cookie
-      // config.processPool = MySharedManager.shared.processPool
-      
+    Hotwire.config.makeCustomWebView = { config in      
       let url = Bundle.main.url(forResource: "init", withExtension: "js")!
       let source = try! String(contentsOf: url, encoding: .utf8)
       let userScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
