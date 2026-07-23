@@ -7,6 +7,7 @@ struct SendResultData {
 }
 
 final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+  static let shared = BluetoothManager()
 
   // MARK: - Callbacks
   var onDevicesFound: (([DeviceInfo]) -> Void)?
