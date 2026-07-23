@@ -39,7 +39,8 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   private func sendDeviceList() {
-    let devices: [DeviceInfo] = discoveredPeripherals.map { peripheral in
+    let devices: [DeviceInfo] = discoveredPeripherals.map {
+      peripheral in
       return DeviceInfo(
         name: peripheral.name ?? "未知设备",
         address: peripheral.identifier.uuidString
