@@ -50,7 +50,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   // MARK: - Connect
   func connect(to uuidString: String) {
-    guard let peripheral = discoveredPeripherals.first(where: {$0.identifier.uuidString == uuidString}) else { onConnected?(false); return }
+    guard let peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString }) else { onConnected?(false); return }
 
     targetPeripheral = peripheral
     centralManager?.connect(peripheral, options: nil)
