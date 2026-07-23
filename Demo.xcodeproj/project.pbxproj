@@ -92,6 +92,7 @@
 				844BA7982B9A4844008F48DB /* Info.plist */,
 				844BA7932B9A4844008F48DB /* Assets.xcassets */,
 				844BA7952B9A4844008F48DB /* LaunchScreen.storyboard */,
+				D888F3E33008C635001CEFB6 /* BluetoothManager.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -99,7 +100,6 @@
 		844BA7BA2B9A4893008F48DB /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
-				D888F3E33008C635001CEFB6 /* BluetoothManager.swift */,
 				D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */,
 				844BA7A32B9A488A008F48DB /* FormComponent.swift */,
 				844BA7AB2B9A488A008F48DB /* MenuComponent.swift */,
