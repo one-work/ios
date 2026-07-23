@@ -13,7 +13,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   var onDevicesFound: (([DeviceInfo]) -> Void)?
   var onConnected: ((Bool) -> Void)?
   var onDataSent: ((SendResultData) -> Void)?
-  
+
   // MARK: - Properties
   private var centralManager: CBCentralManager?
   private var discoveredPeripherals: [CBPeripheral] = []
@@ -68,7 +68,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     peripheral.writeValue(packet, for: characteristic, type: .withResponse)
     onDataSent?(SendResultData(success: true, error: nil))
   }
-  
+
   // MARK: - CBCentralManagerDelegate
   func centralManagerDidUpdateState(_ central: CBCentralManager) {
     
