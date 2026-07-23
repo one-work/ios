@@ -66,7 +66,6 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
     let packet = Data(bytes)
     peripheral.writeValue(packet, for: characteristic, type: .withResponse)
-    onDataSent?(SendResultData(success: true, error: nil))
   }
 
   // MARK: - CBCentralManagerDelegate
