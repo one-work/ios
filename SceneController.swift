@@ -11,7 +11,7 @@ final class SceneController: UIResponder {
     navigatorDelegate: self,
     lazyLoadTabs: true
   )
-  
+
   // MARK: - Authentication
   private func promptForAuthentication() {
     // Clean up empty screen from 401 response.
@@ -23,6 +23,7 @@ final class SceneController: UIResponder {
 }
 
 extension SceneController: UIWindowSceneDelegate {
+
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = scene as? UIWindowScene else { return }
 
@@ -34,6 +35,7 @@ extension SceneController: UIWindowSceneDelegate {
 }
 
 extension SceneController: NavigatorDelegate {
+
   func handle(proposal: VisitProposal, from navigator: Navigator) -> ProposalResult {
     switch proposal.viewController {
     case NumbersViewController.pathConfigurationIdentifier:
