@@ -55,7 +55,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     targetPeripheral = peripheral
     centralManager?.connect(peripheral, options: nil)
   }
-  
+
   // MARK: - Send Data
   func send(bytes: [UInt8]) {
     guard let peripheral = targetPeripheral,
@@ -70,62 +70,41 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
   
   // MARK: - CBCentralManagerDelegate
-  func centralManagerDidUpdateState(_ central: CBCentralManager) {}
+  func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    
+  }
 
-  func centralManager(
-    _ central: CBCentralManager,
-    didDiscover peripheral: CBPeripheral,
-    advertisementData: [String: Any],
-    rssi RSSI: NSNumber
-  ) {
+  func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
     let alreadyExists = discoveredPeripherals.contains(where: { $0.identifier == peripheral.identifier })
     if !alreadyExists {
       discoveredPeripherals.append(peripheral)
     }
   }
 
-  func centralManager(
-    _ central: CBCentralManager,
-    didConnect peripheral: CBPeripheral
-  ) {
+  func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
     peripheral.delegate = self
     peripheral.discoverServices(nil)
     onConnected?(true)
   }
 
-  func centralManager(
-    _ central: CBCentralManager,
-    didFailToConnect peripheral: CBPeripheral,
-    error: Error?
-  ) {
+  func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
     onConnected?(false)
   }
 
   // MARK: - CBPeripheralDelegate
-  func peripheral(
-    _ peripheral: CBPeripheral,
-    didDiscoverServices error: Error?
-  ) {
+  func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
     guard let services = peripheral.services else { return }
     for service in services {
       peripheral.discoverCharacteristics(nil, for: service)
     }
   }
 
-  func peripheral(
-    _ peripheral: CBPeripheral,
-    didDiscoverCharacteristicsFor service: CBService,
-    error: Error?
-  ) {
+  func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
     guard let characteristics = service.characteristics else { return }
     targetCharacteristic = characteristics.first(where: { $0.properties.contains(.write) })
   }
 
-  func peripheral(
-    _ peripheral: CBPeripheral,
-    didWriteValueFor characteristic: CBCharacteristic,
-    error: Error?
-  ) {
+  func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
     if let error = error {
       onDataSent?(SendResultData(success: false, error: error.localizedDescription))
     } else {
