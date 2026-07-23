@@ -30,11 +30,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   // MARK: - Scan
   func startScan() {
     discoveredPeripherals.removeAll()
-    centralManager?.scanForPeripherals(
-      withServices: nil,
-      options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
-    )
-
+    centralManager?.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
     scanTimer?.invalidate()
     scanTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
       self?.centralManager?.stopScan()
