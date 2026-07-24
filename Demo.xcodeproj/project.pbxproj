@@ -24,6 +24,7 @@
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
 		D8985B6130118C180049165C /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = D8985B6030118C0B0049165C /* init.js */; };
 		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
+		D8F12F5130136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		D888F3E33008C635001CEFB6 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D8985B6030118C0B0049165C /* init.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
+		D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossOriginWebViewRouteDecisionHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		844BA7892B9A4843008F48DB /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */,
 				D8985B6030118C0B0049165C /* init.js */,
 				D89586BC300A0926007E1FF8 /* .gitignore */,
 				844BA7BA2B9A4893008F48DB /* Bridge */,
@@ -204,6 +207,7 @@
 				84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */,
 				844BA78B2B9A4843008F48DB /* AppDelegate.swift in Sources */,
 				844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */,
+				D8F12F5130136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift in Sources */,
 				844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */,
 				844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */,
 			);

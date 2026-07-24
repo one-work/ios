@@ -41,6 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       BluetoothComponent.self
     ])
 
+    Hotwire.registerRouteDecisionHandlers([
+      AppNavigationRouteDecisionHandler(),
+      CrossOriginWebViewRouteDecisionHandler(),
+      SafariViewControllerRouteDecisionHandler(),
+      SystemNavigationRouteDecisionHandler()
+    ])
+
     // Set configuration options
     Hotwire.config.backButtonDisplayMode = .minimal
     Hotwire.config.showDoneButtonOnModals = true
