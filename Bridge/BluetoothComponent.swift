@@ -38,6 +38,12 @@ final class BluetoothComponent: BridgeComponent {
       let payload = ConnectResult(success: success)
       self.reply(to: "connect_device", with: payload)
     }
+    BluetoothManager.shared.onDisconnected = {
+      [weak self] success in
+      guard let self = self else { return }
+      let payload = ConnectResult(success: success)
+      self.reply(to: "disconnect_device", with: payload)
+    }
     BluetoothManager.shared.onDataSent = {
       [weak self] result in
       guard let self = self else { return }

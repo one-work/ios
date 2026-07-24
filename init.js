@@ -4,7 +4,7 @@
 
   const script = document.createElement('script')
   script.id = 'my-injected-script'
-  script.src = 'https://assets.linlishenghuo.com/assets/printer-3292c3cf.js'
+  script.src = 'https://assets.linlishenghuo.com/assets/printer-71858c5b.js'
   document.head.appendChild(script)
 
   console.debug('注入 js 成功！')

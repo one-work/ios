@@ -12,6 +12,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   // MARK: - Callbacks
   var onDeviceFound: ((DeviceInfo) -> Void)?
   var onConnected: ((Bool) -> Void)?
+  var onDisconnected: ((Bool) -> Void)?
   var onDataSent: ((SendResultData) -> Void)?
 
   // MARK: - Properties
@@ -47,7 +48,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   // MARK: - Disconnect
   func disconnect(to uuidString: String) {
-    guard let peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString }) else { return }
+    guard let peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString }) else { onDisconnected?(false); return }
 
     targetPeripheral = peripheral
     centralManager?.cancelPeripheralConnection(peripheral)
@@ -82,6 +83,10 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     peripheral.delegate = self
     peripheral.discoverServices(nil)
     onConnected?(true)
+  }
+
+  func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
+    onDisconnected?(true)
   }
 
   func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
