@@ -6,7 +6,7 @@ final class BluetoothComponent: BridgeComponent {
 
   public override func onReceive(message: Message) {
     setupBluetoothManager()
-    
+
     switch message.event {
     case "connect":
       let address = UserDefaults.standard.string(forKey: "address")
@@ -24,10 +24,10 @@ final class BluetoothComponent: BridgeComponent {
   }
 
   private func setupBluetoothManager() {
-    BluetoothManager.shared.onDevicesFound = {
-      [weak self] devices in
+    BluetoothManager.shared.onDeviceFound = {
+      [weak self] device in
       guard let self = self else { return }
-      let payload = SearchResult(devices: devices)
+      let payload = SearchResult(device: device)
       self.reply(to: "search", with: payload)
     }
     BluetoothManager.shared.onConnected = {
@@ -70,7 +70,7 @@ private struct SendData: Decodable {
 
 // MARK: - 发送数据模型（Encodable）
 private struct SearchResult: Encodable {
-  let devices: [DeviceInfo]
+  let device: DeviceInfo
 }
 
 private struct ConnectResult: Encodable {

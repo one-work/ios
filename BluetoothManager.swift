@@ -10,7 +10,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   static let shared = BluetoothManager()
 
   // MARK: - Callbacks
-  var onDevicesFound: (([DeviceInfo]) -> Void)?
+  var onDeviceFound: ((DeviceInfo) -> Void)?
   var onConnected: ((Bool) -> Void)?
   var onDataSent: ((SendResultData) -> Void)?
 
@@ -34,19 +34,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     scanTimer?.invalidate()
     scanTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
       self?.centralManager?.stopScan()
-      self?.sendDeviceList()
     }
-  }
-
-  private func sendDeviceList() {
-    let devices: [DeviceInfo] = discoveredPeripherals.map {
-      peripheral in
-      return DeviceInfo(
-        name: peripheral.name ?? "未知设备",
-        address: peripheral.identifier.uuidString
-      )
-    }
-    onDevicesFound?(devices)
   }
 
   // MARK: - Connect
@@ -78,6 +66,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     let alreadyExists = discoveredPeripherals.contains(where: { $0.identifier == peripheral.identifier })
     if !alreadyExists {
       discoveredPeripherals.append(peripheral)
+      onDeviceFound?(DeviceInfo(name: peripheral.name ?? "未知设备", address: peripheral.identifier.uuidString))
     }
   }
 
