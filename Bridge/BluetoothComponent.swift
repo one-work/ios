@@ -16,6 +16,8 @@ final class BluetoothComponent: BridgeComponent {
       BluetoothManager.shared.startScan()
     case "connect_device":
       handleConnectDevice(message)
+    case "disconnect_device":
+      handleDisconnectDevice(message)
     case "send_data":
       handleSendData(message)
     default:
@@ -49,6 +51,13 @@ final class BluetoothComponent: BridgeComponent {
     guard let address = data?.address else { return }
     UserDefaults.standard.set(address, forKey: "address")
     BluetoothManager.shared.connect(to: address)
+  }
+
+  private func handleDisconnectDevice(_ message: Message) {
+    let data: ConnectDeviceData? = message.data()
+    guard let address = data?.address else { return }
+    UserDefaults.standard.removeObject(forKey: "address")
+    BluetoothManager.shared.disconnect(to: address)
   }
 
   private func handleSendData(_ message: Message) {
