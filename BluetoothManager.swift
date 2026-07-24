@@ -64,9 +64,9 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
     let alreadyExists = discoveredPeripherals.contains(where: { $0.identifier == peripheral.identifier })
-    if !alreadyExists {
+    if !alreadyExists && peripheral.name != nil {
       discoveredPeripherals.append(peripheral)
-      onDeviceFound?(DeviceInfo(name: peripheral.name ?? "未知设备", address: peripheral.identifier.uuidString))
+      onDeviceFound?(DeviceInfo(name: peripheral.name, address: peripheral.identifier.uuidString))
     }
   }
 
@@ -104,6 +104,6 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
 // MARK: - 设备信息结构体
 struct DeviceInfo: Encodable {
-  let name: String
+  let name: String?
   let address: String
 }
