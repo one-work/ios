@@ -20,7 +20,7 @@ extension HotwireTab {
   static let navigation = HotwireTab(
     title: "Navigation",
     image: .init(systemName: "arrow.left.arrow.right")!,
-    url: Demo.current
+    url: Demo.current.appendingPathComponent("outside")
   )
 
   static let bridgeComponents = HotwireTab(
