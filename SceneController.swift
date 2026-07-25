@@ -37,11 +37,18 @@ extension SceneController: UIWindowSceneDelegate {
 extension SceneController: NavigatorDelegate {
 
   func handle(proposal: VisitProposal, from navigator: Navigator) -> ProposalResult {
+    
+    
     switch proposal.viewController {
     case NumbersViewController.pathConfigurationIdentifier:
       return .acceptCustom(NumbersViewController(url: proposal.url, navigator: navigator))
     default:
-      return .accept
+      let allows = ["app-demo.xcprinter.com"]
+      if allows.contains(proposal.url.host ?? "") {
+        return .acceptCustom(ExternalWebViewController(url: proposal.url))
+      } else {
+        return .accept
+      }
     }
   }
 

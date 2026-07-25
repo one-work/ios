@@ -23,15 +23,6 @@
         "view_controller": "numbers"
       },
       "comment": "Intercept with a native view."
-    },
-    {
-      "patterns": [
-        "^/$"
-      ],
-      "properties": {
-        "presentation": "clear_all"
-      },
-      "comment": "Reset navigation stacks when visiting root page."
     }
   ]
 }
