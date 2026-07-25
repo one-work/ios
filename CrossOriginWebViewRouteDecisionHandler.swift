@@ -10,22 +10,29 @@ final class CrossOriginWebViewRouteDecisionHandler: RouteDecisionHandler {
 
   func matches(proposal: VisitProposal, configuration: Navigator.Configuration) -> Bool {
     let location = proposal.url
+    // 如果已处理过（来自本 handler 的再 route），则不要再匹配
+     if let params = proposal.parameters,
+        let handled = params["inAppExternalHandled"] as? Bool,
+        handled == true {
+         return false
+     }
     
     // 只处理 http/https，避免 mailto:、tel: 等被错误拦截
     guard location.scheme == "http" || location.scheme == "https" else {
       return false
     }
-    
-    // 与 Navigator 启动域名不同即视为跨域
-    if #available(iOS 16, *) {
-      return configuration.startLocation.host() != location.host()
-    }
-    return configuration.startLocation.host != location.host
+
+    let allowedHosts = ["app-demo.xcprinter.com"]
+    return allowedHosts.contains(location.host ?? "")
   }
   
   func handle(proposal: VisitProposal, configuration: Navigator.Configuration, navigator: Navigating) -> Router.Decision {
-    // .navigate 会让 Navigator 创建一个 VisitableViewController，
-    // 并在当前 Session 的 WKWebView 中加载该 URL（普通 push，非 modal）。
-    return .navigate
+    print("------------------Routing \(proposal.url.absoluteString)")
+    var newParams = proposal.parameters ?? [:]
+    newParams["inAppExternalHandled"] = true
+    DispatchQueue.main.async {
+      navigator.route(proposal.url, options: proposal.options, parameters: newParams)
+    }
+    return .cancel
   }
 }
