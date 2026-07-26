@@ -44,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Hotwire.registerRouteDecisionHandlers([
       CrossOriginWebViewRouteDecisionHandler(),
       AppNavigationRouteDecisionHandler(),
-      
       SafariViewControllerRouteDecisionHandler(),
       SystemNavigationRouteDecisionHandler()
     ])
@@ -53,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Hotwire.config.backButtonDisplayMode = .minimal
     Hotwire.config.showDoneButtonOnModals = true
     Hotwire.config.animateReplaceActions = true
-    
+
     // 注入 js
     Hotwire.config.makeCustomWebView = { config in
       let turboUrl = Bundle.main.url(forResource: "init_turbo", withExtension: "js")!
