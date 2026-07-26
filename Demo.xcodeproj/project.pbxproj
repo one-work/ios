@@ -19,7 +19,7 @@
 		844BA7B92B9A488A008F48DB /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = 844BA7AE2B9A488A008F48DB /* path-configuration.json */; };
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
 		84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A617FE2D5AA88B00694AEE /* Tabs.swift */; };
-		D85D5C4F30147E280067FB0D /* ExternalWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D5C4E30147E1F0067FB0D /* ExternalWebViewController.swift */; };
+		D85D5C553014D7050067FB0D /* init_turbo.js in Resources */ = {isa = PBXBuildFile; fileRef = D85D5C543014D7050067FB0D /* init_turbo.js */; };
 		D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */; };
 		D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3E33008C635001CEFB6 /* BluetoothManager.swift */; };
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
@@ -43,7 +43,7 @@
 		844BA7AE2B9A488A008F48DB /* path-configuration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "path-configuration.json"; sourceTree = "<group>"; };
 		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
 		84A617FE2D5AA88B00694AEE /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
-		D85D5C4E30147E1F0067FB0D /* ExternalWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalWebViewController.swift; sourceTree = "<group>"; };
+		D85D5C543014D7050067FB0D /* init_turbo.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init_turbo.js; sourceTree = "<group>"; };
 		D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothComponent.swift; sourceTree = "<group>"; };
 		D888F3E33008C635001CEFB6 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -84,7 +84,6 @@
 		844BA7892B9A4843008F48DB /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				D85D5C4E30147E1F0067FB0D /* ExternalWebViewController.swift */,
 				D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */,
 				D8985B6030118C0B0049165C /* init.js */,
 				D89586BC300A0926007E1FF8 /* .gitignore */,
@@ -99,6 +98,7 @@
 				844BA7932B9A4844008F48DB /* Assets.xcassets */,
 				844BA7952B9A4844008F48DB /* LaunchScreen.storyboard */,
 				D888F3E33008C635001CEFB6 /* BluetoothManager.swift */,
+				D85D5C543014D7050067FB0D /* init_turbo.js */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -192,6 +192,7 @@
 				844BA7942B9A4844008F48DB /* Assets.xcassets in Resources */,
 				844BA7B92B9A488A008F48DB /* path-configuration.json in Resources */,
 				844BA7972B9A4844008F48DB /* Base in Resources */,
+				D85D5C553014D7050067FB0D /* init_turbo.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +205,6 @@
 			files = (
 				844BA7B62B9A488A008F48DB /* MenuComponent.swift in Sources */,
 				D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */,
-				D85D5C4F30147E280067FB0D /* ExternalWebViewController.swift in Sources */,
 				844BA7B72B9A488A008F48DB /* NumbersViewController.swift in Sources */,
 				844BA7B82B9A488A008F48DB /* Demo.swift in Sources */,
 				D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */,

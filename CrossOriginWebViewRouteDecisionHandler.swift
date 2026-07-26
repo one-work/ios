@@ -11,10 +11,12 @@ final class CrossOriginWebViewRouteDecisionHandler: RouteDecisionHandler {
   public init() {}
   
   /// 防止新 Session 被释放
-      private var externalSessions: [ObjectIdentifier: ExternalWebSession] = [:]
+  private var externalSessions: [ObjectIdentifier: ExternalWebSession] = [:]
 
   func matches(proposal: VisitProposal, configuration: Navigator.Configuration) -> Bool {
     let location = proposal.url
+    
+    
     
     // 只处理 http/https，避免 mailto:、tel: 等被错误拦截
     guard location.scheme == "http" || location.scheme == "https" else {
@@ -28,8 +30,8 @@ final class CrossOriginWebViewRouteDecisionHandler: RouteDecisionHandler {
   func handle(proposal: VisitProposal, configuration: Navigator.Configuration, navigator: Navigating) -> Router.Decision {
     print("------------------Routing \(proposal.url.absoluteString)")
     let external = ExternalWebSession(url: proposal.url)
-            externalSessions[ObjectIdentifier(external.viewController)] = external
-            navigator.activeNavigationController.pushViewController(external.viewController, animated: true)
+           externalSessions[ObjectIdentifier(external.viewController)] = external
+           navigator.activeNavigationController.pushViewController(external.viewController, animated: true)
     return .cancel
   }
 }

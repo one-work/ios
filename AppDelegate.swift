@@ -55,7 +55,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Hotwire.config.animateReplaceActions = true
     
     // 注入 js
-    Hotwire.config.makeCustomWebView = { config in      
+    Hotwire.config.makeCustomWebView = { config in
+      let turboUrl = Bundle.main.url(forResource: "init_turbo", withExtension: "js")!
+      let turboSource = try! String(contentsOf: turboUrl, encoding: .utf8)
+      let turboScript = WKUserScript(source: turboSource, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+      config.userContentController.addUserScript(turboScript)
+      
       let url = Bundle.main.url(forResource: "init", withExtension: "js")!
       let source = try! String(contentsOf: url, encoding: .utf8)
       let userScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
