@@ -39,8 +39,9 @@ final class ExternalWebSession: NSObject, SessionDelegate {
   let viewController: VisitableViewController
 
   init(url: URL) {
-    session = Session(webView: Hotwire.config.makeWebView())
-    viewController = VisitableViewController(url: url)
+    let webView = Hotwire.config.makeWebView()
+    session = Session(webView: webView)
+    viewController = HotwireWebViewController(url: url)
     super.init()
     session.delegate = self
     session.visit(viewController)
@@ -48,7 +49,7 @@ final class ExternalWebSession: NSObject, SessionDelegate {
 
   /// app-demo 内部的 Turbo 链接：正常 push 新页面
   func session(_ session: Session, didProposeVisit proposal: VisitProposal) {
-    let vc = VisitableViewController(url: proposal.url)
+    let vc = HotwireWebViewController(url: proposal.url)
     viewController.navigationController?.pushViewController(vc, animated: true)
     session.visit(vc, options: proposal.options)
   }
