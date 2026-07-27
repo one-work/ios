@@ -107,4 +107,4 @@
   setTimeout(() => {
     document.dispatchEvent(new Event("turbo:load"));
   }, 0);
-})();
+})()
