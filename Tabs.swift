@@ -18,19 +18,19 @@ extension HotwireTab {
   }()
 
   static let navigation = HotwireTab(
-    title: "Navigation",
+    title: "Home",
     image: .init(systemName: "arrow.left.arrow.right")!,
-    url: Demo.current.appendingPathComponent("outside")
+    url: Demo.current.appendingPathComponent("auth/apps")
   )
 
   static let bridgeComponents = HotwireTab(
-    title: "Bridge Components",
+    title: "Bluetooth",
     image: .init(systemName: "widget.small")!,
     url: Demo.current.appendingPathComponent("bluetooth")
   )
 
   static let resources = HotwireTab(
-    title: "Resources",
+    title: "Help",
     image: .init(systemName: "questionmark.text.page")!,
     url: Demo.current.appendingPathComponent("resources")
   )
