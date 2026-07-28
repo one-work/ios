@@ -1,6 +1,5 @@
-// name=minimal-turbo-stub.js
 (function () {
-  if (window.Turbo) return; // 不覆盖已有真实 Turbo
+  if (window.Turbo) return // 不覆盖已有真实 Turbo
 
   function uid(prefix = "t") {
     return prefix + "-" + Math.random().toString(36).slice(2, 9);
