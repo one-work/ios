@@ -10,8 +10,9 @@ final class BluetoothComponent: BridgeComponent {
     switch message.event {
     case "connect":
       let address = UserDefaults.standard.string(forKey: "address")
+      let name = UserDefaults.standard.string(forKey: "name")
       print("connect address: \(address ?? "nil")")
-      reply(to: "connect", with: ConnectStatus(address: address))
+      reply(to: "connect", with: ConnectStatus(address: address, name: name))
     case "search":
       BluetoothManager.shared.startScan()
     case "connect_device":
@@ -55,14 +56,17 @@ final class BluetoothComponent: BridgeComponent {
   private func handleConnectDevice(_ message: Message) {
     let data: ConnectDeviceData? = message.data()
     guard let address = data?.address else { return }
+    guard let name = data?.name else { return }
     UserDefaults.standard.set(address, forKey: "address")
+    UserDefaults.standard.set(name, forKey: "name")
     BluetoothManager.shared.connect(to: address)
   }
 
   private func handleDisconnectDevice(_ message: Message) {
-    let data: ConnectDeviceData? = message.data()
+    let data: DisconnectDeviceData? = message.data()
     guard let address = data?.address else { return }
     UserDefaults.standard.removeObject(forKey: "address")
+    UserDefaults.standard.removeObject(forKey: "name")
     BluetoothManager.shared.disconnect(to: address)
   }
 
@@ -75,6 +79,11 @@ final class BluetoothComponent: BridgeComponent {
 
 // MARK: - 接收数据模型（Decodable）
 private struct ConnectDeviceData: Decodable {
+  let address: String
+  let name: String
+}
+
+private struct DisconnectDeviceData: Decodable {
   let address: String
 }
 
@@ -99,4 +108,5 @@ private struct SendResult: Encodable {
 
 private struct ConnectStatus: Encodable {
   let address: String?
+  let name: String?
 }

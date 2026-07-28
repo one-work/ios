@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Set configuration options
     Hotwire.config.backButtonDisplayMode = .minimal
     Hotwire.config.showDoneButtonOnModals = true
+    Hotwire.config.hideTabBarWhenPushed = true
     Hotwire.config.animateReplaceActions = true
 
     // 注入 js
