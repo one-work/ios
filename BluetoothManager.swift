@@ -68,7 +68,15 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   // MARK: - CBCentralManagerDelegate
   func centralManagerDidUpdateState(_ central: CBCentralManager) {
-    
+
+    switch central.state {
+    case .poweredOn:
+      print("蓝牙已开启")
+    case .poweredOff
+      print("蓝牙已关闭")
+    default:
+      break
+    }
   }
 
   func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
