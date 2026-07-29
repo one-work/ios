@@ -17,11 +17,20 @@ final class BluetoothComponent: BridgeComponent {
 
       if let address = address, let uuid = UUID(uuidString: address) {
         let results = BluetoothManager.shared.getConnectedPeripherals(identifiers: [uuid])
-        let result = results.first
-        if result != nil {
-          state = result.state
+        if let result = results.first {
+          switch result.state {
+          case .connected:
+            state = "connected"
+          case .connecting:
+            state = "connecting"
+          case .disconnected:
+            state = "disconnected"
+          case .disconnecting:
+            state = "disconnecting"
+          @unknown default:
+            state = "unknown"
+          }
         }
-        print(result)
       }
 
       reply(to: "connect", with: ConnectStatus(address: address, name: name, state: state))
