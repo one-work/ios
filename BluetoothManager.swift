@@ -40,21 +40,27 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   // MARK: - Connect
   func connect(to uuidString: String) {
-    var peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString })
-    
-    if (peripheral == nil) {
-      let uuid = UUID(uuidString: uuidString)
+    guard let centralManager = centralManager else {
+      onConnected?(false)
+      return
+    }
+
+    if let peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString }) {
+      targetPeripheral = peripheral
+      centralManager.connect(peripheral, options: nil)
+      return
+    }
+
+    if let uuid = UUID(uuidString: uuidString) {
       let peripherals = getConnectedPeripherals(identifiers: [uuid])
       if let peripheral = peripherals.first {
+        targetPeripheral = peripheral
         centralManager.connect(peripheral, options: nil)
-      } else {
-        // 检索不到，退回到扫描方式
-        centralManager.scanForPeripherals(withServices: nil, options: nil)
+        return
       }
     }
 
-    targetPeripheral = peripheral
-    centralManager?.connect(peripheral, options: nil)
+    centralManager.scanForPeripherals(withServices: nil, options: nil)
   }
 
   // MARK: - Disconnect
