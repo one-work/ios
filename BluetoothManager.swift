@@ -66,13 +66,18 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     peripheral.writeValue(packet, for: characteristic, type: .withResponse)
   }
 
+  /// 获取当前已连接的设备列表 (必须提供该设备的 Service UUID)
+  func getConnectedPeripherals(serviceUUIDs: [CBUUID]) -> [CBPeripheral] {
+    return centralManager?.retrieveConnectedPeripherals(withServices: serviceUUIDs) ?? <#default value#>
+  }
+
   // MARK: - CBCentralManagerDelegate
   func centralManagerDidUpdateState(_ central: CBCentralManager) {
 
     switch central.state {
     case .poweredOn:
       print("蓝牙已开启")
-    case .poweredOff
+    case .poweredOff:
       print("蓝牙已关闭")
     default:
       break

@@ -1,5 +1,6 @@
 import HotwireNative
 import Foundation
+import CoreBluetooth
 
 final class BluetoothComponent: BridgeComponent {
   public override class var name: String { "bluetooth" }
@@ -12,6 +13,13 @@ final class BluetoothComponent: BridgeComponent {
       let address = UserDefaults.standard.string(forKey: "address")
       let name = UserDefaults.standard.string(forKey: "name")
       print("connect address: \(address ?? "nil")")
+
+      if let address {
+        let serviceUUID = CBUUID(string: address)
+        _ = BluetoothManager.shared.getConnectedPeripherals(serviceUUIDs: [serviceUUID])
+        
+      }
+
       reply(to: "connect", with: ConnectStatus(address: address, name: name))
     case "search":
       BluetoothManager.shared.startScan()
