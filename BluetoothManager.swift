@@ -40,7 +40,18 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   // MARK: - Connect
   func connect(to uuidString: String) {
-    guard let peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString }) else { onConnected?(false); return }
+    var peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString })
+    
+    if (peripheral == nil) {
+      let uuid = UUID(uuidString: uuidString)
+      let peripherals = getConnectedPeripherals(identifiers: [uuid])
+      if let peripheral = peripherals.first {
+        centralManager.connect(peripheral, options: nil)
+      } else {
+        // 检索不到，退回到扫描方式
+        centralManager.scanForPeripherals(withServices: nil, options: nil)
+      }
+    }
 
     targetPeripheral = peripheral
     centralManager?.connect(peripheral, options: nil)
@@ -102,7 +113,8 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     onDisconnected?(true)
   }
 
-  func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+  func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+    print(error?.localizedDescription ?? "连接失败")
     onConnected?(false)
   }
 
