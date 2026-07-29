@@ -33,6 +33,10 @@ final class BluetoothComponent: BridgeComponent {
         }
       }
 
+      if (state != "connected") {
+        handleConnectDevice(message)
+      }
+      
       reply(to: "connect", with: ConnectStatus(address: address, name: name, state: state))
     case "search":
       BluetoothManager.shared.startScan()
