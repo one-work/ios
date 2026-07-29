@@ -67,8 +67,8 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   /// 获取当前已连接的设备列表 (必须提供该设备的 Service UUID)
-  func getConnectedPeripherals(serviceUUIDs: [CBUUID]) -> [CBPeripheral] {
-    return centralManager?.retrieveConnectedPeripherals(withServices: serviceUUIDs) ?? <#default value#>
+  func getConnectedPeripherals(identifiers: [UUID]) -> [CBPeripheral] {
+    return centralManager?.retrievePeripherals(withIdentifiers: identifiers) ?? []
   }
 
   // MARK: - CBCentralManagerDelegate

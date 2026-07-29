@@ -12,15 +12,19 @@ final class BluetoothComponent: BridgeComponent {
     case "connect":
       let address = UserDefaults.standard.string(forKey: "address")
       let name = UserDefaults.standard.string(forKey: "name")
+      var state = "disconnected"
       print("connect address: \(address ?? "nil")")
 
-      if let address {
-        let serviceUUID = CBUUID(string: address)
-        _ = BluetoothManager.shared.getConnectedPeripherals(serviceUUIDs: [serviceUUID])
-        
+      if let address = address, let uuid = UUID(uuidString: address) {
+        let results = BluetoothManager.shared.getConnectedPeripherals(identifiers: [uuid])
+        let result = results.first
+        if result != nil {
+          state = result.state
+        }
+        print(result)
       }
 
-      reply(to: "connect", with: ConnectStatus(address: address, name: name))
+      reply(to: "connect", with: ConnectStatus(address: address, name: name, state: state))
     case "search":
       BluetoothManager.shared.startScan()
     case "connect_device":
@@ -117,4 +121,5 @@ private struct SendResult: Encodable {
 private struct ConnectStatus: Encodable {
   let address: String?
   let name: String?
+  let state: String?
 }
