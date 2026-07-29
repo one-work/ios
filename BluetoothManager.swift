@@ -65,10 +65,21 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   // MARK: - Disconnect
   func disconnect(to uuidString: String) {
-    guard let peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString }) else { onDisconnected?(false); return }
+    let peripheral = discoveredPeripherals.first(where: { $0.identifier.uuidString == uuidString })
+    if peripheral != nil {
+      targetPeripheral = peripheral
+      centralManager?.cancelPeripheralConnection(peripheral!)
+      return
+    }
 
-    targetPeripheral = peripheral
-    centralManager?.cancelPeripheralConnection(peripheral)
+    if let uuid = UUID(uuidString: uuidString) {
+      let peripherals = getConnectedPeripherals(identifiers: [uuid])
+      if let peripheral = peripherals.first {
+        targetPeripheral = peripheral
+        centralManager?.cancelPeripheralConnection(peripheral)
+        return
+      }
+    }
   }
 
   // MARK: - Send Data
