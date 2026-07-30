@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let turboSource = try! String(contentsOf: turboUrl, encoding: .utf8)
       let turboScript = WKUserScript(source: turboSource, injectionTime: .atDocumentStart, forMainFrameOnly: true)
       config.userContentController.addUserScript(turboScript)
-      
+
       let url = Bundle.main.url(forResource: "init", withExtension: "js")!
       let source = try! String(contentsOf: url, encoding: .utf8)
       let userScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
       return webView
     }
-    
+
     #if DEBUG
     Hotwire.config.debugLoggingEnabled = true
     #endif
