@@ -32,7 +32,7 @@ extension HotwireTab {
   static let resources = HotwireTab(
     title: "Help",
     image: .init(systemName: "questionmark.text.page")!,
-    url: Demo.current.appendingPathComponent("resources")
+    url: URL(string: "https://app-demo.xcprinter.com/README/")!
   )
 
   static let bugsAndFixes = HotwireTab(
