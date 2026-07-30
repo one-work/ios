@@ -26,6 +26,7 @@
 		D8985B6130118C180049165C /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = D8985B6030118C0B0049165C /* init.js */; };
 		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
 		D8F12F5130136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */; };
+		D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C712301B53B000DCC732 /* LaunchScreen.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		D8985B6030118C0B0049165C /* init.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
 		D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossOriginWebViewRouteDecisionHandler.swift; sourceTree = "<group>"; };
 		D8F6C710301B52F400DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		D8F6C711301B53B000DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		844BA7892B9A4843008F48DB /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D8F6C713301B53B000DCC732 /* zh-Hans.lproj */,
 				D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */,
 				D8985B6030118C0B0049165C /* init.js */,
 				D89586BC300A0926007E1FF8 /* .gitignore */,
@@ -121,6 +124,14 @@
 				8458F3EF2BD8139400867B66 /* hotwire-native-ios */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D8F6C713301B53B000DCC732 /* zh-Hans.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				D8F6C712301B53B000DCC732 /* LaunchScreen.strings */,
+			);
+			path = "zh-Hans.lproj";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 				D8985B6130118C180049165C /* init.js in Resources */,
 				844BA7942B9A4844008F48DB /* Assets.xcassets in Resources */,
 				844BA7B92B9A488A008F48DB /* path-configuration.json in Resources */,
+				D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */,
 				844BA7972B9A4844008F48DB /* Base in Resources */,
 				D85D5C553014D7050067FB0D /* init_turbo.js in Resources */,
 			);
@@ -229,6 +241,14 @@
 				D8F6C710301B52F400DCC732 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D8F6C712301B53B000DCC732 /* LaunchScreen.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8F6C711301B53B000DCC732 /* zh-Hans */,
+			);
+			name = LaunchScreen.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
