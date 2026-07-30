@@ -8,8 +8,6 @@ import WebKit
 final class CrossOriginWebViewRouteDecisionHandler: RouteDecisionHandler {
   public let name: String = "cross-origin-webview"
 
-  public init() {}
-
   /// 防止新 Session 被释放
   private var externalSessions: [ObjectIdentifier: ExternalWebSession] = [:]
 
