@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		844BA7872B9A4843008F48DB /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		844BA7872B9A4843008F48DB /* XcPrinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XcPrinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		844BA78A2B9A4843008F48DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		844BA7932B9A4844008F48DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		844BA7962B9A4844008F48DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		844BA7882B9A4843008F48DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				844BA7872B9A4843008F48DB /* Demo.app */,
+				844BA7872B9A4843008F48DB /* XcPrinter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,9 +137,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		844BA7862B9A4843008F48DB /* Demo */ = {
+		844BA7862B9A4843008F48DB /* XcPrinter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 844BA79B2B9A4844008F48DB /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = 844BA79B2B9A4844008F48DB /* Build configuration list for PBXNativeTarget "XcPrinter" */;
 			buildPhases = (
 				844BA7832B9A4843008F48DB /* Sources */,
 				844BA7842B9A4843008F48DB /* Frameworks */,
@@ -149,13 +149,13 @@
 			);
 			dependencies = (
 			);
-			name = Demo;
+			name = XcPrinter;
 			packageProductDependencies = (
 				848E12202BD813CA009BB0A4 /* HotwireNative */,
 				D8AFC54730077026009D4AB5 /* HotwireNative */,
 			);
 			productName = Demo;
-			productReference = 844BA7872B9A4843008F48DB /* Demo.app */;
+			productReference = 844BA7872B9A4843008F48DB /* XcPrinter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -190,7 +190,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				844BA7862B9A4843008F48DB /* Demo */,
+				844BA7862B9A4843008F48DB /* XcPrinter */,
 			);
 		};
 /* End PBXProject section */
@@ -451,7 +451,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		844BA79B2B9A4844008F48DB /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		844BA79B2B9A4844008F48DB /* Build configuration list for PBXNativeTarget "XcPrinter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				844BA79C2B9A4844008F48DB /* Debug */,

@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "844BA7862B9A4843008F48DB"
-               BuildableName = "Demo.app"
-               BlueprintName = "Demo"
+               BuildableName = "XcPrinter.app"
+               BlueprintName = "XcPrinter"
                ReferencedContainer = "container:Demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "844BA7862B9A4843008F48DB"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
+            BuildableName = "XcPrinter.app"
+            BlueprintName = "XcPrinter"
             ReferencedContainer = "container:Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "844BA7862B9A4843008F48DB"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
+            BuildableName = "XcPrinter.app"
+            BlueprintName = "XcPrinter"
             ReferencedContainer = "container:Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
