@@ -27,6 +27,7 @@
 		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
 		D8F12F5130136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */; };
 		D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C712301B53B000DCC732 /* LaunchScreen.strings */; };
+		D8F6C719301C99EA00DCC732 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C718301C99E600DCC732 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossOriginWebViewRouteDecisionHandler.swift; sourceTree = "<group>"; };
 		D8F6C710301B52F400DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		D8F6C711301B53B000DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
+		D8F6C718301C99E600DCC732 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		844BA7892B9A4843008F48DB /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D8F6C718301C99E600DCC732 /* WebViewController.swift */,
 				D8F6C713301B53B000DCC732 /* zh-Hans.lproj */,
 				D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */,
 				D8985B6030118C0B0049165C /* init.js */,
@@ -173,7 +176,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 844BA7822B9A4843008F48DB /* Build configuration list for PBXProject "Demo" */;
+			buildConfigurationList = 844BA7822B9A4843008F48DB /* Build configuration list for PBXProject "Xcprinter" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -224,6 +227,7 @@
 				D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */,
 				84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */,
 				844BA78B2B9A4843008F48DB /* AppDelegate.swift in Sources */,
+				D8F6C719301C99EA00DCC732 /* WebViewController.swift in Sources */,
 				844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */,
 				D8F12F5130136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift in Sources */,
 				844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */,
@@ -442,7 +446,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		844BA7822B9A4843008F48DB /* Build configuration list for PBXProject "Demo" */ = {
+		844BA7822B9A4843008F48DB /* Build configuration list for PBXProject "Xcprinter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				844BA7992B9A4844008F48DB /* Debug */,

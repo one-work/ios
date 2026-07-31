@@ -6,6 +6,10 @@ import UIKit
 /// which will notify the web when it has been tapped.
 final class OverflowMenuComponent: BridgeComponent {
   override class var name: String { "overflow-menu" }
+  
+  /// 兜底地址：web 消息里没带 url 时使用
+  private static let defaultFormURL = URL(string: "https://linlishenghuo/bluetooth/menus")!
+  private var formURL: URL?
 
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
@@ -25,6 +29,9 @@ final class OverflowMenuComponent: BridgeComponent {
 
   private func handleConnectEvent(message: Message) {
     guard let data: MessageData = message.data() else { return }
+    if let urlString = data.url, let url = URL(string: urlString) {
+      formURL = url
+    }
     showOverflowMenuItem(data)
   }
 
@@ -43,7 +50,8 @@ final class OverflowMenuComponent: BridgeComponent {
   }
 
   private func overflowAction() {
-    reply(to: Event.connect.rawValue)
+    let url = formURL ?? Self.defaultFormURL
+    WebViewController.navigator?.route(url)
   }
 }
 
@@ -58,5 +66,6 @@ private extension OverflowMenuComponent {
 private extension OverflowMenuComponent {
   struct MessageData: Decodable {
     let label: String
+    let url: String?
   }
 }

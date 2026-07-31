@@ -5,6 +5,15 @@
   "rules": [
     {
       "patterns": [
+        "/menus$"
+      ],
+      "properties": {
+        "presentation": "modal",
+        "modal_close_title": "关闭"
+      }
+    },
+    {
+      "patterns": [
         "/new$",
         "/edit$",
         "/modal"

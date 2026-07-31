@@ -37,11 +37,13 @@ extension SceneController: UIWindowSceneDelegate {
 extension SceneController: NavigatorDelegate {
 
   func handle(proposal: VisitProposal, from navigator: Navigator) -> ProposalResult {
+
     switch proposal.viewController {
     case NumbersViewController.pathConfigurationIdentifier:
       return .acceptCustom(NumbersViewController(url: proposal.url, navigator: navigator))
     default:
-      return .accept
+      return .acceptCustom(WebViewController(url: proposal.url))
+      ///return .accept
     }
   }
 
