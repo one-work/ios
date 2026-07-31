@@ -22,12 +22,12 @@ final class OverflowMenuComponent: BridgeComponent {
   private var viewController: UIViewController? {
     delegate?.destination as? UIViewController
   }
-  
+
   private func handleConnectEvent(message: Message) {
     guard let data: MessageData = message.data() else { return }
     showOverflowMenuItem(data)
   }
-  
+
   private func showOverflowMenuItem(_ data: MessageData) {
     guard let viewController else { return }
     
@@ -48,7 +48,6 @@ final class OverflowMenuComponent: BridgeComponent {
 }
 
 // MARK: Events
-
 private extension OverflowMenuComponent {
   enum Event: String {
     case connect
@@ -56,7 +55,6 @@ private extension OverflowMenuComponent {
 }
 
 // MARK: Message data
-
 private extension OverflowMenuComponent {
   struct MessageData: Decodable {
     let label: String
