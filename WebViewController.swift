@@ -23,10 +23,8 @@ final class WebViewController: HotwireWebViewController {
     let properties = Hotwire.config.pathConfiguration.properties(for: "/menus$")
     guard properties["context"] as? String == "modal" else { return }
 
-    let title = properties["modal_close_title"] as? String ?? "关闭"
     navigationItem.rightBarButtonItem = UIBarButtonItem(
-      title: title,
-      style: .done,
+      barButtonSystemItem: .close,
       target: self,
       action: #selector(closeModal)
     )
