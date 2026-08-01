@@ -51,7 +51,7 @@ final class OverflowMenuComponent: BridgeComponent {
 
   private func overflowAction() {
     let url = formURL ?? Self.defaultFormURL
-    WebViewController.navigator?.route(url)
+    (viewController as? WebViewController)?.navigator?.route(url)
   }
 }
 

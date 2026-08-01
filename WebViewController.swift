@@ -3,6 +3,15 @@ import UIKit
 
 final class WebViewController: HotwireWebViewController {
   weak var navigator: Navigator?
+  
+  init(url: URL, navigator: Navigator? = nil) {
+    self.navigator = navigator
+    super.init(url: url)
+  }
+
+  @MainActor required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
