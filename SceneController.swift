@@ -42,7 +42,7 @@ extension SceneController: NavigatorDelegate {
     case NumbersViewController.pathConfigurationIdentifier:
       return .acceptCustom(NumbersViewController(url: proposal.url, navigator: navigator))
     default:
-      return .acceptCustom(WebViewController(url: proposal.url))
+      return .acceptCustom(WebViewController(url: proposal.url, navigator: navigator))
       ///return .accept
     }
   }

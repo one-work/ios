@@ -3,7 +3,7 @@ import UIKit
 
 final class WebViewController: HotwireWebViewController {
   weak var navigator: Navigator?
-  
+
   init(url: URL, navigator: Navigator? = nil) {
     self.navigator = navigator
     super.init(url: url)
