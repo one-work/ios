@@ -8,7 +8,7 @@ final class OverflowMenuComponent: BridgeComponent {
   override class var name: String { "overflow-menu" }
   
   /// 兜底地址：web 消息里没带 url 时使用
-  private static let defaultFormURL = URL(string: "https://linlishenghuo/bluetooth/menus")!
+  private static let defaultFormURL = URL(string: "https://linlishenghuo.com/bluetooth/menus")!
   private var formURL: URL?
 
   override func onReceive(message: Message) {

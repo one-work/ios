@@ -25,7 +25,7 @@ final class CrossOriginWebViewRouteDecisionHandler: RouteDecisionHandler {
 
   func handle(proposal: VisitProposal, configuration: Navigator.Configuration, navigator: Navigating) -> Router.Decision {
     print("------------------Routing \(proposal.url.absoluteString)")
-    let external = ExternalWebSession(url: proposal.url)
+    let external = ExternalWebSession(url: proposal.url, navigator: (navigator as! Navigator))
     externalSessions[ObjectIdentifier(external.viewController)] = external
     navigator.activeNavigationController.pushViewController(external.viewController, animated: true)
     return .cancel
@@ -34,12 +34,14 @@ final class CrossOriginWebViewRouteDecisionHandler: RouteDecisionHandler {
 
 final class ExternalWebSession: NSObject, SessionDelegate {
   let session: Session
-  let viewController: VisitableViewController
+  let viewController: WebViewController
+  private weak var navigator: Navigator?
 
-  init(url: URL) {
+  init(url: URL, navigator: Navigator?) {
+    self.navigator = navigator
     let webView = Hotwire.config.makeWebView()
     session = Session(webView: webView)
-    viewController = HotwireWebViewController(url: url)
+    viewController = WebViewController(url: url, navigator: navigator)
     super.init()
     session.delegate = self
     session.visit(viewController)
@@ -47,7 +49,7 @@ final class ExternalWebSession: NSObject, SessionDelegate {
 
   /// app-demo 内部的 Turbo 链接：正常 push 新页面
   func session(_ session: Session, didProposeVisit proposal: VisitProposal) {
-    let vc = HotwireWebViewController(url: proposal.url)
+    let vc = WebViewController(url: proposal.url, navigator: navigator)
     viewController.navigationController?.pushViewController(vc, animated: true)
     session.visit(vc, options: proposal.options)
   }

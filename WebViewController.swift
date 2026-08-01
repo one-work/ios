@@ -21,7 +21,7 @@ final class WebViewController: HotwireWebViewController {
   /// 以 modal 呈现的页面（即表单页）：右上角放「关闭」，替代 submit
   private func addModalCloseButtonIfNeeded() {
     let properties = Hotwire.config.pathConfiguration.properties(for: "/menus$")
-    guard properties["presentation"] as? String == "modal" else { return }
+    guard properties["context"] as? String == "modal" else { return }
 
     let title = properties["modal_close_title"] as? String ?? "关闭"
     navigationItem.rightBarButtonItem = UIBarButtonItem(

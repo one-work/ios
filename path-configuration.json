@@ -8,7 +8,7 @@
         "/menus$"
       ],
       "properties": {
-        "presentation": "modal",
+        "context": "modal",
         "modal_close_title": "关闭"
       }
     },
