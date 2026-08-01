@@ -1,37 +1,5 @@
 {
   "settings": {
     "enable_feature_x": true
-  },
-  "rules": [
-    {
-      "patterns": [
-        "/menus$"
-      ],
-      "properties": {
-        "context": "modal",
-        "modal_close_title": "关闭"
-      }
-    },
-    {
-      "patterns": [
-        "/new$",
-        "/edit$",
-        "/modal"
-      ],
-      "properties": {
-        "context": "modal",
-        "pull_to_refresh_enabled": false
-      },
-      "comment": "Present forms and custom modal path as modals."
-    },
-    {
-      "patterns": [
-        "/numbers$"
-      ],
-      "properties": {
-        "view_controller": "numbers"
-      },
-      "comment": "Intercept with a native view."
-    }
-  ]
+  }
 }

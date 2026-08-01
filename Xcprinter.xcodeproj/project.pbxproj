@@ -16,7 +16,6 @@
 		844BA7B62B9A488A008F48DB /* MenuComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AB2B9A488A008F48DB /* MenuComponent.swift */; };
 		844BA7B72B9A488A008F48DB /* NumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AC2B9A488A008F48DB /* NumbersViewController.swift */; };
 		844BA7B82B9A488A008F48DB /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AD2B9A488A008F48DB /* Demo.swift */; };
-		844BA7B92B9A488A008F48DB /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = 844BA7AE2B9A488A008F48DB /* path-configuration.json */; };
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
 		84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A617FE2D5AA88B00694AEE /* Tabs.swift */; };
 		D85D5C553014D7050067FB0D /* init_turbo.js in Resources */ = {isa = PBXBuildFile; fileRef = D85D5C543014D7050067FB0D /* init_turbo.js */; };
@@ -28,6 +27,7 @@
 		D8F12F5130136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */; };
 		D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C712301B53B000DCC732 /* LaunchScreen.strings */; };
 		D8F6C719301C99EA00DCC732 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C718301C99E600DCC732 /* WebViewController.swift */; };
+		D8F6C71B301DB55900DCC732 /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C71A301DB55900DCC732 /* path-configuration.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +42,6 @@
 		844BA7AB2B9A488A008F48DB /* MenuComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuComponent.swift; sourceTree = "<group>"; };
 		844BA7AC2B9A488A008F48DB /* NumbersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumbersViewController.swift; sourceTree = "<group>"; };
 		844BA7AD2B9A488A008F48DB /* Demo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
-		844BA7AE2B9A488A008F48DB /* path-configuration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "path-configuration.json"; sourceTree = "<group>"; };
 		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
 		84A617FE2D5AA88B00694AEE /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		D85D5C543014D7050067FB0D /* init_turbo.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init_turbo.js; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		D8F6C710301B52F400DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		D8F6C711301B53B000DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
 		D8F6C718301C99E600DCC732 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		D8F6C71A301DB55900DCC732 /* path-configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "path-configuration.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +89,7 @@
 		844BA7892B9A4843008F48DB /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D8F6C71A301DB55900DCC732 /* path-configuration.json */,
 				D8F6C718301C99E600DCC732 /* WebViewController.swift */,
 				D8F6C713301B53B000DCC732 /* zh-Hans.lproj */,
 				D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */,
@@ -100,7 +101,6 @@
 				844BA78A2B9A4843008F48DB /* AppDelegate.swift */,
 				84A617FE2D5AA88B00694AEE /* Tabs.swift */,
 				844BA7AC2B9A488A008F48DB /* NumbersViewController.swift */,
-				844BA7AE2B9A488A008F48DB /* path-configuration.json */,
 				844BA7982B9A4844008F48DB /* Info.plist */,
 				844BA7932B9A4844008F48DB /* Assets.xcassets */,
 				844BA7952B9A4844008F48DB /* LaunchScreen.storyboard */,
@@ -205,8 +205,8 @@
 			files = (
 				D89586BD300A092D007E1FF8 /* .gitignore in Resources */,
 				D8985B6130118C180049165C /* init.js in Resources */,
+				D8F6C71B301DB55900DCC732 /* path-configuration.json in Resources */,
 				844BA7942B9A4844008F48DB /* Assets.xcassets in Resources */,
-				844BA7B92B9A488A008F48DB /* path-configuration.json in Resources */,
 				D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */,
 				844BA7972B9A4844008F48DB /* Base in Resources */,
 				D85D5C553014D7050067FB0D /* init_turbo.js in Resources */,

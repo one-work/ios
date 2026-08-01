@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ])
 
     Hotwire.registerRouteDecisionHandlers([
-      CrossOriginWebViewRouteDecisionHandler(),
       AppNavigationRouteDecisionHandler(),
+      CrossOriginWebViewRouteDecisionHandler(),
       SafariViewControllerRouteDecisionHandler(),
       SystemNavigationRouteDecisionHandler()
     ])
