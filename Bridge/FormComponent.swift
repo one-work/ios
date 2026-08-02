@@ -11,7 +11,7 @@ final class FormComponent: BridgeComponent {
     guard let event = Event(rawValue: message.event) else {
       return
     }
-    
+
     switch event {
     case .connect:
       handleConnectEvent(message: message)

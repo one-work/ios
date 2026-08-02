@@ -15,7 +15,7 @@ final class WebViewController: HotwireWebViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    addModalCloseButtonIfNeeded()
+    //addModalCloseButtonIfNeeded()
   }
 
   /// 以 modal 呈现的页面（即表单页）：右上角放「关闭」，替代 submit
