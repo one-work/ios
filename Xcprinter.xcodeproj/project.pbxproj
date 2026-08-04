@@ -45,6 +45,7 @@
 		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
 		84A617FE2D5AA88B00694AEE /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		D85D5C543014D7050067FB0D /* init_turbo.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init_turbo.js; sourceTree = "<group>"; };
+		D85DA5F43021AAFB00C06BAA /* AppleSignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInCoordinator.swift; sourceTree = "<group>"; };
 		D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothComponent.swift; sourceTree = "<group>"; };
 		D888F3E33008C635001CEFB6 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -106,6 +107,7 @@
 				844BA7952B9A4844008F48DB /* LaunchScreen.storyboard */,
 				D888F3E33008C635001CEFB6 /* BluetoothManager.swift */,
 				D85D5C543014D7050067FB0D /* init_turbo.js */,
+				D85DA5F43021AAFB00C06BAA /* AppleSignInCoordinator.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
