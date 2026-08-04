@@ -22,17 +22,14 @@ final class AppleSignInComponent: BridgeComponent {
   }
 
   private func replyError(_ description: String, cancelled: Bool = false) {
-    reply(to: "signIn", with: [
-      "success": false,
-      "cancelled": cancelled,
-      "error": description
-    ])
+    let payload = ErrData(success: false, cancelled: cancelled, error: description)
+    reply(to: "signIn", with: payload)
   }
 }
 
 // MARK: - 授权回调
 extension AppleSignInComponent: ASAuthorizationControllerDelegate {
-  
+
   func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
     guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
           let tokenData = credential.identityToken,
@@ -41,19 +38,15 @@ extension AppleSignInComponent: ASAuthorizationControllerDelegate {
       return
     }
 
-    var data: MessageData = [
-      "success": true,
-      "identityToken": identityToken,
-      "userIdentifier": credential.user
-    ]
+    var payload = UserData(success: true, identityToken: identityToken, userIdentifier: credential.user)
     // email / fullName 只有首次授权时才返回
-    if let email = credential.email { data["email"] = email }
+    if let email = credential.email { payload.email = email }
     if let name = credential.fullName {
-      if let given = name.givenName { data["givenName"] = given }
-      if let family = name.familyName { data["familyName"] = family }
+      if let given = name.givenName { payload.givenName = given }
+      if let family = name.familyName { payload.familyName = family }
     }
 
-    reply(to: "signIn", with: data)
+    reply(to: "signIn", with: payload)
   }
   
   func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -69,9 +62,7 @@ extension AppleSignInComponent: ASAuthorizationControllerPresentationContextProv
     if let vc = delegate?.destination as? UIViewController, let window = vc.view.window {
       return window
     }
-    let window = UIApplication.shared.connectedScenes
-      .compactMap { ($0 as? UIWindowScene)?.windows.first { $0.isKeyWindow } }
-      .first
+    let window = UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.windows.first { $0.isKeyWindow } }.first
     return window ?? ASPresentationAnchor(frame: .zero)
   }
 }
@@ -87,9 +78,18 @@ private extension FormComponent {
 
 // MARK: Message data
 private extension AppleSignInComponent {
-  struct MessageData: Decodable {
+  struct UserData: Encodable {
     let success: Bool
     let identityToken: String
     let userIdentifier: String
+    let email: String?
+    let givenName: String?
+    let familyName: String?
+  }
+  
+  struct ErrData: Encodable {
+    let success: Bool
+    let cancelled: Bool
+    let error: String
   }
 }
