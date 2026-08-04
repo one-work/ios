@@ -2,8 +2,7 @@ import Foundation
 import HotwireNative
 import UIKit
 
-/// Bridge component to display a native 3-dot menu in the toolbar,
-/// which will notify the web when it has been tapped.
+/// 在右上角显示按钮，点击后跳转到指定地址
 final class OverflowMenuComponent: BridgeComponent {
   override class var name: String { "overflow-menu" }
 
