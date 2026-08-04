@@ -15,13 +15,12 @@ final class WebViewController: HotwireWebViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    //addModalCloseButtonIfNeeded()
+    addModalCloseButtonIfNeeded()
   }
 
   /// 以 modal 呈现的页面（即表单页）：右上角放「关闭」，替代 submit
   private func addModalCloseButtonIfNeeded() {
-    let properties = Hotwire.config.pathConfiguration.properties(for: "/menus$")
-    guard properties["context"] as? String == "modal" else { return }
+    if self.initialVisitableURL.path != "/bluetooth/menus" { return }
 
     navigationItem.rightBarButtonItem = UIBarButtonItem(
       barButtonSystemItem: .close,
