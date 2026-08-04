@@ -5,7 +5,7 @@ import UIKit
 
 final class AppleSignInComponent: BridgeComponent {
   override class var name: String { "apple-sign-in" }
-  
+
   // 强引用持有 coordinator，保证授权流程期间不被释放
   private lazy var coordinator = AppleSignInCoordinator(
     onSuccess: { [weak self] data in

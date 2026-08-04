@@ -5,15 +5,13 @@ final class AppleSignInCoordinator: NSObject {
   private let onSuccess: (MessageData) -> Void
   private let onFailure: (String, Bool) -> Void
   private let anchorProvider: () -> ASPresentationAnchor
-  
-  init(onSuccess: @escaping (MessageData) -> Void,
-       onFailure: @escaping (String, Bool) -> Void,
-       anchorProvider: @escaping () -> ASPresentationAnchor) {
+
+  init(onSuccess: @escaping (MessageData) -> Void, onFailure: @escaping (String, Bool) -> Void, anchorProvider: @escaping () -> ASPresentationAnchor) {
     self.onSuccess = onSuccess
     self.onFailure = onFailure
     self.anchorProvider = anchorProvider
   }
-  
+
   func start() {
     let request = ASAuthorizationAppleIDProvider().createRequest()
     request.requestedScopes = [.fullName, .email]
@@ -27,15 +25,14 @@ final class AppleSignInCoordinator: NSObject {
 
 // NSObject 子类可以正常遵守这两个协议
 extension AppleSignInCoordinator: ASAuthorizationControllerDelegate {
-  func authorizationController(controller: ASAuthorizationController,
-                               didCompleteWithAuthorization authorization: ASAuthorization) {
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
     guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
           let tokenData = credential.identityToken,
           let identityToken = String(data: tokenData, encoding: .utf8) else {
       onFailure("无法获取 identityToken", false)
       return
     }
-    
+
     var data: MessageData = [
       "success": true,
       "identityToken": identityToken,
@@ -49,12 +46,10 @@ extension AppleSignInCoordinator: ASAuthorizationControllerDelegate {
     }
     onSuccess(data)
   }
-  
-  func authorizationController(controller: ASAuthorizationController,
-                               didCompleteWithError error: Error) {
+
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
     let nsError = error as NSError
-    onFailure(error.localizedDescription,
-              nsError.code == ASAuthorizationError.canceled.rawValue)
+    onFailure(error.localizedDescription, nsError.code == ASAuthorizationError.canceled.rawValue)
   }
 }
 
