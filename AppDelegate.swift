@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     )
 
     // Set an optional custom user agent application prefix.
-    Hotwire.config.applicationUserAgentPrefix = "Hotwire Demo;"
+    Hotwire.config.applicationUserAgentPrefix = "Hotwire"
 
     // Register bridge components
     Hotwire.registerBridgeComponents([

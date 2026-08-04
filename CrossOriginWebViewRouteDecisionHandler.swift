@@ -19,8 +19,7 @@ final class CrossOriginWebViewRouteDecisionHandler: RouteDecisionHandler {
       return false
     }
 
-    let allowedHosts = ["app-demo.xcprinter.com"]
-    return allowedHosts.contains(location.host ?? "")
+    return true
   }
 
   func handle(proposal: VisitProposal, configuration: Navigator.Configuration, navigator: Navigating) -> Router.Decision {
