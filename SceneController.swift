@@ -28,6 +28,28 @@ extension SceneController: UIWindowSceneDelegate {
     window?.rootViewController = tabBarController
     window?.makeKeyAndVisible()
     tabBarController.load(HotwireTab.all)
+    
+    tagIdleWebViews()
+  }
+  
+  /// 给还没加载内容的 WebView 打标记，让 Safari 检查器里能分清是谁
+  private func tagIdleWebViews() {
+    for tab in HotwireTab.all {
+      guard let navigator = tabBarController.navigator(for: tab) else { continue }
+
+      if navigator.session.webView.url == nil {
+        navigator.session.webView.loadMarkerTitle("主栈 · \(tab.title)")
+      }
+      if navigator.modalSession.webView.url == nil {
+        navigator.modalSession.webView.loadMarkerTitle("模态栈 · \(tab.title)")
+      }
+    }
+  }
+}
+
+private extension WKWebView {
+  func loadMarkerTitle(_ title: String) {
+    loadHTMLString("<html><head><title>\(title)</title></head><body></body></html>", baseURL: nil)
   }
 }
 
