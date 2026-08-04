@@ -6,7 +6,7 @@ import WebKit
 /// 让跨域 http/https 链接在 App 原生 WebView 中打开，
 /// 而不是弹 Safari 或跳到系统浏览器。
 final class ExternalRouteDecisionHandler: RouteDecisionHandler {
-  public let name: String = "cross-origin-webview"
+  public let name: String = "external"
 
   /// 防止新 Session 被释放
   private var externalSessions: [ObjectIdentifier: ExternalWebSession] = [:]
@@ -38,8 +38,7 @@ final class ExternalWebSession: NSObject, SessionDelegate {
 
   init(url: URL, navigator: Navigator?) {
     self.navigator = navigator
-    let webView = Hotwire.config.makeWebView()
-    session = Session(webView: webView)
+    session = Session(webView: Hotwire.config.makeWebView())
     viewController = WebViewController(url: url, navigator: navigator)
     super.init()
     session.delegate = self
