@@ -18,6 +18,7 @@
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
 		84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A617FE2D5AA88B00694AEE /* Tabs.swift */; };
 		D85D5C553014D7050067FB0D /* init_turbo.js in Resources */ = {isa = PBXBuildFile; fileRef = D85D5C543014D7050067FB0D /* init_turbo.js */; };
+		D85DA5F73021B19100C06BAA /* AppleSignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85DA5F43021AAFB00C06BAA /* AppleSignInCoordinator.swift */; };
 		D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */; };
 		D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3E33008C635001CEFB6 /* BluetoothManager.swift */; };
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
@@ -224,6 +225,7 @@
 				844BA7B82B9A488A008F48DB /* Demo.swift in Sources */,
 				D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */,
 				84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */,
+				D85DA5F73021B19100C06BAA /* AppleSignInCoordinator.swift in Sources */,
 				844BA78B2B9A4843008F48DB /* AppDelegate.swift in Sources */,
 				D8F6C719301C99EA00DCC732 /* WebViewController.swift in Sources */,
 				844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */,
