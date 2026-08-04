@@ -13,7 +13,7 @@
 		844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7A22B9A4889008F48DB /* SceneController.swift */; };
 		844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7A32B9A488A008F48DB /* FormComponent.swift */; };
 		844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */; };
-		844BA7B62B9A488A008F48DB /* MenuComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AB2B9A488A008F48DB /* MenuComponent.swift */; };
+		844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */; };
 		844BA7B72B9A488A008F48DB /* NumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AC2B9A488A008F48DB /* NumbersViewController.swift */; };
 		844BA7B82B9A488A008F48DB /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AD2B9A488A008F48DB /* Demo.swift */; };
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
@@ -39,7 +39,7 @@
 		844BA7A22B9A4889008F48DB /* SceneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneController.swift; sourceTree = "<group>"; };
 		844BA7A32B9A488A008F48DB /* FormComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormComponent.swift; sourceTree = "<group>"; };
 		844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverflowMenuComponent.swift; sourceTree = "<group>"; };
-		844BA7AB2B9A488A008F48DB /* MenuComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuComponent.swift; sourceTree = "<group>"; };
+		844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignInComponent.swift; sourceTree = "<group>"; };
 		844BA7AC2B9A488A008F48DB /* NumbersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumbersViewController.swift; sourceTree = "<group>"; };
 		844BA7AD2B9A488A008F48DB /* Demo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			children = (
 				D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */,
 				844BA7A32B9A488A008F48DB /* FormComponent.swift */,
-				844BA7AB2B9A488A008F48DB /* MenuComponent.swift */,
+				844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */,
 				844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */,
 			);
 			path = Bridge;
@@ -220,7 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				844BA7B62B9A488A008F48DB /* MenuComponent.swift in Sources */,
+				844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */,
 				D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */,
 				844BA7B72B9A488A008F48DB /* NumbersViewController.swift in Sources */,
 				844BA7B82B9A488A008F48DB /* Demo.swift in Sources */,
