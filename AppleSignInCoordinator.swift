@@ -1,5 +1,6 @@
 import AuthenticationServices
 import HotwireNative
+import Foundation
 
 final class AppleSignInCoordinator: NSObject {
   private let onSuccess: (MessageData) -> Void

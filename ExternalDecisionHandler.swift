@@ -5,7 +5,7 @@ import WebKit
 
 /// 让跨域 http/https 链接在 App 原生 WebView 中打开，
 /// 而不是弹 Safari 或跳到系统浏览器。
-final class CrossOriginWebViewRouteDecisionHandler: RouteDecisionHandler {
+final class ExternalRouteDecisionHandler: RouteDecisionHandler {
   public let name: String = "cross-origin-webview"
 
   /// 防止新 Session 被释放

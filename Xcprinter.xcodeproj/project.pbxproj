@@ -14,7 +14,6 @@
 		844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7A32B9A488A008F48DB /* FormComponent.swift */; };
 		844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */; };
 		844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */; };
-		844BA7B72B9A488A008F48DB /* NumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AC2B9A488A008F48DB /* NumbersViewController.swift */; };
 		844BA7B82B9A488A008F48DB /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AD2B9A488A008F48DB /* Demo.swift */; };
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
 		84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A617FE2D5AA88B00694AEE /* Tabs.swift */; };
@@ -24,7 +23,7 @@
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
 		D8985B6130118C180049165C /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = D8985B6030118C0B0049165C /* init.js */; };
 		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
-		D8F12F5130136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */; };
+		D8F12F5130136A6F00AAB98A /* ExternalDecisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F12F5030136A6F00AAB98A /* ExternalDecisionHandler.swift */; };
 		D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C712301B53B000DCC732 /* LaunchScreen.strings */; };
 		D8F6C719301C99EA00DCC732 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C718301C99E600DCC732 /* WebViewController.swift */; };
 		D8F6C71B301DB55900DCC732 /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C71A301DB55900DCC732 /* path-configuration.json */; };
@@ -40,7 +39,6 @@
 		844BA7A32B9A488A008F48DB /* FormComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormComponent.swift; sourceTree = "<group>"; };
 		844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverflowMenuComponent.swift; sourceTree = "<group>"; };
 		844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignInComponent.swift; sourceTree = "<group>"; };
-		844BA7AC2B9A488A008F48DB /* NumbersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumbersViewController.swift; sourceTree = "<group>"; };
 		844BA7AD2B9A488A008F48DB /* Demo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
 		84A617FE2D5AA88B00694AEE /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
@@ -50,7 +48,7 @@
 		D888F3E33008C635001CEFB6 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D8985B6030118C0B0049165C /* init.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
-		D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossOriginWebViewRouteDecisionHandler.swift; sourceTree = "<group>"; };
+		D8F12F5030136A6F00AAB98A /* ExternalDecisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDecisionHandler.swift; sourceTree = "<group>"; };
 		D8F6C710301B52F400DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		D8F6C711301B53B000DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
 		D8F6C718301C99E600DCC732 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +91,7 @@
 				D8F6C71A301DB55900DCC732 /* path-configuration.json */,
 				D8F6C718301C99E600DCC732 /* WebViewController.swift */,
 				D8F6C713301B53B000DCC732 /* zh-Hans.lproj */,
-				D8F12F5030136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift */,
+				D8F12F5030136A6F00AAB98A /* ExternalDecisionHandler.swift */,
 				D8985B6030118C0B0049165C /* init.js */,
 				D89586BC300A0926007E1FF8 /* .gitignore */,
 				844BA7BA2B9A4893008F48DB /* Bridge */,
@@ -101,7 +99,6 @@
 				844BA7A22B9A4889008F48DB /* SceneController.swift */,
 				844BA78A2B9A4843008F48DB /* AppDelegate.swift */,
 				84A617FE2D5AA88B00694AEE /* Tabs.swift */,
-				844BA7AC2B9A488A008F48DB /* NumbersViewController.swift */,
 				844BA7982B9A4844008F48DB /* Info.plist */,
 				844BA7932B9A4844008F48DB /* Assets.xcassets */,
 				844BA7952B9A4844008F48DB /* LaunchScreen.storyboard */,
@@ -224,14 +221,13 @@
 			files = (
 				844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */,
 				D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */,
-				844BA7B72B9A488A008F48DB /* NumbersViewController.swift in Sources */,
 				844BA7B82B9A488A008F48DB /* Demo.swift in Sources */,
 				D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */,
 				84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */,
 				844BA78B2B9A4843008F48DB /* AppDelegate.swift in Sources */,
 				D8F6C719301C99EA00DCC732 /* WebViewController.swift in Sources */,
 				844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */,
-				D8F12F5130136A6F00AAB98A /* CrossOriginWebViewRouteDecisionHandler.swift in Sources */,
+				D8F12F5130136A6F00AAB98A /* ExternalDecisionHandler.swift in Sources */,
 				844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */,
 				844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */,
 			);
