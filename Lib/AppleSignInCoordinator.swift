@@ -16,7 +16,7 @@ final class AppleSignInCoordinator: NSObject {
   func start() {
     let request = ASAuthorizationAppleIDProvider().createRequest()
     request.requestedScopes = [.fullName, .email]
-    
+
     let controller = ASAuthorizationController(authorizationRequests: [request])
     controller.delegate = self
     controller.presentationContextProvider = self
@@ -34,16 +34,12 @@ extension AppleSignInCoordinator: ASAuthorizationControllerDelegate {
       return
     }
 
-    var data: MessageData = [
-      "success": true,
-      "identityToken": identityToken,
-      "userIdentifier": credential.user
-    ]
+    var data = MessageData(success: true, identityToken: identityToken, userIdentifier: credential.user)
     // email / fullName 只有首次授权时才返回
-    if let email = credential.email { data["email"] = email }
+    if let email = credential.email { data.email = email }
     if let name = credential.fullName {
-      if let given = name.givenName { data["givenName"] = given }
-      if let family = name.familyName { data["familyName"] = family }
+      if let given = name.givenName { data.givenName = given }
+      if let family = name.familyName { data.familyName = family }
     }
     onSuccess(data)
   }
@@ -57,5 +53,16 @@ extension AppleSignInCoordinator: ASAuthorizationControllerDelegate {
 extension AppleSignInCoordinator: ASAuthorizationControllerPresentationContextProviding {
   func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
     anchorProvider()
+  }
+}
+
+extension AppleSignInCoordinator {
+  struct MessageData: Encodable {
+    let success: Bool
+    let identityToken: String
+    let userIdentifier: String
+    let email: String?
+    let givenName: String?
+    let familyName: String?
   }
 }
