@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,19 +14,11 @@
 		844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7A32B9A488A008F48DB /* FormComponent.swift */; };
 		844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */; };
 		844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */; };
-		844BA7B82B9A488A008F48DB /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AD2B9A488A008F48DB /* Demo.swift */; };
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
-		84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A617FE2D5AA88B00694AEE /* Tabs.swift */; };
-		D85D5C553014D7050067FB0D /* init_turbo.js in Resources */ = {isa = PBXBuildFile; fileRef = D85D5C543014D7050067FB0D /* init_turbo.js */; };
-		D85DA5F73021B19100C06BAA /* AppleSignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85DA5F43021AAFB00C06BAA /* AppleSignInCoordinator.swift */; };
 		D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */; };
-		D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3E33008C635001CEFB6 /* BluetoothManager.swift */; };
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
-		D8985B6130118C180049165C /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = D8985B6030118C0B0049165C /* init.js */; };
 		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
-		D8F12F5130136A6F00AAB98A /* ExternalDecisionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F12F5030136A6F00AAB98A /* ExternalDecisionHandler.swift */; };
 		D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C712301B53B000DCC732 /* LaunchScreen.strings */; };
-		D8F6C719301C99EA00DCC732 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F6C718301C99E600DCC732 /* WebViewController.swift */; };
 		D8F6C71B301DB55900DCC732 /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C71A301DB55900DCC732 /* path-configuration.json */; };
 /* End PBXBuildFile section */
 
@@ -40,21 +32,18 @@
 		844BA7A32B9A488A008F48DB /* FormComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormComponent.swift; sourceTree = "<group>"; };
 		844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverflowMenuComponent.swift; sourceTree = "<group>"; };
 		844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignInComponent.swift; sourceTree = "<group>"; };
-		844BA7AD2B9A488A008F48DB /* Demo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
-		84A617FE2D5AA88B00694AEE /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
-		D85D5C543014D7050067FB0D /* init_turbo.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init_turbo.js; sourceTree = "<group>"; };
-		D85DA5F43021AAFB00C06BAA /* AppleSignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInCoordinator.swift; sourceTree = "<group>"; };
 		D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothComponent.swift; sourceTree = "<group>"; };
-		D888F3E33008C635001CEFB6 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		D8985B6030118C0B0049165C /* init.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
-		D8F12F5030136A6F00AAB98A /* ExternalDecisionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDecisionHandler.swift; sourceTree = "<group>"; };
 		D8F6C710301B52F400DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		D8F6C711301B53B000DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
-		D8F6C718301C99E600DCC732 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		D8F6C71A301DB55900DCC732 /* path-configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "path-configuration.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D85DA5F83021B22C00C06BAA /* js */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = js; sourceTree = "<group>"; };
+		D85DA5F93021B26900C06BAA /* Lib */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Lib; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		844BA7842B9A4843008F48DB /* Frameworks */ = {
@@ -89,23 +78,17 @@
 		844BA7892B9A4843008F48DB /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				D85DA5F93021B26900C06BAA /* Lib */,
+				D85DA5F83021B22C00C06BAA /* js */,
 				D8F6C71A301DB55900DCC732 /* path-configuration.json */,
-				D8F6C718301C99E600DCC732 /* WebViewController.swift */,
 				D8F6C713301B53B000DCC732 /* zh-Hans.lproj */,
-				D8F12F5030136A6F00AAB98A /* ExternalDecisionHandler.swift */,
-				D8985B6030118C0B0049165C /* init.js */,
 				D89586BC300A0926007E1FF8 /* .gitignore */,
 				844BA7BA2B9A4893008F48DB /* Bridge */,
-				844BA7AD2B9A488A008F48DB /* Demo.swift */,
 				844BA7A22B9A4889008F48DB /* SceneController.swift */,
 				844BA78A2B9A4843008F48DB /* AppDelegate.swift */,
-				84A617FE2D5AA88B00694AEE /* Tabs.swift */,
 				844BA7982B9A4844008F48DB /* Info.plist */,
 				844BA7932B9A4844008F48DB /* Assets.xcassets */,
 				844BA7952B9A4844008F48DB /* LaunchScreen.storyboard */,
-				D888F3E33008C635001CEFB6 /* BluetoothManager.swift */,
-				D85D5C543014D7050067FB0D /* init_turbo.js */,
-				D85DA5F43021AAFB00C06BAA /* AppleSignInCoordinator.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -151,6 +134,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D85DA5F83021B22C00C06BAA /* js */,
+				D85DA5F93021B26900C06BAA /* Lib */,
 			);
 			name = XcPrinter;
 			packageProductDependencies = (
@@ -204,12 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D89586BD300A092D007E1FF8 /* .gitignore in Resources */,
-				D8985B6130118C180049165C /* init.js in Resources */,
 				D8F6C71B301DB55900DCC732 /* path-configuration.json in Resources */,
 				844BA7942B9A4844008F48DB /* Assets.xcassets in Resources */,
 				D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */,
 				844BA7972B9A4844008F48DB /* Base in Resources */,
-				D85D5C553014D7050067FB0D /* init_turbo.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,14 +207,8 @@
 			files = (
 				844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */,
 				D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */,
-				844BA7B82B9A488A008F48DB /* Demo.swift in Sources */,
-				D888F3E43008C63A001CEFB6 /* BluetoothManager.swift in Sources */,
-				84A617FF2D5AA88B00694AEE /* Tabs.swift in Sources */,
-				D85DA5F73021B19100C06BAA /* AppleSignInCoordinator.swift in Sources */,
 				844BA78B2B9A4843008F48DB /* AppDelegate.swift in Sources */,
-				D8F6C719301C99EA00DCC732 /* WebViewController.swift in Sources */,
 				844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */,
-				D8F12F5130136A6F00AAB98A /* ExternalDecisionHandler.swift in Sources */,
 				844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */,
 				844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */,
 			);
