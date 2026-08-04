@@ -1,4 +1,3 @@
-// AppleSignInComponent.swift
 import AuthenticationServices
 import HotwireNative
 import UIKit
@@ -12,11 +11,8 @@ final class AppleSignInComponent: BridgeComponent {
       self?.reply(to: "signIn", with: data)
     },
     onFailure: { [weak self] error, cancelled in
-      self?.reply(to: "signIn", with: [
-        "success": false,
-        "cancelled": cancelled,
-        "error": error
-      ])
+      let payload = UserData(success: true, cancelled: cancelled, error: error)
+      self?.reply(to: "signIn", with: payload)
     },
     anchorProvider: { [weak self] in
       if let vc = self?.delegate?.destination as? UIViewController,
@@ -28,9 +24,15 @@ final class AppleSignInComponent: BridgeComponent {
         .first ?? ASPresentationAnchor(frame: .zero)
     }
   )
-  
+
   override func onReceive(message: Message) {
     guard message.event == "signIn" else { return }
     coordinator.start()
   }
+}
+
+private struct UserData: Encodable {
+  let success: Bool
+  let cancelled: Bool
+  let error: String
 }

@@ -61,8 +61,8 @@ extension AppleSignInCoordinator {
     let success: Bool
     let identityToken: String
     let userIdentifier: String
-    let email: String?
-    let givenName: String?
-    let familyName: String?
+    var email: String = ""
+    var givenName: String = ""
+    var familyName: String = ""
   }
 }
