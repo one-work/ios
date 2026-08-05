@@ -10,6 +10,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   static let shared = BluetoothManager()
 
   // MARK: - Callbacks
+  var onReady: ((Bool) -> Void)?
   var onDeviceFound: ((DeviceInfo) -> Void)?
   var onConnected: ((Bool) -> Void)?
   var onDisconnected: ((Bool) -> Void)?
@@ -101,10 +102,10 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   // MARK: - CBCentralManagerDelegate
   func centralManagerDidUpdateState(_ central: CBCentralManager) {
-
     switch central.state {
     case .poweredOn:
       print("蓝牙已开启")
+      onReady?(true)
     case .poweredOff:
       print("蓝牙已关闭")
     default:
