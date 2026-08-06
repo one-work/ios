@@ -51,7 +51,10 @@ final class BluetoothComponent: BridgeComponent {
     BluetoothManager.shared.onReady = {
       [weak self] success in
       guard let self = self else { return }
-      let payload = ReadyResult(ready: success)
+      let address = UserDefaults.standard.string(forKey: "address")
+      let name = UserDefaults.standard.string(forKey: "name")
+      let payload = ConnectStatus(address: address, name: name, ready: success)
+      
       self.reply(to: "connect", with: payload)
     }
     BluetoothManager.shared.onDeviceFound = {
@@ -120,10 +123,6 @@ private struct SendData: Decodable {
 }
 
 // MARK: - 发送数据模型（Encodable）
-private struct ReadyResult: Encodable {
-  let ready: Bool
-}
-
 private struct SearchResult: Encodable {
   let device: DeviceInfo
 }
@@ -140,5 +139,6 @@ private struct SendResult: Encodable {
 private struct ConnectStatus: Encodable {
   let address: String?
   let name: String?
-  let state: String?
+  var state: String = ""
+  var ready: Bool = false
 }
