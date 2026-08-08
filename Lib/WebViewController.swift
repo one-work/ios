@@ -20,7 +20,10 @@ final class WebViewController: HotwireWebViewController {
 
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    navigator?.reload() // 会触发 main + modal session 刷新（使用库的 API）
+
+    if self.initialVisitableURL.path == "/bluetooth/menus" {
+      navigator?.reload() // 会触发 main + modal session 刷新（使用库的 API）
+    }
   }
 
   /// 以 modal 呈现的页面（即表单页）：右上角放「关闭」，替代 submit
