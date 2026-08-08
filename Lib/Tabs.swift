@@ -6,7 +6,6 @@ extension HotwireTab {
   static let all: [HotwireTab] = {
     var tabs: [HotwireTab] = [
       .navigation,
-      .bridgeComponents,
       .resources
     ]
 
@@ -21,12 +20,6 @@ extension HotwireTab {
     title: "Home",
     image: .init(systemName: "arrow.left.arrow.right")!,
     url: Demo.current.appendingPathComponent("auth/apps")
-  )
-
-  static let bridgeComponents = HotwireTab(
-    title: "Bluetooth",
-    image: .init(systemName: "widget.small")!,
-    url: Demo.current.appendingPathComponent("bluetooth")
   )
 
   static let resources = HotwireTab(

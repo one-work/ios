@@ -118,7 +118,6 @@ private struct DisconnectDeviceData: Decodable {
 }
 
 private struct SendData: Decodable {
-  let address: String
   let data: [UInt8]
 }
 
