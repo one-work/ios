@@ -8,8 +8,7 @@ import WebKit
 final class ExternalRouteDecisionHandler: RouteDecisionHandler {
   public let name: String = "external"
 
-  /// 防止新 Session 被释放
-  private var externalSessions: [ObjectIdentifier: ExternalWebSession] = [:]
+  private lazy var externalSession = ExternalWebSession()
 
   func matches(proposal: VisitProposal, configuration: Navigator.Configuration) -> Bool {
     let location = proposal.url
@@ -24,31 +23,35 @@ final class ExternalRouteDecisionHandler: RouteDecisionHandler {
 
   func handle(proposal: VisitProposal, configuration: Navigator.Configuration, navigator: Navigating) -> Router.Decision {
     print("------------------Routing \(proposal.url.absoluteString)")
-    let external = ExternalWebSession(url: proposal.url, navigator: (navigator as! Navigator))
-    externalSessions[ObjectIdentifier(external.viewController)] = external
-    navigator.activeNavigationController.pushViewController(external.viewController, animated: true)
+    guard let navigator = navigator as? Navigator else { return .cancel }
+    
+    let vc = WebViewController(url: proposal.url, navigator: navigator)
+    navigator.activeNavigationController.pushViewController(vc, animated: true)
+    externalSession.session.visit(vc, options: proposal.options, reload: true)
     return .cancel
   }
 }
 
 final class ExternalWebSession: NSObject, SessionDelegate {
   let session: Session
-  let viewController: WebViewController
   private weak var navigator: Navigator?
 
-  init(url: URL, navigator: Navigator?) {
-    self.navigator = navigator
+  override init() {
     session = Session(webView: Hotwire.config.makeWebView())
-    viewController = WebViewController(url: url, navigator: navigator)
     super.init()
     session.delegate = self
-    session.visit(viewController)
+  }
+
+  func visit(_ vc: WebViewController, options: VisitOptions) {
+    let currentHost = session.topmostVisitable?.currentVisitableURL.host
+    let needsColdBoot = currentHost != nil && currentHost != vc.initialVisitableURL.host
+    session.visit(vc, options: options, reload: needsColdBoot)
   }
 
   /// app-demo 内部的 Turbo 链接：正常 push 新页面
   func session(_ session: Session, didProposeVisit proposal: VisitProposal) {
     let vc = WebViewController(url: proposal.url, navigator: navigator)
-    viewController.navigationController?.pushViewController(vc, animated: true)
+    session.activeVisitable?.visitableViewController.navigationController?.pushViewController(vc, animated: true)
     session.visit(vc, options: proposal.options)
   }
 
