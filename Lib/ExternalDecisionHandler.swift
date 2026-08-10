@@ -55,16 +55,17 @@ final class ExternalWebSession: NSObject, SessionDelegate {
     session.visit(vc, options: proposal.options)
   }
 
-  /// 外部 session 内又重定向到别的域名：在当前 webview 原地加载即可
+  // 外部 session 内又重定向到别的域名：在当前 webview 原地加载即可
   func session(_ session: Session, didProposeVisitToCrossOriginRedirect location: URL) {
     session.webView.load(URLRequest(url: location))
   }
 
+  
   func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, error: HotwireNativeError) {
     print("External session visit failed: \(error)")
   }
 
-  /// 外部 session 内的导航全部放行（浏览器行为）
+  // 外部 session 内的导航全部放行（浏览器行为）
   func session(_ session: Session, decidePolicyFor navigationAction: WKNavigationAction) -> WebViewPolicyManager.Decision {
     .allow
   }
