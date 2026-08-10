@@ -1,5 +1,6 @@
 {
   "settings": {
     "enable_feature_x": true
-  }
+  },
+  "rules": []
 }
