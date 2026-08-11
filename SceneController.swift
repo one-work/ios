@@ -81,3 +81,26 @@ extension SceneController: NavigatorDelegate {
     }
   }
 }
+
+extension Navigator {
+  private enum ExternalSessionRegistry {
+    /// 键为弱引用：Navigator 销毁后条目自动失效，无需手动清理
+    static let sessions = NSMapTable<Navigator, ExternalWebSession>(keyOptions: .weakMemory, valueOptions: .strongMemory)
+  }
+
+  /// 与 session / modalSession 平行的外部站点 Session
+  var externalSession: ExternalWebSession {
+    if let existing = ExternalSessionRegistry.sessions.object(forKey: self) {
+      return existing
+    }
+    let created = ExternalWebSession(navigator: self)
+    ExternalSessionRegistry.sessions.setObject(created, forKey: self)
+    return created
+  }
+
+  /// 主、modal、外部三个 Session 一起刷新
+  func reloadAllSessions() {
+    reload()
+    externalSession.session.reload()
+  }
+}

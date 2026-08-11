@@ -8,8 +8,6 @@ import WebKit
 final class ExternalRouteDecisionHandler: RouteDecisionHandler {
   public let name: String = "external"
 
-  private lazy var externalSession = ExternalWebSession()
-
   func matches(proposal: VisitProposal, configuration: Navigator.Configuration) -> Bool {
     let location = proposal.url
 
@@ -24,10 +22,10 @@ final class ExternalRouteDecisionHandler: RouteDecisionHandler {
   func handle(proposal: VisitProposal, configuration: Navigator.Configuration, navigator: Navigating) -> Router.Decision {
     print("------------------Routing \(proposal.url.absoluteString)")
     guard let navigator = navigator as? Navigator else { return .cancel }
-    
+
     let vc = WebViewController(url: proposal.url, navigator: navigator)
     navigator.activeNavigationController.pushViewController(vc, animated: true)
-    externalSession.session.visit(vc, options: proposal.options, reload: true)
+    navigator.externalSession.session.visit(vc, options: proposal.options, reload: true)
     return .cancel
   }
 }
@@ -36,7 +34,8 @@ final class ExternalWebSession: NSObject, SessionDelegate {
   let session: Session
   private weak var navigator: Navigator?
 
-  override init() {
+  init(navigator: Navigator) {
+    self.navigator = navigator
     session = Session(webView: Hotwire.config.makeWebView())
     super.init()
     session.delegate = self
@@ -59,7 +58,6 @@ final class ExternalWebSession: NSObject, SessionDelegate {
   func session(_ session: Session, didProposeVisitToCrossOriginRedirect location: URL) {
     session.webView.load(URLRequest(url: location))
   }
-
   
   func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, error: HotwireNativeError) {
     print("External session visit failed: \(error)")
@@ -69,6 +67,7 @@ final class ExternalWebSession: NSObject, SessionDelegate {
   func session(_ session: Session, decidePolicyFor navigationAction: WKNavigationAction) -> WebViewPolicyManager.Decision {
     .allow
   }
+
 
   func sessionWebViewProcessDidTerminate(_ session: Session) {
     session.reload()

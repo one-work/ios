@@ -22,7 +22,7 @@ final class WebViewController: HotwireWebViewController {
     super.viewDidDisappear(animated)
 
     if self.initialVisitableURL.path == "/bluetooth/menus" {
-      navigator?.reload() // 会触发 main + modal session 刷新（使用库的 API）
+      navigator?.externalSession.session.reload() // 会触发 main + modal session 刷新（使用库的 API）
     }
   }
 
