@@ -73,8 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       return webView
     }
 
-    #if DEBUG
     Hotwire.config.debugLoggingEnabled = true
-    #endif
   }
 }
