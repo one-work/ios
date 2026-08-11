@@ -26,6 +26,7 @@ final class AppleSignInCoordinator: NSObject {
 
 // NSObject 子类可以正常遵守这两个协议
 extension AppleSignInCoordinator: ASAuthorizationControllerDelegate {
+
   func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
     guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
           let tokenData = credential.identityToken,
