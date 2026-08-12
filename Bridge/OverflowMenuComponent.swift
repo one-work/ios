@@ -9,6 +9,9 @@ final class OverflowMenuComponent: BridgeComponent {
   /// 兜底地址：web 消息里没带 url 时使用
   private static let defaultFormURL = URL(string: "https://linlishenghuo.com/bluetooth/menus")!
   private var formURL: URL?
+  private var viewController: UIViewController? {
+    delegate?.destination as? UIViewController
+  }
 
   override func onReceive(message: Message) {
     guard let event = Event(rawValue: message.event) else {
@@ -19,10 +22,6 @@ final class OverflowMenuComponent: BridgeComponent {
     case .connect:
       handleConnectEvent(message: message)
     }
-  }
-
-  private var viewController: UIViewController? {
-    delegate?.destination as? UIViewController
   }
 
   private func handleConnectEvent(message: Message) {

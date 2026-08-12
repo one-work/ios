@@ -11,7 +11,7 @@
 		844BA7942B9A4844008F48DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 844BA7932B9A4844008F48DB /* Assets.xcassets */; };
 		844BA7972B9A4844008F48DB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 844BA7962B9A4844008F48DB /* Base */; };
 		844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7A22B9A4889008F48DB /* SceneController.swift */; };
-		844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7A32B9A488A008F48DB /* FormComponent.swift */; };
+		844BA7B12B9A488A008F48DB /* RightButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7A32B9A488A008F48DB /* RightButtonComponent.swift */; };
 		844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */; };
 		844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */; };
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
@@ -29,7 +29,7 @@
 		844BA7962B9A4844008F48DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		844BA7982B9A4844008F48DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		844BA7A22B9A4889008F48DB /* SceneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneController.swift; sourceTree = "<group>"; };
-		844BA7A32B9A488A008F48DB /* FormComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormComponent.swift; sourceTree = "<group>"; };
+		844BA7A32B9A488A008F48DB /* RightButtonComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightButtonComponent.swift; sourceTree = "<group>"; };
 		844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverflowMenuComponent.swift; sourceTree = "<group>"; };
 		844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignInComponent.swift; sourceTree = "<group>"; };
 		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */,
-				844BA7A32B9A488A008F48DB /* FormComponent.swift */,
+				844BA7A32B9A488A008F48DB /* RightButtonComponent.swift */,
 				844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */,
 				844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */,
 			);
@@ -211,7 +211,7 @@
 				D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */,
 				844BA78B2B9A4843008F48DB /* AppDelegate.swift in Sources */,
 				844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */,
-				844BA7B12B9A488A008F48DB /* FormComponent.swift in Sources */,
+				844BA7B12B9A488A008F48DB /* RightButtonComponent.swift in Sources */,
 				844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
