@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Register bridge components
     Hotwire.registerBridgeComponents([
       BluetoothComponent.self,
-      FormComponent.self,
+      RightButtonComponent.self,
       AppleSignInComponent.self,
       OverflowMenuComponent.self
     ])
