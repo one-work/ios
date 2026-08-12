@@ -21,7 +21,7 @@ final class RightButtonComponent: BridgeComponent {
     }
     let item = UIBarButtonItem(
       title: data.title,
-      image: .init(systemName: "ellipsis"),
+      image: .init(systemName: "person.fill"),
       primaryAction: action
     )
     viewController.navigationItem.rightBarButtonItem = item
