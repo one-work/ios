@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Register bridge components
     Hotwire.registerBridgeComponents([
+      ScanComponent.self,
       BluetoothComponent.self,
       RightButtonComponent.self,
       AppleSignInComponent.self,
