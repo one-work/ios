@@ -3,7 +3,7 @@ import Foundation
 import CoreBluetooth
 
 final class BluetoothComponent: BridgeComponent {
-  public override class var name: String { "bluetooth" }
+  override class var name: String { "bluetooth" }
 
   public override func onReceive(message: Message) {
     setupBluetoothManager()

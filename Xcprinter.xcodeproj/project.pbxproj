@@ -18,6 +18,7 @@
 		D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */; };
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
 		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
+		D8D9691D302E064200F97120 /* ScanComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D9691C302E063900F97120 /* ScanComponent.swift */; };
 		D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C712301B53B000DCC732 /* LaunchScreen.strings */; };
 		D8F6C71B301DB55900DCC732 /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C71A301DB55900DCC732 /* path-configuration.json */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothComponent.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D8D968DB302B0F6E00F97120 /* XcPrinter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XcPrinter.entitlements; sourceTree = "<group>"; };
+		D8D9691C302E063900F97120 /* ScanComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanComponent.swift; sourceTree = "<group>"; };
 		D8F6C710301B52F400DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		D8F6C711301B53B000DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = LaunchScreen.strings; sourceTree = "<group>"; };
 		D8F6C71A301DB55900DCC732 /* path-configuration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "path-configuration.json"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		844BA7BA2B9A4893008F48DB /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
+				D8D9691C302E063900F97120 /* ScanComponent.swift */,
 				D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */,
 				844BA7A32B9A488A008F48DB /* RightButtonComponent.swift */,
 				844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */,
@@ -209,6 +212,7 @@
 			files = (
 				844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */,
 				D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */,
+				D8D9691D302E064200F97120 /* ScanComponent.swift in Sources */,
 				844BA78B2B9A4843008F48DB /* AppDelegate.swift in Sources */,
 				844BA7B02B9A488A008F48DB /* SceneController.swift in Sources */,
 				844BA7B12B9A488A008F48DB /* RightButtonComponent.swift in Sources */,
