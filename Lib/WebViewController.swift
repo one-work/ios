@@ -15,6 +15,7 @@ final class WebViewController: HotwireWebViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
     addModalCloseButtonIfNeeded()
   }
 

@@ -70,6 +70,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       if #available(iOS 16.4, *) {
         webView.isInspectable = true
       }
+      print(webView.frame)
+      print(webView.safeAreaInsets)
+      webView.scrollView.contentInsetAdjustmentBehavior = .never
+      
       return webView
     }
 
