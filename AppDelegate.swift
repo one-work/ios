@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       print(webView.frame)
       print(webView.safeAreaInsets)
       webView.scrollView.contentInsetAdjustmentBehavior = .never
-      
+
       return webView
     }
 

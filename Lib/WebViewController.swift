@@ -1,7 +1,7 @@
 import HotwireNative
 import UIKit
 
-final class WebViewController: HotwireWebViewController {
+final class WebViewController: HotwireWebViewController, UIGestureRecognizerDelegate {
   weak var navigator: Navigator?
 
   init(url: URL, navigator: Navigator? = nil) {
@@ -11,6 +11,16 @@ final class WebViewController: HotwireWebViewController {
 
   @MainActor required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    navigationController?.setNavigationBarHidden(true, animated: animated)
+
+    // 隐藏导航栏后系统会禁用侧滑返回手势，需要手动恢复
+    navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    navigationController?.interactivePopGestureRecognizer?.delegate = self
   }
 
   override func viewDidLoad() {

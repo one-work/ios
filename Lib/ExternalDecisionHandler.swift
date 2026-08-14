@@ -68,7 +68,6 @@ final class ExternalWebSession: NSObject, SessionDelegate {
     .allow
   }
 
-
   func sessionWebViewProcessDidTerminate(_ session: Session) {
     session.reload()
   }
