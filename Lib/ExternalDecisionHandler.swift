@@ -25,7 +25,9 @@ final class ExternalRouteDecisionHandler: RouteDecisionHandler {
 
     let vc = WebViewController(url: proposal.url, navigator: navigator)
     navigator.activeNavigationController.pushViewController(vc, animated: true)
-    navigator.externalSession.session.visit(vc, options: proposal.options, reload: true)
+    
+    // 改为调用封装方法，让 needsColdBoot 自动判断生效
+    navigator.externalSession.visit(vc, options: proposal.options)
     return .cancel
   }
 }
@@ -33,7 +35,7 @@ final class ExternalRouteDecisionHandler: RouteDecisionHandler {
 final class ExternalWebSession: NSObject, SessionDelegate {
   let session: Session
   private weak var navigator: Navigator?
-
+  
   init(navigator: Navigator) {
     self.navigator = navigator
     session = Session(webView: Hotwire.config.makeWebView())
@@ -47,23 +49,67 @@ final class ExternalWebSession: NSObject, SessionDelegate {
     session.visit(vc, options: options, reload: needsColdBoot)
   }
 
-  /// app-demo 内部的 Turbo 链接：正常 push 新页面
+  /// 外部 Session 内的 Turbo 导航：根据 action 执行对应的 UI 操作
   func session(_ session: Session, didProposeVisit proposal: VisitProposal) {
     let vc = WebViewController(url: proposal.url, navigator: navigator)
-    session.activeVisitable?.visitableViewController.navigationController?.pushViewController(vc, animated: true)
-    session.visit(vc, options: proposal.options)
+    let navController = session.activeVisitable?.visitableViewController.navigationController
+    
+    switch proposal.options.action {
+    case .replace:
+      // 替换当前页面：不增加导航栈层级
+      replaceViewController(vc, in: navController, options: proposal.options)
+    case .restore:
+      // 恢复页面：如果栈中已存在相同 URL，pop 到该页面；否则按 advance 处理
+      restoreOrAdvance(vc, in: navController, options: proposal.options)
+    default:
+      // advance 或其他：正常 push
+      navController?.pushViewController(vc, animated: true)
+      self.visit(vc, options: proposal.options)
+    }
   }
 
-  // 外部 session 内又重定向到别的域名：在当前 webview 原地加载即可
+  private func replaceViewController(_ vc: WebViewController, in nav: UINavigationController?, options: VisitOptions) {
+    guard let nav = nav else { return }
+    
+    var vcs = nav.viewControllers
+    guard !vcs.isEmpty else {
+      nav.setViewControllers([vc], animated: false)
+      self.visit(vc, options: options)
+      return
+    }
+    
+    // 替换栈顶，保持其余页面不变
+    vcs[vcs.count - 1] = vc
+    nav.setViewControllers(vcs, animated: false)
+    self.visit(vc, options: options)
+  }
+
+  private func restoreOrAdvance(_ vc: WebViewController, in nav: UINavigationController?, options: VisitOptions) {
+    guard let nav = nav else { return }
+    
+    // 查找是否已有相同 URL 的页面在栈中
+    if let existingIndex = nav.viewControllers.firstIndex(where: {
+      ($0 as? WebViewController)?.initialVisitableURL == vc.initialVisitableURL
+    }) {
+      // pop 到已有页面
+      let targetVC = nav.viewControllers[existingIndex]
+      nav.popToViewController(targetVC, animated: true)
+      // 不需要重新 visit，因为页面已经存在
+    } else {
+      // 没有找到，按 advance 处理
+      nav.pushViewController(vc, animated: true)
+      self.visit(vc, options: options)
+    }
+  }
+  
   func session(_ session: Session, didProposeVisitToCrossOriginRedirect location: URL) {
     session.webView.load(URLRequest(url: location))
   }
-  
+
   func session(_ session: Session, didFailRequestForVisitable visitable: Visitable, error: HotwireNativeError) {
     print("External session visit failed: \(error)")
   }
 
-  // 外部 session 内的导航全部放行（浏览器行为）
   func session(_ session: Session, decidePolicyFor navigationAction: WKNavigationAction) -> WebViewPolicyManager.Decision {
     .allow
   }
