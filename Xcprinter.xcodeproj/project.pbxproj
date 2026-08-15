@@ -17,8 +17,8 @@
 		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
 		D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */; };
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
-		D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8AFC54730077026009D4AB5 /* HotwireNative */; };
 		D8D9691D302E064200F97120 /* ScanComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D9691C302E063900F97120 /* ScanComponent.swift */; };
+		D8D9695630301EEA00F97120 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8D9695530301EEA00F97120 /* HotwireNative */; };
 		D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C712301B53B000DCC732 /* LaunchScreen.strings */; };
 		D8F6C71B301DB55900DCC732 /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C71A301DB55900DCC732 /* path-configuration.json */; };
 /* End PBXBuildFile section */
@@ -53,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8AFC54830077026009D4AB5 /* HotwireNative in Frameworks */,
+				D8D9695630301EEA00F97120 /* HotwireNative in Frameworks */,
 				848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,7 +147,7 @@
 			name = XcPrinter;
 			packageProductDependencies = (
 				848E12202BD813CA009BB0A4 /* HotwireNative */,
-				D8AFC54730077026009D4AB5 /* HotwireNative */,
+				D8D9695530301EEA00F97120 /* HotwireNative */,
 			);
 			productName = Demo;
 			productReference = 844BA7872B9A4843008F48DB /* XcPrinter.app */;
@@ -179,7 +179,7 @@
 			);
 			mainGroup = 844BA77E2B9A4843008F48DB;
 			packageReferences = (
-				D8AFC54630077026009D4AB5 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */,
+				D8D9695430301EEA00F97120 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */,
 			);
 			productRefGroup = 844BA7882B9A4843008F48DB /* Products */;
 			projectDirPath = "";
@@ -466,12 +466,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D8AFC54630077026009D4AB5 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */ = {
+		D8D9695430301EEA00F97120 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hotwired/hotwire-native-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.0;
+				minimumVersion = 1.3.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -481,9 +481,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = HotwireNative;
 		};
-		D8AFC54730077026009D4AB5 /* HotwireNative */ = {
+		D8D9695530301EEA00F97120 /* HotwireNative */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D8AFC54630077026009D4AB5 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */;
+			package = D8D9695430301EEA00F97120 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */;
 			productName = HotwireNative;
 		};
 /* End XCSwiftPackageProductDependency section */

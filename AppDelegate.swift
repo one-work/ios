@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Hotwire.config.makeCustomWebView = { config in
       let turboUrl = Bundle.main.url(forResource: "init_turbo", withExtension: "js")!
       let turboSource = try! String(contentsOf: turboUrl, encoding: .utf8)
-      let turboScript = WKUserScript(source: turboSource, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+      let turboScript = WKUserScript(source: turboSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
       config.userContentController.addUserScript(turboScript)
 
       let url = Bundle.main.url(forResource: "init", withExtension: "js")!
