@@ -3,8 +3,7 @@ import Foundation
 import UIKit
 import WebKit
 
-/// 让跨域 http/https 链接在 App 原生 WebView 中打开，
-/// 而不是弹 Safari 或跳到系统浏览器。
+// 让跨域 http/https 链接在 App 原生 WebView 中打开， 而不是弹 Safari 或跳到系统浏览器。
 final class ExternalRouteDecisionHandler: RouteDecisionHandler {
   public let name: String = "external"
 
@@ -25,8 +24,6 @@ final class ExternalRouteDecisionHandler: RouteDecisionHandler {
 
     let vc = WebViewController(url: proposal.url, navigator: navigator)
     navigator.activeNavigationController.pushViewController(vc, animated: true)
-    
-    // 改为调用封装方法，让 needsColdBoot 自动判断生效
     navigator.externalSession.visit(vc, options: proposal.options)
     return .cancel
   }
@@ -35,7 +32,7 @@ final class ExternalRouteDecisionHandler: RouteDecisionHandler {
 final class ExternalWebSession: NSObject, SessionDelegate {
   let session: Session
   private weak var navigator: Navigator?
-  
+
   init(navigator: Navigator) {
     self.navigator = navigator
     session = Session(webView: Hotwire.config.makeWebView())
@@ -70,14 +67,14 @@ final class ExternalWebSession: NSObject, SessionDelegate {
 
   private func replaceViewController(_ vc: WebViewController, in nav: UINavigationController?, options: VisitOptions) {
     guard let nav = nav else { return }
-    
+
     var vcs = nav.viewControllers
     guard !vcs.isEmpty else {
       nav.setViewControllers([vc], animated: false)
       self.visit(vc, options: options)
       return
     }
-    
+
     // 替换栈顶，保持其余页面不变
     vcs[vcs.count - 1] = vc
     nav.setViewControllers(vcs, animated: false)
@@ -101,7 +98,7 @@ final class ExternalWebSession: NSObject, SessionDelegate {
       self.visit(vc, options: options)
     }
   }
-  
+
   func session(_ session: Session, didProposeVisitToCrossOriginRedirect location: URL) {
     session.webView.load(URLRequest(url: location))
   }

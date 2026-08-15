@@ -15,7 +15,6 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    //DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in self?.view.window?.debugPaintBorders() }
   }
 
   override func viewDidLayoutSubviews() {
@@ -59,14 +58,5 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
 
   @objc private func closeModal() {
     navigationController?.dismiss(animated: true)
-  }
-}
-
-// 放在 WebViewController.swift 底部的 extension 里，或任意地方
-extension UIView {
-  func debugPaintBorders() {
-    layer.borderWidth = 1
-    layer.borderColor = UIColor.systemRed.cgColor
-    subviews.forEach { $0.debugPaintBorders() }
   }
 }
