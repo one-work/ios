@@ -46,11 +46,11 @@ final class ExternalWebSession: NSObject, SessionDelegate {
     session.visit(vc, options: options, reload: needsColdBoot)
   }
 
-  /// 外部 Session 内的 Turbo 导航：根据 action 执行对应的 UI 操作
+  // 外部 Session 内的 Turbo 导航：根据 action 执行对应的 UI 操作
   func session(_ session: Session, didProposeVisit proposal: VisitProposal) {
     let vc = WebViewController(url: proposal.url, navigator: navigator)
     let navController = session.activeVisitable?.visitableViewController.navigationController
-    
+
     switch proposal.options.action {
     case .replace:
       // 替换当前页面：不增加导航栈层级
