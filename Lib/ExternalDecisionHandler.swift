@@ -32,6 +32,8 @@ final class ExternalRouteDecisionHandler: RouteDecisionHandler {
 final class ExternalWebSession: NSObject, SessionDelegate {
   let session: Session
   private weak var navigator: Navigator?
+  /// 导航栈中是否还有本 Session 的存活页面
+  private var hasLivePages = false
 
   init(navigator: Navigator) {
     self.navigator = navigator
@@ -40,10 +42,22 @@ final class ExternalWebSession: NSObject, SessionDelegate {
     session.delegate = self
   }
 
+  /// 所有外部页面都已退出，下次 visit 需要强制整页加载（让 JS 重新执行）
+  func markIdle() {
+    hasLivePages = false
+  }
+
   func visit(_ vc: WebViewController, options: VisitOptions) {
+    vc.isExternal = true
+    vc.externalSession = self
+
+    // 重新进入（此前页面已全部退出）→ 强制 reload，不走 Turbo 快照恢复
+    let needsFreshLoad = !hasLivePages
+    hasLivePages = true
+    
     let currentHost = session.topmostVisitable?.currentVisitableURL.host
     let needsColdBoot = currentHost != nil && currentHost != vc.initialVisitableURL.host
-    session.visit(vc, options: options, reload: needsColdBoot)
+    session.visit(vc, options: options, reload: needsFreshLoad || needsColdBoot)
   }
 
   // 外部 Session 内的 Turbo 导航：根据 action 执行对应的 UI 操作
@@ -85,9 +99,7 @@ final class ExternalWebSession: NSObject, SessionDelegate {
     guard let nav = nav else { return }
     
     // 查找是否已有相同 URL 的页面在栈中
-    if let existingIndex = nav.viewControllers.firstIndex(where: {
-      ($0 as? WebViewController)?.initialVisitableURL == vc.initialVisitableURL
-    }) {
+    if let existingIndex = nav.viewControllers.firstIndex(where: {($0 as? WebViewController)?.initialVisitableURL == vc.initialVisitableURL}) {
       // pop 到已有页面
       let targetVC = nav.viewControllers[existingIndex]
       nav.popToViewController(targetVC, animated: true)

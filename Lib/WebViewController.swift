@@ -3,6 +3,10 @@ import UIKit
 
 final class WebViewController: HotwireWebViewController, UIGestureRecognizerDelegate {
   weak var navigator: Navigator?
+  /// 是否由外部 Session 打开
+  var isExternal = false
+  /// 所属的外部 Session（弱引用，用于出栈时回通知）
+  weak var externalSession: ExternalWebSession?
 
   init(url: URL, navigator: Navigator? = nil) {
     self.navigator = navigator
@@ -32,6 +36,25 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
 
     if self.initialVisitableURL.path == "/bluetooth/menus" {
       navigator?.externalSession.session.reload() // 会触发 main + modal session 刷新（使用库的 API）
+    }
+  }
+  
+  override func didMove(toParent parent: UIViewController?) {
+    super.didMove(toParent: parent)
+    // parent == nil 说明被 pop / 移出了导航栈
+    guard parent == nil, isExternal else { return }
+    // 延迟一拍再判断，避免 replace 场景下新页面还没入栈导致误判
+    DispatchQueue.main.async { [weak self] in
+      self?.notifyExternalPageRemoved()
+    }
+  }
+
+  private func notifyExternalPageRemoved() {
+    guard let navigator else { return }
+    let stack = navigator.activeNavigationController.viewControllers
+    let stillHasExternal = stack.contains { ($0 as? WebViewController)?.isExternal == true }
+    if !stillHasExternal {
+      externalSession?.markIdle()
     }
   }
 
