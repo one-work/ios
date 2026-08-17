@@ -56,7 +56,7 @@ private extension WKWebView {
 extension SceneController: NavigatorDelegate {
 
   func handle(proposal: VisitProposal, from navigator: Navigator) -> ProposalResult {
-    
+
     switch proposal.viewController {
     default:
       return .acceptCustom(WebViewController(url: proposal.url, navigator: navigator))

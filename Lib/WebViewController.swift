@@ -21,6 +21,7 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
+
     disableEdgeEffectTouches(in: visitableView)
   }
 
