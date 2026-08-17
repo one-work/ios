@@ -79,8 +79,8 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
 
   private func disableEdgeEffectTouches(in view: UIView) {
     if view.isSystemScrollEdgeEffectView, view.isUserInteractionEnabled {
-        view.isUserInteractionEnabled = false
-      }
+      view.isUserInteractionEnabled = false
+    }
 
     for subview in view.subviews {
       disableEdgeEffectTouches(in: subview)
