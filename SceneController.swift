@@ -28,11 +28,11 @@ extension SceneController: UIWindowSceneDelegate {
     window?.rootViewController = tabBarController
     window?.makeKeyAndVisible()
     tabBarController.load(HotwireTab.all)
-    
+
     tagIdleWebViews()
   }
-  
-  /// 给还没加载内容的 WebView 打标记，让 Safari 检查器里能分清是谁
+
+  // 给还没加载内容的 WebView 打标记，让 Safari 检查器里能分清是谁
   private func tagIdleWebViews() {
     for tab in HotwireTab.all {
       guard let navigator = tabBarController.navigator(for: tab) else { continue }
@@ -56,11 +56,10 @@ private extension WKWebView {
 extension SceneController: NavigatorDelegate {
 
   func handle(proposal: VisitProposal, from navigator: Navigator) -> ProposalResult {
-
+    
     switch proposal.viewController {
     default:
       return .acceptCustom(WebViewController(url: proposal.url, navigator: navigator))
-      ///return .accept
     }
   }
 
@@ -84,11 +83,11 @@ extension SceneController: NavigatorDelegate {
 
 extension Navigator {
   private enum ExternalSessionRegistry {
-    /// 键为弱引用：Navigator 销毁后条目自动失效，无需手动清理
+    // 键为弱引用：Navigator 销毁后条目自动失效，无需手动清理
     static let sessions = NSMapTable<Navigator, ExternalWebSession>(keyOptions: .weakMemory, valueOptions: .strongMemory)
   }
 
-  /// 与 session / modalSession 平行的外部站点 Session
+  // 与 session / modalSession 平行的外部站点 Session
   var externalSession: ExternalWebSession {
     if let existing = ExternalSessionRegistry.sessions.object(forKey: self) {
       return existing
@@ -98,7 +97,7 @@ extension Navigator {
     return created
   }
 
-  /// 主、modal、外部三个 Session 一起刷新
+  // 主、modal、外部三个 Session 一起刷新
   func reloadAllSessions() {
     reload()
     externalSession.session.reload()
