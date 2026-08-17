@@ -15,6 +15,10 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
     fatalError("init(coder:) has not been implemented")
   }
 
+  override func loadView() {
+    view = TouchForwardingView()
+  }
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
   }
@@ -22,7 +26,12 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
 
-    disableEdgeEffectTouches(in: visitableView)
+    disableEdgeEffectTouches(in: view)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    disableEdgeEffectTouches(in: view)
   }
 
   override func viewDidLoad() {
@@ -69,16 +78,46 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
   }
 
   private func disableEdgeEffectTouches(in view: UIView) {
-    for subview in view.subviews {
-      let typeName = String(describing: type(of: subview))
-      if typeName.contains("ScrollEdgeEffect"), subview.isUserInteractionEnabled {
-        subview.isUserInteractionEnabled = false
+    if view.isSystemScrollEdgeEffectView, view.isUserInteractionEnabled {
+        view.isUserInteractionEnabled = false
       }
+
+    for subview in view.subviews {
       disableEdgeEffectTouches(in: subview)
     }
   }
 
   @objc private func closeModal() {
     navigationController?.dismiss(animated: true)
+  }
+}
+
+/// iOS 26 的 ScrollEdgeEffect 内部视图可能在 modal 转场完成后才插入。
+/// 布局时扫描可能早于插入时机，因此在命中测试时兜底禁用，确保第一次弹出也不会形成点击死区。
+private final class TouchForwardingView: UIView {
+  override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    var hitView = super.hitTest(point, with: event)
+    var disabledViews = Set<ObjectIdentifier>()
+
+    while let currentHitView = hitView,
+          let edgeEffectView = currentHitView.systemScrollEdgeEffectAncestor,
+          !disabledViews.contains(ObjectIdentifier(edgeEffectView)) {
+      edgeEffectView.isUserInteractionEnabled = false
+      disabledViews.insert(ObjectIdentifier(edgeEffectView))
+      hitView = super.hitTest(point, with: event)
+    }
+
+    return hitView
+  }
+}
+
+private extension UIView {
+  var isSystemScrollEdgeEffectView: Bool {
+    guard !(self is TouchForwardingView) else { return false }
+    return String(describing: type(of: self)).contains("ScrollEdgeEffect")
+  }
+
+  var systemScrollEdgeEffectAncestor: UIView? {
+    sequence(first: self) { $0.superview }.first { $0.isSystemScrollEdgeEffectView }
   }
 }
