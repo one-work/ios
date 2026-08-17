@@ -3,10 +3,8 @@ import UIKit
 
 final class WebViewController: HotwireWebViewController, UIGestureRecognizerDelegate {
   weak var navigator: Navigator?
-  /// 是否由外部 Session 打开
-  var isExternal = false
-  /// 所属的外部 Session（弱引用，用于出栈时回通知）
-  weak var externalSession: ExternalWebSession?
+  weak var externalSession: ExternalWebSession? // 所属的外部 Session（弱引用，用于出栈时回通知）
+  var isExternal = false  // 是否由外部 Session 打开
 
   init(url: URL, navigator: Navigator? = nil) {
     self.navigator = navigator
@@ -38,7 +36,7 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
       navigator?.externalSession.session.reload() // 会触发 main + modal session 刷新（使用库的 API）
     }
   }
-  
+
   override func didMove(toParent parent: UIViewController?) {
     super.didMove(toParent: parent)
     // parent == nil 说明被 pop / 移出了导航栈
@@ -58,7 +56,7 @@ final class WebViewController: HotwireWebViewController, UIGestureRecognizerDele
     }
   }
 
-  /// 以 modal 呈现的页面（即表单页）：右上角放「关闭」，替代 submit
+  // 以 modal 呈现的页面（即表单页）：右上角放「关闭」，替代 submit
   private func addModalCloseButtonIfNeeded() {
     if self.initialVisitableURL.path != "/bluetooth/menus" { return }
 

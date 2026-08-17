@@ -3,7 +3,7 @@ import Foundation
 import UIKit
 import WebKit
 
-// 让跨域 http/https 链接在 App 原生 WebView 中打开， 而不是弹 Safari 或跳到系统浏览器。
+// 让跨域 http/https 链接在 App 原生 WebView 中打开， 而不是弹 Safari 或跳到系统浏览器
 final class ExternalRouteDecisionHandler: RouteDecisionHandler {
   public let name: String = "external"
 
@@ -42,7 +42,7 @@ final class ExternalWebSession: NSObject, SessionDelegate {
     session.delegate = self
   }
 
-  /// 所有外部页面都已退出，下次 visit 需要强制整页加载（让 JS 重新执行）
+  // 所有页面都已退出，下次 visit 需要强制整页加载（让 JS 重新执行）
   func markIdle() {
     hasLivePages = false
   }
