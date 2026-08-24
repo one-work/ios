@@ -57,15 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // 注入 js
     Hotwire.config.makeCustomWebView = { config in
-      let turboUrl = Bundle.main.url(forResource: "init_turbo", withExtension: "js")!
-      let turboSource = try! String(contentsOf: turboUrl, encoding: .utf8)
-      let turboScript = WKUserScript(source: turboSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-      config.userContentController.addUserScript(turboScript)
-
-      let url = Bundle.main.url(forResource: "init", withExtension: "js")!
-      let source = try! String(contentsOf: url, encoding: .utf8)
-      let userScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-      config.userContentController.addUserScript(userScript)
+      if let script = InjectedScriptsProvider.makeUserScript() {
+        config.userContentController.addUserScript(script)
+      }
 
       let webView = WKWebView(frame: .zero, configuration: config)
       if #available(iOS 16.4, *) {
@@ -79,5 +73,89 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     Hotwire.config.debugLoggingEnabled = true
+  }
+}
+
+private struct InjectedScript {
+  let id: String
+  let url: String
+}
+
+private enum InjectedScriptsProvider {
+  static let fallback: [InjectedScript] = [
+    InjectedScript(
+      id: "init_turbo",
+      url: "https://assets.linlishenghuo.com/assets/turbo-00000001.digested.js"
+    ),
+    InjectedScript(
+      id: "init",
+      url: "https://assets.linlishenghuo.com/assets/printer-00000097.digested.js"
+    )
+  ]
+
+  static func currentScripts() -> [InjectedScript] {
+    let settings = Hotwire.config.pathConfiguration.settings
+
+    guard let items = settings["script_injections"] as? [[String: AnyHashable]] else {
+      return fallback
+    }
+
+    let scripts = items.compactMap { item -> InjectedScript? in
+      guard
+        let id = item["id"] as? String,
+        let url = item["url"] as? String,
+        URL(string: url) != nil
+      else {
+        return nil
+      }
+
+      return InjectedScript(id: id, url: url)
+    }
+
+    return scripts.isEmpty ? fallback : scripts
+  }
+
+  static func makeUserScript() -> WKUserScript? {
+    let payload = currentScripts().map {
+      [
+        "id": $0.id,
+        "url": $0.url
+      ]
+    }
+
+    guard
+      let data = try? JSONSerialization.data(withJSONObject: payload),
+      let json = String(data: data, encoding: .utf8)
+    else {
+      return nil
+    }
+
+    let source = """
+    (() => {
+      const scripts = \(json);
+
+      for (const item of scripts) {
+        if (document.getElementById(item.id)) continue;
+
+        const script = document.createElement('script');
+        script.id = item.id;
+        script.src = item.url;
+        script.async = false;
+
+        script.onerror = () => {
+          console.error(`注入 ${item.id} 失败：${item.url}`);
+        };
+
+        document.head.appendChild(script);
+        console.debug(`注入 ${item.id} 成功：${item.url}`);
+      }
+    })();
+    """
+
+    return WKUserScript(
+      source: source,
+      injectionTime: .atDocumentEnd,
+      forMainFrameOnly: true
+    )
   }
 }

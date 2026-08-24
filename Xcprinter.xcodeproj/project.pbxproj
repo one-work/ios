@@ -44,7 +44,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		D85DA5F83021B22C00C06BAA /* js */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = js; sourceTree = "<group>"; };
 		D85DA5F93021B26900C06BAA /* Lib */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Lib; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -83,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				D85DA5F93021B26900C06BAA /* Lib */,
-				D85DA5F83021B22C00C06BAA /* js */,
 				D8F6C71A301DB55900DCC732 /* path-configuration.json */,
 				D8F6C713301B53B000DCC732 /* zh-Hans.lproj */,
 				D89586BC300A0926007E1FF8 /* .gitignore */,
@@ -141,7 +139,6 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				D85DA5F83021B22C00C06BAA /* js */,
 				D85DA5F93021B26900C06BAA /* Lib */,
 			);
 			name = XcPrinter;
