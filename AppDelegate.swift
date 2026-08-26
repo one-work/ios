@@ -140,7 +140,6 @@ private enum InjectedScriptsProvider {
         const script = document.createElement('script');
         script.id = item.id;
         script.src = item.url;
-        script.async = false;
 
         script.onerror = () => {
           console.error(`注入 ${item.id} 失败：${item.url}`);
