@@ -138,6 +138,6 @@ private struct SendResult: Encodable {
 private struct ConnectStatus: Encodable {
   let address: String?
   let name: String?
-  var state: String = ""
-  var ready: Bool = false
+  var state: String?
+  var ready: Bool?
 }
