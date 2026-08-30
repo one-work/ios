@@ -54,7 +54,7 @@ final class BluetoothComponent: BridgeComponent {
       let address = UserDefaults.standard.string(forKey: "address")
       let name = UserDefaults.standard.string(forKey: "name")
       let payload = ConnectStatus(address: address, name: name, ready: success)
-      
+
       self.reply(to: "connect", with: payload)
     }
     BluetoothManager.shared.onDeviceFound = {
