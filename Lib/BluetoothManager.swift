@@ -29,6 +29,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
 
   // MARK: - Callbacks（统一在主线程派发）
   var onReady: ((Bool) -> Void)?
+  var onAuthorizationGranted: (() -> Void)?
   var onDeviceFound: ((DeviceInfo) -> Void)?
   var onConnected: ((Bool) -> Void)?
   var onDisconnected: ((Bool) -> Void)?
@@ -45,6 +46,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   private var writeCharacteristic: CBCharacteristic?
   private var notifyCharacteristic: CBCharacteristic?
 
+  private var isAwaitingAuthorization = false
   private var isScanning = false
   private var shouldResumeScan = false
   private var connectInFlight = false
@@ -298,11 +300,18 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   func centralManagerDidUpdateState(_ central: CBCentralManager) {
     switch central.state {
     case .poweredOn:
+      let authorizationGranted = isAwaitingAuthorization
+      isAwaitingAuthorization = false
       print("蓝牙已开启")
       if shouldResumeScan { startScan() }
-      dispatchOnMain { self.onReady?(true) }
+      dispatchOnMain {
+        self.onReady?(true)
+        if authorizationGranted { self.onAuthorizationGranted?() }
+      }
     case .poweredOff:
       print("蓝牙已关闭")
+    case .unauthorized:
+      isAwaitingAuthorization = true
     default:
       break
     }

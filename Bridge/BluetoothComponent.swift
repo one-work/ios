@@ -57,6 +57,12 @@ final class BluetoothComponent: BridgeComponent {
 
       self.reply(to: "connect", with: payload)
     }
+    BluetoothManager.shared.onAuthorizationGranted = {
+      [weak self] in
+      guard let self = self else { return }
+      let viewController = self.delegate?.destination as? HotwireWebViewController
+      viewController?.visitableView.webView?.reload()
+    }
     BluetoothManager.shared.onDeviceFound = {
       [weak self] device in
       guard let self = self else { return }
