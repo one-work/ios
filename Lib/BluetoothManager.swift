@@ -46,6 +46,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   private var notifyCharacteristic: CBCharacteristic?
 
   private var isScanning = false
+  private var shouldResumeScan = false
   private var connectInFlight = false
   private var suppressDisconnectNotify = false
 
@@ -86,8 +87,12 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
       guard let self = self else { return }
       self.discoveredPeripherals.removeAll()
       self.scanStopWorkItem?.cancel()
-      guard self.centralManager.state == .poweredOn else { return }
+      guard self.centralManager.state == .poweredOn else {
+        self.shouldResumeScan = true
+        return
+      }
 
+      self.shouldResumeScan = false
       self.isScanning = true
       self.centralManager.scanForPeripherals(
         withServices: nil,
@@ -101,6 +106,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   private func stopScan() {
+    shouldResumeScan = false
     guard isScanning else { return }
     isScanning = false
     scanStopWorkItem?.cancel()
@@ -293,6 +299,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     switch central.state {
     case .poweredOn:
       print("蓝牙已开启")
+      if shouldResumeScan { startScan() }
       dispatchOnMain { self.onReady?(true) }
     case .poweredOff:
       print("蓝牙已关闭")
