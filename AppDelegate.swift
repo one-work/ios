@@ -89,7 +89,7 @@ private enum InjectedScriptsProvider {
     ),
     InjectedScript(
       id: "init",
-      url: "https://assets.linlishenghuo.com/assets/printer-00000097.digested.js"
+      url: "https://assets.linlishenghuo.com/assets/printer-00000109.digested.js"
     )
   ]
 
