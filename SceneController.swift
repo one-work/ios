@@ -8,6 +8,11 @@ final class SceneController: UIResponder {
 
   private let rootURL = Demo.current
   private lazy var tabBarController = HotwireTabBarController(navigatorDelegate: self, lazyLoadTabs: true)
+  private var isInitialInterruptionInProgress = false
+  private var shouldRetryFailedVisit = false
+  private var didHandleInitialInterruption = false
+  private var failedVisitRetryHandler: NavigatorDelegate.RetryBlock?
+  private weak var failedVisitErrorPresenter: (any ErrorPresenter)?
 
   // MARK: - Authentication
   private func promptForAuthentication() {
@@ -30,6 +35,32 @@ extension SceneController: UIWindowSceneDelegate {
     tabBarController.load(HotwireTab.all)
 
     tagIdleWebViews()
+  }
+
+  func sceneWillResignActive(_ scene: UIScene) {
+    guard !didHandleInitialInterruption else { return }
+    isInitialInterruptionInProgress = true
+  }
+
+  func sceneDidBecomeActive(_ scene: UIScene) {
+    guard isInitialInterruptionInProgress, !didHandleInitialInterruption else { return }
+    isInitialInterruptionInProgress = false
+    didHandleInitialInterruption = true
+
+    // 网络权限没有授权结果回调；系统权限弹窗结束后重新尝试失败的访问。
+    shouldRetryFailedVisit = true
+    retryFailedVisitIfPossible()
+  }
+
+  private func retryFailedVisitIfPossible() {
+    guard shouldRetryFailedVisit, let retryHandler = failedVisitRetryHandler else { return }
+    shouldRetryFailedVisit = false
+    failedVisitRetryHandler = nil
+
+    let errorPresenter = failedVisitErrorPresenter
+    failedVisitErrorPresenter = nil
+    retryHandler()
+    errorPresenter?.removeErrorViewController()
   }
 
   // 给还没加载内容的 WebView 打标记，让 Safari 检查器里能分清是谁
@@ -69,7 +100,18 @@ extension SceneController: NavigatorDelegate {
       promptForAuthentication()
     default:
       if let errorPresenter = visitable as? ErrorPresenter {
-        errorPresenter.presentError(error) {
+        failedVisitRetryHandler = retryHandler
+        failedVisitErrorPresenter = errorPresenter
+
+        if shouldRetryFailedVisit {
+          retryFailedVisitIfPossible()
+          return
+        }
+
+        errorPresenter.presentError(error) { [weak self] in
+          self?.shouldRetryFailedVisit = false
+          self?.failedVisitRetryHandler = nil
+          self?.failedVisitErrorPresenter = nil
           retryHandler?()
         }
       } else {
