@@ -14,7 +14,6 @@
 		844BA7B12B9A488A008F48DB /* RightButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7A32B9A488A008F48DB /* RightButtonComponent.swift */; };
 		844BA7B52B9A488A008F48DB /* OverflowMenuComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */; };
 		844BA7B62B9A488A008F48DB /* AppleSignInComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */; };
-		848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = 848E12202BD813CA009BB0A4 /* HotwireNative */; };
 		D888F3DF3007D14F001CEFB6 /* BluetoothComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */; };
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
 		D8D9691D302E064200F97120 /* ScanComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D9691C302E063900F97120 /* ScanComponent.swift */; };
@@ -53,7 +52,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D9695630301EEA00F97120 /* HotwireNative in Frameworks */,
-				848E12212BD813CA009BB0A4 /* HotwireNative in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +141,6 @@
 			);
 			name = XcPrinter;
 			packageProductDependencies = (
-				848E12202BD813CA009BB0A4 /* HotwireNative */,
 				D8D9695530301EEA00F97120 /* HotwireNative */,
 			);
 			productName = Demo;
@@ -480,10 +477,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		848E12202BD813CA009BB0A4 /* HotwireNative */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = HotwireNative;
-		};
 		D8D9695530301EEA00F97120 /* HotwireNative */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D8D9695430301EEA00F97120 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */;
