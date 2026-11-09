@@ -32,7 +32,6 @@
 		844BA7A32B9A488A008F48DB /* RightButtonComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightButtonComponent.swift; sourceTree = "<group>"; };
 		844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverflowMenuComponent.swift; sourceTree = "<group>"; };
 		844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignInComponent.swift; sourceTree = "<group>"; };
-		8458F3EF2BD8139400867B66 /* hotwire-native-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "hotwire-native-ios"; path = ..; sourceTree = "<group>"; };
 		D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothComponent.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D8D968DB302B0F6E00F97120 /* XcPrinter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XcPrinter.entitlements; sourceTree = "<group>"; };
@@ -64,7 +63,6 @@
 				D8D968DB302B0F6E00F97120 /* XcPrinter.entitlements */,
 				844BA7892B9A4843008F48DB /* Demo */,
 				844BA7882B9A4843008F48DB /* Products */,
-				8458F3EC2BD8135600867B66 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,14 +101,6 @@
 				844BA7AA2B9A488A008F48DB /* OverflowMenuComponent.swift */,
 			);
 			path = Bridge;
-			sourceTree = "<group>";
-		};
-		8458F3EC2BD8135600867B66 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8458F3EF2BD8139400867B66 /* hotwire-native-ios */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D8F6C713301B53B000DCC732 /* zh-Hans.lproj */ = {
