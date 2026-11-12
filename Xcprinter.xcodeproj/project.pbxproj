@@ -18,6 +18,7 @@
 		D89586BD300A092D007E1FF8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D89586BC300A0926007E1FF8 /* .gitignore */; };
 		D8D9691D302E064200F97120 /* ScanComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D9691C302E063900F97120 /* ScanComponent.swift */; };
 		D8D9695630301EEA00F97120 /* HotwireNative in Frameworks */ = {isa = PBXBuildFile; productRef = D8D9695530301EEA00F97120 /* HotwireNative */; };
+		D8C0A001303C12A100000001 /* XCPrinterBluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = D8C0A003303C12A100000003 /* XCPrinterBluetooth */; };
 		D8F6C714301B53B000DCC732 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C712301B53B000DCC732 /* LaunchScreen.strings */; };
 		D8F6C71B301DB55900DCC732 /* path-configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = D8F6C71A301DB55900DCC732 /* path-configuration.json */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D9695630301EEA00F97120 /* HotwireNative in Frameworks */,
+				D8C0A001303C12A100000001 /* XCPrinterBluetooth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +134,7 @@
 			name = XcPrinter;
 			packageProductDependencies = (
 				D8D9695530301EEA00F97120 /* HotwireNative */,
+				D8C0A003303C12A100000003 /* XCPrinterBluetooth */,
 			);
 			productName = Demo;
 			productReference = 844BA7872B9A4843008F48DB /* XcPrinter.app */;
@@ -164,6 +167,7 @@
 			mainGroup = 844BA77E2B9A4843008F48DB;
 			packageReferences = (
 				D8D9695430301EEA00F97120 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */,
+				D8C0A002303C12A100000002 /* XCLocalSwiftPackageReference "XCPrinterBluetooth" */,
 			);
 			productRefGroup = 844BA7882B9A4843008F48DB /* Products */;
 			projectDirPath = "";
@@ -455,6 +459,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D8C0A002303C12A100000002 /* XCLocalSwiftPackageReference "XCPrinterBluetooth" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = XCPrinterBluetooth;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		D8D9695430301EEA00F97120 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -471,6 +482,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D8D9695430301EEA00F97120 /* XCRemoteSwiftPackageReference "hotwire-native-ios" */;
 			productName = HotwireNative;
+		};
+		D8C0A003303C12A100000003 /* XCPrinterBluetooth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8C0A002303C12A100000002 /* XCLocalSwiftPackageReference "XCPrinterBluetooth" */;
+			productName = XCPrinterBluetooth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,4 +1,5 @@
 import HotwireNative
+import XCPrinterBluetooth
 import Foundation
 import CoreBluetooth
 

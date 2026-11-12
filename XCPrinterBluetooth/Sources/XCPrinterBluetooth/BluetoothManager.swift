@@ -1,13 +1,13 @@
 import Foundation
 import CoreBluetooth
 
-struct SendResultData {
-  let success: Bool
-  let error: String?
+public struct SendResultData {
+  public let success: Bool
+  public let error: String?
 }
 
-final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-  static let shared = BluetoothManager()
+public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+  public static let shared = BluetoothManager()
 
   // MARK: - 打印机 GATT 服务/特征值（对照安卓 BluetoothPrinterManager 与流控文档 §2）
   private let serviceUUID = CBUUID(string: "FF00")
@@ -28,11 +28,11 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   private let scanDurationSeconds: TimeInterval = 5
 
   // MARK: - Callbacks（统一在主线程派发）
-  var onReady: ((Bool) -> Void)?
-  var onDeviceFound: ((DeviceInfo) -> Void)?
-  var onConnected: ((Bool) -> Void)?
-  var onDisconnected: ((Bool) -> Void)?
-  var onDataSent: ((SendResultData) -> Void)?
+  public var onReady: ((Bool) -> Void)?
+  public var onDeviceFound: ((DeviceInfo) -> Void)?
+  public var onConnected: ((Bool) -> Void)?
+  public var onDisconnected: ((Bool) -> Void)?
+  public var onDataSent: ((SendResultData) -> Void)?
 
   // MARK: - Properties
   /// 所有 CoreBluetooth 系统回调与流控状态都在该串行队列上处理，
@@ -82,7 +82,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   // MARK: - Scan
-  func startScan() {
+  public func startScan() {
     bleQueue.async { [weak self] in
       guard let self = self else { return }
       self.discoveredPeripherals.removeAll()
@@ -115,7 +115,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   // MARK: - Connect
-  func connect(to uuidString: String) {
+  public func connect(to uuidString: String) {
     bleQueue.async { [weak self] in
       guard let self = self else { return }
       guard let peripheral = self.resolvePeripheral(uuidString) else {
@@ -144,7 +144,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   // MARK: - Disconnect
-  func disconnect(to uuidString: String) {
+  public func disconnect(to uuidString: String) {
     bleQueue.async { [weak self] in
       guard let self = self else { return }
       var peripheral = self.resolvePeripheral(uuidString)
@@ -190,7 +190,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
    * 注意：运行期间若收到新的 FF03 MTU 通知，仅影响后续 send 调用的切片，
    * 已入队的旧包不重新切分（对照文档 §3.2 规则 5）。
    */
-  func send(bytes: [UInt8]) {
+  public func send(bytes: [UInt8]) {
     bleQueue.async { [weak self] in
       guard let self = self else { return }
       guard let peripheral = self.targetPeripheral, peripheral.state == .connected else {
@@ -290,12 +290,12 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   /// 获取当前已连接的设备列表 (必须提供该设备的 Service UUID)
-  func getConnectedPeripherals(identifiers: [UUID]) -> [CBPeripheral] {
+  public func getConnectedPeripherals(identifiers: [UUID]) -> [CBPeripheral] {
     return centralManager.retrievePeripherals(withIdentifiers: identifiers)
   }
 
   // MARK: - CBCentralManagerDelegate
-  func centralManagerDidUpdateState(_ central: CBCentralManager) {
+  public func centralManagerDidUpdateState(_ central: CBCentralManager) {
     switch central.state {
     case .poweredOn:
       print("蓝牙已开启")
@@ -308,7 +308,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     }
   }
 
-  func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
+  public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
     guard peripheral.name != nil,
           !discoveredPeripherals.contains(where: { $0.identifier == peripheral.identifier }) else { return }
     discoveredPeripherals.append(peripheral)
@@ -316,7 +316,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     dispatchOnMain { self.onDeviceFound?(info) }
   }
 
-  func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+  public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
     connectInFlight = false
     connectTimeoutWorkItem?.cancel()
     // 系统建链时已自动协商 MTU，先取协商值作为临时切片长度（对照 wx.setBLEMTU 的效果）；
@@ -330,7 +330,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     dispatchOnMain { self.onConnected?(true) }
   }
 
-  func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
+  public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
     connectInFlight = false
     connectTimeoutWorkItem?.cancel()
     if targetPeripheral?.identifier == peripheral.identifier { targetPeripheral = nil }
@@ -338,7 +338,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     dispatchOnMain { self.onConnected?(false) }
   }
 
-  func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
+  public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
     let wasConnecting = connectInFlight
     connectInFlight = false
     connectTimeoutWorkItem?.cancel()
@@ -357,7 +357,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   // MARK: - CBPeripheralDelegate
-  func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
+  public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: (any Error)?) {
     guard error == nil, let service = peripheral.services?.first(where: { $0.uuid == serviceUUID }) else {
       // 找不到 FF00 → 判定非目标设备，主动断开物理连接（对照安卓 _forceDisconnect）
       print("[Bluetooth] 未找到 FF00 服务，判定非目标设备，断开连接")
@@ -368,7 +368,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     peripheral.discoverCharacteristics([writeCharUUID, notifyCharUUID], for: service)
   }
 
-  func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
+  public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
     guard error == nil,
           let write = service.characteristics?.first(where: { $0.uuid == writeCharUUID }),
           let notify = service.characteristics?.first(where: { $0.uuid == notifyCharUUID }) else {
@@ -388,7 +388,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
     scheduleCreditsTimeout()
   }
 
-  func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
+  public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: (any Error)?) {
     if let error = error {
       print("[Bluetooth] 启用 FF03 通知失败: \(error.localizedDescription)")
       return
@@ -399,7 +399,7 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   /// FF03 上行流控通知（对照安卓 onCharacteristicChanged / 文档 §2.3）
-  func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+  public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
     guard error == nil,
           characteristic.uuid == notifyCharUUID,
           let value = characteristic.value,
@@ -432,13 +432,13 @@ final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDe
   }
 
   /// iOS 本地发送队列恢复可写（MTU 变化或队列腾出空间时触发），驱动挂起的冲刷
-  func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {
+  public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {
     flushQueue()
   }
 }
 
 // MARK: - 设备信息结构体
-struct DeviceInfo: Encodable {
-  let name: String?
-  let address: String
+public struct DeviceInfo: Encodable {
+  public let name: String?
+  public let address: String
 }
