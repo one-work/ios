@@ -6,7 +6,9 @@ import CoreBluetooth
 final class BluetoothComponent: BridgeComponent {
   override class var name: String { "bluetooth" }
 
-  private let bluetoothManager = BluetoothManager()
+  // 每个页面都会创建组件，蓝牙会话必须跨页面共享，避免重复连接收不到 Credits。
+  private static let sharedManager = BluetoothManager()
+  private let bluetoothManager = BluetoothComponent.sharedManager
   private var readyTask: Task<Void, Never>?
   private var disconnectionTask: Task<Void, Never>?
   private var scanTask: Task<Void, Never>?
