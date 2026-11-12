@@ -1,0 +1,1454 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "XCPrinterBluetooth",
+    "printedName": "XCPrinterBluetooth",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "XCPrinterBluetooth"
+      },
+      {
+        "kind": "Import",
+        "name": "CoreBluetooth",
+        "printedName": "CoreBluetooth",
+        "declKind": "Import",
+        "moduleName": "XCPrinterBluetooth"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SendResultData",
+        "printedName": "SendResultData",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "success",
+            "printedName": "success",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18XCPrinterBluetooth14SendResultDataV7successSbvp",
+            "mangledName": "$s18XCPrinterBluetooth14SendResultDataV7successSbvp",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18XCPrinterBluetooth14SendResultDataV7successSbvg",
+                "mangledName": "$s18XCPrinterBluetooth14SendResultDataV7successSbvg",
+                "moduleName": "XCPrinterBluetooth",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "error",
+            "printedName": "error",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18XCPrinterBluetooth14SendResultDataV5errorSSSgvp",
+            "mangledName": "$s18XCPrinterBluetooth14SendResultDataV5errorSSSgvp",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18XCPrinterBluetooth14SendResultDataV5errorSSSgvg",
+                "mangledName": "$s18XCPrinterBluetooth14SendResultDataV5errorSSSgvg",
+                "moduleName": "XCPrinterBluetooth",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(success:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SendResultData",
+                "printedName": "XCPrinterBluetooth.SendResultData",
+                "usr": "s:18XCPrinterBluetooth14SendResultDataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18XCPrinterBluetooth14SendResultDataV7success5errorACSb_SSSgtcfc",
+            "mangledName": "$s18XCPrinterBluetooth14SendResultDataV7success5errorACSb_SSSgtcfc",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:18XCPrinterBluetooth14SendResultDataV",
+        "mangledName": "$s18XCPrinterBluetooth14SendResultDataV",
+        "moduleName": "XCPrinterBluetooth",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "DeviceInfo",
+        "printedName": "DeviceInfo",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "name",
+            "printedName": "name",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18XCPrinterBluetooth10DeviceInfoV4nameSSSgvp",
+            "mangledName": "$s18XCPrinterBluetooth10DeviceInfoV4nameSSSgvp",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18XCPrinterBluetooth10DeviceInfoV4nameSSSgvg",
+                "mangledName": "$s18XCPrinterBluetooth10DeviceInfoV4nameSSSgvg",
+                "moduleName": "XCPrinterBluetooth",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "address",
+            "printedName": "address",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18XCPrinterBluetooth10DeviceInfoV7addressSSvp",
+            "mangledName": "$s18XCPrinterBluetooth10DeviceInfoV7addressSSvp",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18XCPrinterBluetooth10DeviceInfoV7addressSSvg",
+                "mangledName": "$s18XCPrinterBluetooth10DeviceInfoV7addressSSvg",
+                "moduleName": "XCPrinterBluetooth",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(name:address:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "DeviceInfo",
+                "printedName": "XCPrinterBluetooth.DeviceInfo",
+                "usr": "s:18XCPrinterBluetooth10DeviceInfoV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18XCPrinterBluetooth10DeviceInfoV4name7addressACSSSg_SStcfc",
+            "mangledName": "$s18XCPrinterBluetooth10DeviceInfoV4name7addressACSSSg_SStcfc",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Encoder",
+                "printedName": "any Swift.Encoder",
+                "usr": "s:s7EncoderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18XCPrinterBluetooth10DeviceInfoV6encode2toys7Encoder_p_tKF",
+            "mangledName": "$s18XCPrinterBluetooth10DeviceInfoV6encode2toys7Encoder_p_tKF",
+            "moduleName": "XCPrinterBluetooth",
+            "implicit": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:18XCPrinterBluetooth10DeviceInfoV",
+        "mangledName": "$s18XCPrinterBluetooth10DeviceInfoV",
+        "moduleName": "XCPrinterBluetooth",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "BluetoothManager",
+        "printedName": "BluetoothManager",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "readyEvents",
+            "printedName": "readyEvents",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AsyncStream",
+                "printedName": "_Concurrency.AsyncStream<Swift.Bool>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:ScS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18XCPrinterBluetooth0B7ManagerC11readyEventsScSySbGvp",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC11readyEventsScSySbGvp",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AsyncStream",
+                    "printedName": "_Concurrency.AsyncStream<Swift.Bool>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "usr": "s:ScS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18XCPrinterBluetooth0B7ManagerC11readyEventsScSySbGvg",
+                "mangledName": "$s18XCPrinterBluetooth0B7ManagerC11readyEventsScSySbGvg",
+                "moduleName": "XCPrinterBluetooth",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "disconnectionEvents",
+            "printedName": "disconnectionEvents",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AsyncStream",
+                "printedName": "_Concurrency.AsyncStream<Swift.Bool>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:ScS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18XCPrinterBluetooth0B7ManagerC19disconnectionEventsScSySbGvp",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC19disconnectionEventsScSySbGvp",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AsyncStream",
+                    "printedName": "_Concurrency.AsyncStream<Swift.Bool>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ],
+                    "usr": "s:ScS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18XCPrinterBluetooth0B7ManagerC19disconnectionEventsScSySbGvg",
+                "mangledName": "$s18XCPrinterBluetooth0B7ManagerC19disconnectionEventsScSySbGvg",
+                "moduleName": "XCPrinterBluetooth",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "BluetoothManager",
+                "printedName": "XCPrinterBluetooth.BluetoothManager",
+                "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)init",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerCACycfc",
+            "moduleName": "XCPrinterBluetooth",
+            "overriding": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "scan",
+            "printedName": "scan()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AsyncStream",
+                "printedName": "_Concurrency.AsyncStream<XCPrinterBluetooth.DeviceInfo>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DeviceInfo",
+                    "printedName": "XCPrinterBluetooth.DeviceInfo",
+                    "usr": "s:18XCPrinterBluetooth10DeviceInfoV"
+                  }
+                ],
+                "usr": "s:ScS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18XCPrinterBluetooth0B7ManagerC4scanScSyAA10DeviceInfoVGyF",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC4scanScSyAA10DeviceInfoVGyF",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "connect",
+            "printedName": "connect(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18XCPrinterBluetooth0B7ManagerC7connect2toSbSS_tYaF",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC7connect2toSbSS_tYaF",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "disconnect",
+            "printedName": "disconnect(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18XCPrinterBluetooth0B7ManagerC10disconnect2toSbSS_tYaF",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC10disconnect2toSbSS_tYaF",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "send",
+            "printedName": "send(bytes:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "SendResultData",
+                "printedName": "XCPrinterBluetooth.SendResultData",
+                "usr": "s:18XCPrinterBluetooth14SendResultDataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Swift.UInt8]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18XCPrinterBluetooth0B7ManagerC4send5bytesAA14SendResultDataVSays5UInt8VG_tYaF",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC4send5bytesAA14SendResultDataVSays5UInt8VG_tYaF",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getConnectedPeripherals",
+            "printedName": "getConnectedPeripherals(identifiers:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[CoreBluetooth.CBPeripheral]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CBPeripheral",
+                    "printedName": "CoreBluetooth.CBPeripheral",
+                    "usr": "c:objc(cs)CBPeripheral"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[Foundation.UUID]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UUID",
+                    "printedName": "Foundation.UUID",
+                    "usr": "s:10Foundation4UUIDV"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18XCPrinterBluetooth0B7ManagerC23getConnectedPeripherals11identifiersSaySo12CBPeripheralCGSay10Foundation4UUIDVG_tYaF",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC23getConnectedPeripherals11identifiersSaySo12CBPeripheralCGSay10Foundation4UUIDVG_tYaF",
+            "moduleName": "XCPrinterBluetooth",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManagerDidUpdateState",
+            "printedName": "centralManagerDidUpdateState(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)centralManagerDidUpdateState:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC07centralC14DidUpdateStateyySo09CBCentralC0CF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "centralManagerDidUpdateState:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManager",
+            "printedName": "centralManager(_:didDiscover:advertisementData:rssi:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSNumber",
+                "printedName": "Foundation.NSNumber",
+                "usr": "c:objc(cs)NSNumber"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)centralManager:didDiscoverPeripheral:advertisementData:RSSI:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC07centralC0_11didDiscover17advertisementData4rssiySo09CBCentralC0C_So12CBPeripheralCSDySSypGSo8NSNumberCtF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "centralManager:didDiscoverPeripheral:advertisementData:RSSI:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManager",
+            "printedName": "centralManager(_:didConnect:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)centralManager:didConnectPeripheral:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC07centralC0_10didConnectySo09CBCentralC0C_So12CBPeripheralCtF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "centralManager:didConnectPeripheral:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManager",
+            "printedName": "centralManager(_:didFailToConnect:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any Swift.Error)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)centralManager:didFailToConnectPeripheral:error:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC07centralC0_16didFailToConnect5errorySo09CBCentralC0C_So12CBPeripheralCs5Error_pSgtF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "centralManager:didFailToConnectPeripheral:error:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "centralManager",
+            "printedName": "centralManager(_:didDisconnectPeripheral:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCentralManager",
+                "printedName": "CoreBluetooth.CBCentralManager",
+                "usr": "c:objc(cs)CBCentralManager"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any Swift.Error)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)centralManager:didDisconnectPeripheral:error:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC07centralC0_23didDisconnectPeripheral5errorySo09CBCentralC0C_So12CBPeripheralCs5Error_pSgtF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "centralManager:didDisconnectPeripheral:error:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didDiscoverServices:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any Swift.Error)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)peripheral:didDiscoverServices:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC10peripheral_19didDiscoverServicesySo12CBPeripheralC_s5Error_pSgtF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "peripheral:didDiscoverServices:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didDiscoverCharacteristicsFor:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBService",
+                "printedName": "CoreBluetooth.CBService",
+                "usr": "c:objc(cs)CBService"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any Swift.Error)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)peripheral:didDiscoverCharacteristicsForService:error:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC10peripheral_29didDiscoverCharacteristicsFor5errorySo12CBPeripheralC_So9CBServiceCs5Error_pSgtF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "peripheral:didDiscoverCharacteristicsForService:error:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didUpdateNotificationStateFor:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCharacteristic",
+                "printedName": "CoreBluetooth.CBCharacteristic",
+                "usr": "c:objc(cs)CBCharacteristic"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any Swift.Error)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)peripheral:didUpdateNotificationStateForCharacteristic:error:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC10peripheral_29didUpdateNotificationStateFor5errorySo12CBPeripheralC_So16CBCharacteristicCs5Error_pSgtF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "peripheral:didUpdateNotificationStateForCharacteristic:error:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheral",
+            "printedName": "peripheral(_:didUpdateValueFor:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBCharacteristic",
+                "printedName": "CoreBluetooth.CBCharacteristic",
+                "usr": "c:objc(cs)CBCharacteristic"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any Swift.Error)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)peripheral:didUpdateValueForCharacteristic:error:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC10peripheral_17didUpdateValueFor5errorySo12CBPeripheralC_So16CBCharacteristicCs5Error_pSgtF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "peripheral:didUpdateValueForCharacteristic:error:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "peripheralIsReady",
+            "printedName": "peripheralIsReady(toSendWriteWithoutResponse:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CBPeripheral",
+                "printedName": "CoreBluetooth.CBPeripheral",
+                "usr": "c:objc(cs)CBPeripheral"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager(im)peripheralIsReadyToSendWriteWithoutResponse:",
+            "mangledName": "$s18XCPrinterBluetooth0B7ManagerC17peripheralIsReady26toSendWriteWithoutResponseySo12CBPeripheralC_tF",
+            "moduleName": "XCPrinterBluetooth",
+            "objc_name": "peripheralIsReadyToSendWriteWithoutResponse:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@XCPrinterBluetooth@objc(cs)BluetoothManager",
+        "mangledName": "$s18XCPrinterBluetooth0B7ManagerC",
+        "moduleName": "XCPrinterBluetooth",
+        "declAttributes": [
+          "Final",
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "StringLiteral",
+      "offset": 952,
+      "length": 6,
+      "value": "\"FF00\""
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "StringLiteral",
+      "offset": 1005,
+      "length": 6,
+      "value": "\"FF02\""
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "StringLiteral",
+      "offset": 1101,
+      "length": 6,
+      "value": "\"FF03\""
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1276,
+      "length": 4,
+      "value": "0x01"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1318,
+      "length": 4,
+      "value": "0x02"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1470,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1622,
+      "length": 1,
+      "value": "5"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1710,
+      "length": 2,
+      "value": "30"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1763,
+      "length": 1,
+      "value": "5"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "StringLiteral",
+      "offset": 2018,
+      "length": 25,
+      "value": "\"com.xcprinter.ble.queue\""
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "Array",
+      "offset": 2148,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2332,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2371,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2409,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2456,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3035,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3154,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3188,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3224,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "Array",
+      "offset": 3302,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/qinmingyuan\/work\/native\/XCPrinterBluetooth\/Sources\/XCPrinterBluetooth\/BluetoothManager.swift",
+      "kind": "Array",
+      "offset": 3434,
+      "length": 2,
+      "value": "[]"
+    }
+  ]
+}

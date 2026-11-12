@@ -1,0 +1,42 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4.2 effective-5.10 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)
+// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -language-mode 5 -O -enable-experimental-feature DebugDescriptionMacro -module-name XCPrinterBluetooth -package-name xcprinterbluetooth
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4.2
+import CoreBluetooth
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public struct SendResultData : Swift::Sendable {
+  public let success: Swift::Bool
+  public let error: Swift::String?
+  public init(success: Swift::Bool, error: Swift::String?)
+}
+public struct DeviceInfo : Swift::Encodable, Swift::Sendable {
+  public let name: Swift::String?
+  public let address: Swift::String
+  public init(name: Swift::String?, address: Swift::String)
+  public func encode(to encoder: any Swift::Encoder) throws
+}
+@objc @_inheritsConvenienceInitializers final public class BluetoothManager : ObjectiveC::NSObject, CoreBluetooth::CBCentralManagerDelegate, CoreBluetooth::CBPeripheralDelegate, @unchecked Swift::Sendable {
+  final public let readyEvents: _Concurrency::AsyncStream<Swift::Bool>
+  final public let disconnectionEvents: _Concurrency::AsyncStream<Swift::Bool>
+  @objc override dynamic public init()
+  final public func scan() -> _Concurrency::AsyncStream<XCPrinterBluetooth::DeviceInfo>
+  final public func connect(to uuidString: Swift::String) async -> Swift::Bool
+  final public func disconnect(to uuidString: Swift::String) async -> Swift::Bool
+  final public func send(bytes: [Swift::UInt8]) async -> XCPrinterBluetooth::SendResultData
+  final public func getConnectedPeripherals(identifiers: [Foundation::UUID]) async -> [CoreBluetooth::CBPeripheral]
+  @objc final public func centralManagerDidUpdateState(_ central: CoreBluetooth::CBCentralManager)
+  @objc final public func centralManager(_ central: CoreBluetooth::CBCentralManager, didDiscover peripheral: CoreBluetooth::CBPeripheral, advertisementData: [Swift::String : Any], rssi RSSI: Foundation::NSNumber)
+  @objc final public func centralManager(_ central: CoreBluetooth::CBCentralManager, didConnect peripheral: CoreBluetooth::CBPeripheral)
+  @objc final public func centralManager(_ central: CoreBluetooth::CBCentralManager, didFailToConnect peripheral: CoreBluetooth::CBPeripheral, error: (any Swift::Error)?)
+  @objc final public func centralManager(_ central: CoreBluetooth::CBCentralManager, didDisconnectPeripheral peripheral: CoreBluetooth::CBPeripheral, error: (any Swift::Error)?)
+  @objc final public func peripheral(_ peripheral: CoreBluetooth::CBPeripheral, didDiscoverServices error: (any Swift::Error)?)
+  @objc final public func peripheral(_ peripheral: CoreBluetooth::CBPeripheral, didDiscoverCharacteristicsFor service: CoreBluetooth::CBService, error: (any Swift::Error)?)
+  @objc final public func peripheral(_ peripheral: CoreBluetooth::CBPeripheral, didUpdateNotificationStateFor characteristic: CoreBluetooth::CBCharacteristic, error: (any Swift::Error)?)
+  @objc final public func peripheral(_ peripheral: CoreBluetooth::CBPeripheral, didUpdateValueFor characteristic: CoreBluetooth::CBCharacteristic, error: (any Swift::Error)?)
+  @objc final public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CoreBluetooth::CBPeripheral)
+  @objc deinit
+}
