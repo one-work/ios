@@ -6,18 +6,70 @@ import CoreBluetooth
 final class BluetoothComponent: BridgeComponent {
   override class var name: String { "bluetooth" }
 
+  private let bluetoothManager = BluetoothManager()
+  private var readyTask: Task<Void, Never>?
+  private var disconnectionTask: Task<Void, Never>?
+  private var scanTask: Task<Void, Never>?
+
+  deinit {
+    readyTask?.cancel()
+    disconnectionTask?.cancel()
+    scanTask?.cancel()
+  }
+
   public override func onReceive(message: Message) {
-    setupBluetoothManager()
+    observeBluetoothEvents()
 
     switch message.event {
     case "connect":
+      handleConnect()
+    case "search":
+      handleSearch()
+    case "connect_device":
+      handleConnectDevice(message)
+    case "disconnect_device":
+      handleDisconnectDevice(message)
+    case "send_data":
+      handleSendData(message)
+    default:
+      break
+    }
+  }
+
+  private func observeBluetoothEvents() {
+    if readyTask == nil {
+      readyTask = Task { @MainActor [weak self] in
+        guard let events = self?.bluetoothManager.readyEvents else { return }
+        for await ready in events {
+          let address = UserDefaults.standard.string(forKey: "address")
+          let name = UserDefaults.standard.string(forKey: "name")
+          let payload = ConnectStatus(address: address, name: name, ready: ready)
+          self?.reply(to: "connect", with: payload, completion: nil)
+        }
+      }
+    }
+
+    if disconnectionTask == nil {
+      disconnectionTask = Task { @MainActor [weak self] in
+        guard let events = self?.bluetoothManager.disconnectionEvents else { return }
+        for await disconnected in events {
+          let payload = ConnectResult(success: disconnected)
+          self?.reply(to: "disconnect_device", with: payload, completion: nil)
+        }
+      }
+    }
+  }
+
+  private func handleConnect() {
+    Task { @MainActor [weak self] in
+      guard let self = self else { return }
       let address = UserDefaults.standard.string(forKey: "address")
       let name = UserDefaults.standard.string(forKey: "name")
       var state = "disconnected"
       print("connect address: \(address ?? "nil")")
 
       if let address = address, let uuid = UUID(uuidString: address) {
-        let results = BluetoothManager.shared.getConnectedPeripherals(identifiers: [uuid])
+        let results = await bluetoothManager.getConnectedPeripherals(identifiers: [uuid])
         if let result = results.first {
           switch result.state {
           case .connected:
@@ -34,53 +86,18 @@ final class BluetoothComponent: BridgeComponent {
         }
       }
 
-      reply(to: "connect", with: ConnectStatus(address: address, name: name, state: state))
-    case "search":
-      BluetoothManager.shared.startScan()
-    case "connect_device":
-      handleConnectDevice(message)
-    case "disconnect_device":
-      handleDisconnectDevice(message)
-    case "send_data":
-      handleSendData(message)
-    default:
-      break
+      reply(to: "connect", with: ConnectStatus(address: address, name: name, state: state), completion: nil)
     }
   }
 
-  private func setupBluetoothManager() {
-    BluetoothManager.shared.onReady = {
-      [weak self] success in
-      guard let self = self else { return }
-      let address = UserDefaults.standard.string(forKey: "address")
-      let name = UserDefaults.standard.string(forKey: "name")
-      let payload = ConnectStatus(address: address, name: name, ready: success)
-
-      self.reply(to: "connect", with: payload)
-    }
-    BluetoothManager.shared.onDeviceFound = {
-      [weak self] device in
-      guard let self = self else { return }
-      let payload = SearchResult(device: device)
-      self.reply(to: "search", with: payload)
-    }
-    BluetoothManager.shared.onConnected = {
-      [weak self] success in
-      guard let self = self else { return }
-      let payload = ConnectResult(success: success)
-      self.reply(to: "connect_device", with: payload)
-    }
-    BluetoothManager.shared.onDisconnected = {
-      [weak self] success in
-      guard let self = self else { return }
-      let payload = ConnectResult(success: success)
-      self.reply(to: "disconnect_device", with: payload)
-    }
-    BluetoothManager.shared.onDataSent = {
-      [weak self] result in
-      guard let self = self else { return }
-      let payload = SendResult(success: result.success, error: result.error)
-      self.reply(to: "send_data", with: payload)
+  private func handleSearch() {
+    scanTask?.cancel()
+    scanTask = Task { @MainActor [weak self] in
+      guard let devices = self?.bluetoothManager.scan() else { return }
+      for await device in devices {
+        let payload = SearchResult(device: device)
+        self?.reply(to: "search", with: payload, completion: nil)
+      }
     }
   }
 
@@ -90,7 +107,13 @@ final class BluetoothComponent: BridgeComponent {
     guard let name = data?.name else { return }
     UserDefaults.standard.set(address, forKey: "address")
     UserDefaults.standard.set(name, forKey: "name")
-    BluetoothManager.shared.connect(to: address)
+
+    Task { @MainActor [weak self] in
+      guard let manager = self?.bluetoothManager else { return }
+      let success = await manager.connect(to: address)
+      let payload = ConnectResult(success: success)
+      self?.reply(to: "connect_device", with: payload, completion: nil)
+    }
   }
 
   private func handleDisconnectDevice(_ message: Message) {
@@ -98,13 +121,25 @@ final class BluetoothComponent: BridgeComponent {
     guard let address = data?.address else { return }
     UserDefaults.standard.removeObject(forKey: "address")
     UserDefaults.standard.removeObject(forKey: "name")
-    BluetoothManager.shared.disconnect(to: address)
+
+    Task { @MainActor [weak self] in
+      guard let manager = self?.bluetoothManager else { return }
+      let success = await manager.disconnect(to: address)
+      let payload = ConnectResult(success: success)
+      self?.reply(to: "disconnect_device", with: payload, completion: nil)
+    }
   }
 
   private func handleSendData(_ message: Message) {
     let data: SendData? = message.data()
     guard let text = data?.data else { return }
-    BluetoothManager.shared.send(bytes: text)
+
+    Task { @MainActor [weak self] in
+      guard let manager = self?.bluetoothManager else { return }
+      let result = await manager.send(bytes: text)
+      let payload = SendResult(success: result.success, error: result.error)
+      self?.reply(to: "send_data", with: payload, completion: nil)
+    }
   }
 }
 

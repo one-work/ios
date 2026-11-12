@@ -1,13 +1,32 @@
 import Foundation
 import CoreBluetooth
 
-public struct SendResultData {
+public struct SendResultData: Sendable {
   public let success: Bool
   public let error: String?
+
+  public init(success: Bool, error: String?) {
+    self.success = success
+    self.error = error
+  }
 }
 
-public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-  public static let shared = BluetoothManager()
+public struct DeviceInfo: Encodable, Sendable {
+  public let name: String?
+  public let address: String
+
+  public init(name: String?, address: String) {
+    self.name = name
+    self.address = address
+  }
+}
+
+public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, @unchecked Sendable {
+  public let readyEvents: AsyncStream<Bool>
+  public let disconnectionEvents: AsyncStream<Bool>
+
+  private let readyContinuation: AsyncStream<Bool>.Continuation?
+  private let disconnectionContinuation: AsyncStream<Bool>.Continuation?
 
   // MARK: - 打印机 GATT 服务/特征值（对照安卓 BluetoothPrinterManager 与流控文档 §2）
   private let serviceUUID = CBUUID(string: "FF00")
@@ -26,13 +45,6 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
   /// 应用层连接超时兜底
   private let connectTimeoutSeconds: TimeInterval = 30
   private let scanDurationSeconds: TimeInterval = 5
-
-  // MARK: - Callbacks（统一在主线程派发）
-  public var onReady: ((Bool) -> Void)?
-  public var onDeviceFound: ((DeviceInfo) -> Void)?
-  public var onConnected: ((Bool) -> Void)?
-  public var onDisconnected: ((Bool) -> Void)?
-  public var onDataSent: ((SendResultData) -> Void)?
 
   // MARK: - Properties
   /// 所有 CoreBluetooth 系统回调与流控状态都在该串行队列上处理，
@@ -54,6 +66,10 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
   private var connectTimeoutWorkItem: DispatchWorkItem?
   private var creditsTimeoutWorkItem: DispatchWorkItem?
 
+  private var deviceContinuation: AsyncStream<DeviceInfo>.Continuation?
+  private var connectContinuation: CheckedContinuation<Bool, Never>?
+  private var disconnectContinuation: CheckedContinuation<Bool, Never>?
+
   // MARK: - 流控状态（仅 bleQueue 访问，对照文档 §3.1）
   /// 单包最大字节：先取系统协商的 MTU 载荷，后以 FF03 MTU 通知为准
   private var packetSize: Int = 20
@@ -63,50 +79,72 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
   private var mtuNegotiated = false
   /// 待发送分包队列（FIFO）
   private var sendQueue: [Data] = []
-  /// 每个 send() 调用对应一条记录，remaining 归零时回调成功（对照安卓 PendingSend）
+  /// 每个 send() 调用对应一条记录，remaining 归零时恢复对应调用
   private var pendingSends: [PendingSend] = []
 
   private final class PendingSend {
     var remaining: Int
-    init(_ remaining: Int) { self.remaining = remaining }
+    let continuation: CheckedContinuation<SendResultData, Never>
+
+    init(_ remaining: Int, continuation: CheckedContinuation<SendResultData, Never>) {
+      self.remaining = remaining
+      self.continuation = continuation
+    }
   }
 
   // MARK: - Initialization
-  override init() {
+  public override init() {
+    var readyContinuation: AsyncStream<Bool>.Continuation?
+    var disconnectionContinuation: AsyncStream<Bool>.Continuation?
+
+    readyEvents = AsyncStream { readyContinuation = $0 }
+    disconnectionEvents = AsyncStream { disconnectionContinuation = $0 }
+    self.readyContinuation = readyContinuation
+    self.disconnectionContinuation = disconnectionContinuation
+
     super.init()
     centralManager = CBCentralManager(delegate: self, queue: bleQueue)
   }
 
-  private func dispatchOnMain(_ block: @escaping () -> Void) {
-    if Thread.isMainThread { block() } else { DispatchQueue.main.async(execute: block) }
+  // MARK: - Scan
+  public func scan() -> AsyncStream<DeviceInfo> {
+    AsyncStream { continuation in
+      bleQueue.async { [weak self] in
+        guard let self = self else {
+          continuation.finish()
+          return
+        }
+        self.deviceContinuation?.finish()
+        self.deviceContinuation = continuation
+        self.startScan()
+      }
+    }
   }
 
-  // MARK: - Scan
-  public func startScan() {
-    bleQueue.async { [weak self] in
-      guard let self = self else { return }
-      self.discoveredPeripherals.removeAll()
-      self.scanStopWorkItem?.cancel()
-      guard self.centralManager.state == .poweredOn else {
-        self.shouldResumeScan = true
-        return
-      }
-
-      self.shouldResumeScan = false
-      self.isScanning = true
-      self.centralManager.scanForPeripherals(
-        withServices: nil,
-        options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
-      )
-
-      let stopItem = DispatchWorkItem { [weak self] in self?.stopScan() }
-      self.scanStopWorkItem = stopItem
-      self.bleQueue.asyncAfter(deadline: .now() + self.scanDurationSeconds, execute: stopItem)
+  private func startScan() {
+    discoveredPeripherals.removeAll()
+    scanStopWorkItem?.cancel()
+    guard centralManager.state == .poweredOn else {
+      shouldResumeScan = true
+      return
     }
+
+    shouldResumeScan = false
+    isScanning = true
+    centralManager.scanForPeripherals(
+      withServices: nil,
+      options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
+    )
+
+    let stopItem = DispatchWorkItem { [weak self] in self?.stopScan() }
+    scanStopWorkItem = stopItem
+    bleQueue.asyncAfter(deadline: .now() + scanDurationSeconds, execute: stopItem)
   }
 
   private func stopScan() {
     shouldResumeScan = false
+    deviceContinuation?.finish()
+    deviceContinuation = nil
     guard isScanning else { return }
     isScanning = false
     scanStopWorkItem?.cancel()
@@ -115,47 +153,69 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
   }
 
   // MARK: - Connect
-  public func connect(to uuidString: String) {
-    bleQueue.async { [weak self] in
-      guard let self = self else { return }
-      guard let peripheral = self.resolvePeripheral(uuidString) else {
-        // 未找到设备：重新扫描，等待设备下次广播（保持原有行为）
-        self.startScan()
-        return
-      }
+  public func connect(to uuidString: String) async -> Bool {
+    await withCheckedContinuation { continuation in
+      bleQueue.async {
+        if self.connectContinuation != nil {
+          self.completeConnection(false)
+        }
+        guard let peripheral = self.resolvePeripheral(uuidString) else {
+          // 未找到设备：重新扫描，等待设备下次广播（保持原有行为）
+          self.startScan()
+          continuation.resume(returning: false)
+          return
+        }
+        guard peripheral.state != .connected else {
+          continuation.resume(returning: true)
+          return
+        }
 
-      // 扫描与连接并发会显著降低建链成功率，连接前先停止扫描
-      self.stopScan()
-      // 重连前收尾旧连接（对照安卓 closeGatt），其断开回调静默处理
-      if let old = self.targetPeripheral,
-         old.identifier != peripheral.identifier,
-         old.state != .disconnected {
-        self.suppressDisconnectNotify = true
-        self.centralManager.cancelPeripheralConnection(old)
-      }
-      self.resetFlowControl()
+        // 扫描与连接并发会显著降低建链成功率，连接前先停止扫描
+        self.stopScan()
+        // 重连前收尾旧连接（对照安卓 closeGatt），其断开回调静默处理
+        if let old = self.targetPeripheral,
+           old.identifier != peripheral.identifier,
+           old.state != .disconnected {
+          self.suppressDisconnectNotify = true
+          self.centralManager.cancelPeripheralConnection(old)
+        }
+        self.failPendingSends("连接已断开")
+        self.resetFlowControl()
 
-      self.targetPeripheral = peripheral
-      peripheral.delegate = self
-      self.connectInFlight = true
-      self.centralManager.connect(peripheral, options: nil)
-      self.scheduleConnectTimeout()
+        self.targetPeripheral = peripheral
+        peripheral.delegate = self
+        self.connectInFlight = true
+        self.connectContinuation = continuation
+        self.centralManager.connect(peripheral, options: nil)
+        self.scheduleConnectTimeout()
+      }
     }
   }
 
+  private func completeConnection(_ success: Bool) {
+    let continuation = connectContinuation
+    connectContinuation = nil
+    continuation?.resume(returning: success)
+  }
+
   // MARK: - Disconnect
-  public func disconnect(to uuidString: String) {
-    bleQueue.async { [weak self] in
-      guard let self = self else { return }
-      var peripheral = self.resolvePeripheral(uuidString)
-      if peripheral == nil, self.targetPeripheral?.identifier.uuidString == uuidString {
-        peripheral = self.targetPeripheral
+  public func disconnect(to uuidString: String) async -> Bool {
+    await withCheckedContinuation { continuation in
+      bleQueue.async {
+        var peripheral = self.resolvePeripheral(uuidString)
+        if peripheral == nil, self.targetPeripheral?.identifier.uuidString == uuidString {
+          peripheral = self.targetPeripheral
+        }
+        guard let target = peripheral else {
+          continuation.resume(returning: true)
+          return
+        }
+        if self.disconnectContinuation != nil {
+          self.disconnectContinuation?.resume(returning: false)
+        }
+        self.disconnectContinuation = continuation
+        self.centralManager.cancelPeripheralConnection(target)
       }
-      guard let target = peripheral else {
-        self.dispatchOnMain { self.onDisconnected?(true) }
-        return
-      }
-      self.centralManager.cancelPeripheralConnection(target)
     }
   }
 
@@ -174,6 +234,7 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
     let item = DispatchWorkItem { [weak self] in
       guard let self = self, self.connectInFlight, let peripheral = self.targetPeripheral else { return }
       print("[Bluetooth] 连接超时（\(Int(self.connectTimeoutSeconds))s），取消连接")
+      self.completeConnection(false)
       self.centralManager.cancelPeripheralConnection(peripheral)
     }
     connectTimeoutWorkItem = item
@@ -184,37 +245,37 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
   /**
    * 发送业务数据（对照安卓 send / 小程序 ble.send）：
    * 按 packetSize 切片入队，由 Credits 流控驱动经 FF02 writeNoResponse 串行写出。
-   * 数据先排队，收到打印机 Credits 后自动发出；onDataSent 在本次调用的
-   * 全部数据写完后回调一次。
+   * 数据先排队，收到打印机 Credits 后自动发出；本次调用的全部数据写完后返回。
    *
    * 注意：运行期间若收到新的 FF03 MTU 通知，仅影响后续 send 调用的切片，
    * 已入队的旧包不重新切分（对照文档 §3.2 规则 5）。
    */
-  public func send(bytes: [UInt8]) {
-    bleQueue.async { [weak self] in
-      guard let self = self else { return }
-      guard let peripheral = self.targetPeripheral, peripheral.state == .connected else {
-        self.dispatchOnMain { self.onDataSent?(SendResultData(success: false, error: "未连接设备")) }
-        return
-      }
-      if bytes.isEmpty {
-        self.dispatchOnMain { self.onDataSent?(SendResultData(success: true, error: nil)) }
-        return
-      }
+  public func send(bytes: [UInt8]) async -> SendResultData {
+    await withCheckedContinuation { continuation in
+      bleQueue.async {
+        guard let peripheral = self.targetPeripheral, peripheral.state == .connected else {
+          continuation.resume(returning: SendResultData(success: false, error: "未连接设备"))
+          return
+        }
+        if bytes.isEmpty {
+          continuation.resume(returning: SendResultData(success: true, error: nil))
+          return
+        }
 
-      let size = max(1, self.packetSize)
-      let data = Data(bytes)
-      var count = 0
-      var offset = 0
-      while offset < data.count {
-        let end = min(offset + size, data.count)
-        self.sendQueue.append(data.subdata(in: offset..<end))
-        offset = end
-        count += 1
+        let size = max(1, self.packetSize)
+        let data = Data(bytes)
+        var count = 0
+        var offset = 0
+        while offset < data.count {
+          let end = min(offset + size, data.count)
+          self.sendQueue.append(data.subdata(in: offset..<end))
+          offset = end
+          count += 1
+        }
+        self.pendingSends.append(PendingSend(count, continuation: continuation))
+        print("[Bluetooth] 入队 \(data.count) 字节（\(count) 包，packetSize=\(size)，credits=\(self.credits)）")
+        self.flushQueue()
       }
-      self.pendingSends.append(PendingSend(count))
-      print("[Bluetooth] 入队 \(data.count) 字节（\(count) 包，packetSize=\(size)，credits=\(self.credits)）")
-      self.flushQueue()
     }
   }
 
@@ -238,7 +299,7 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
         pending.remaining -= 1
         if pending.remaining <= 0 {
           pendingSends.removeFirst()
-          dispatchOnMain { self.onDataSent?(SendResultData(success: true, error: nil)) }
+          pending.continuation.resume(returning: SendResultData(success: true, error: nil))
         }
       }
     }
@@ -249,19 +310,15 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
   }
 
   /**
-   * 写入失败/断开时清空发送队列并向上层报错（每条 pending 记录回调一次）。
+   * 写入失败/断开时清空发送队列并向上层报错（每条 pending 记录恢复一次）。
    * 桥接层每条 send_data 消息需明确答复，故直接报错由 JS 决定重发（对照安卓实现）。
    */
   private func failPendingSends(_ error: String) {
-    let count = pendingSends.count
+    let pendingSends = self.pendingSends
     sendQueue.removeAll()
-    pendingSends.removeAll()
-    guard count > 0 else { return }
-    dispatchOnMain { [weak self] in
-      guard let self = self else { return }
-      for _ in 0..<count {
-        self.onDataSent?(SendResultData(success: false, error: error))
-      }
+    self.pendingSends.removeAll()
+    for pending in pendingSends {
+      pending.continuation.resume(returning: SendResultData(success: false, error: error))
     }
   }
 
@@ -290,8 +347,13 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
   }
 
   /// 获取当前已连接的设备列表 (必须提供该设备的 Service UUID)
-  public func getConnectedPeripherals(identifiers: [UUID]) -> [CBPeripheral] {
-    return centralManager.retrievePeripherals(withIdentifiers: identifiers)
+  public func getConnectedPeripherals(identifiers: [UUID]) async -> [CBPeripheral] {
+    await withCheckedContinuation { continuation in
+      bleQueue.async {
+        let peripherals = self.centralManager.retrievePeripherals(withIdentifiers: identifiers)
+        continuation.resume(returning: peripherals)
+      }
+    }
   }
 
   // MARK: - CBCentralManagerDelegate
@@ -300,7 +362,7 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
     case .poweredOn:
       print("蓝牙已开启")
       if shouldResumeScan { startScan() }
-      dispatchOnMain { self.onReady?(true) }
+      readyContinuation?.yield(true)
     case .poweredOff:
       print("蓝牙已关闭")
     default:
@@ -313,7 +375,7 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
           !discoveredPeripherals.contains(where: { $0.identifier == peripheral.identifier }) else { return }
     discoveredPeripherals.append(peripheral)
     let info = DeviceInfo(name: peripheral.name, address: peripheral.identifier.uuidString)
-    dispatchOnMain { self.onDeviceFound?(info) }
+    deviceContinuation?.yield(info)
   }
 
   public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -327,7 +389,7 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
     peripheral.delegate = self
     // 仅枚举 FF00 服务，加快就绪速度
     peripheral.discoverServices([serviceUUID])
-    dispatchOnMain { self.onConnected?(true) }
+    completeConnection(true)
   }
 
   public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: (any Error)?) {
@@ -335,7 +397,7 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
     connectTimeoutWorkItem?.cancel()
     if targetPeripheral?.identifier == peripheral.identifier { targetPeripheral = nil }
     print(error?.localizedDescription ?? "连接失败")
-    dispatchOnMain { self.onConnected?(false) }
+    completeConnection(false)
   }
 
   public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: (any Error)?) {
@@ -349,10 +411,14 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
     if suppressDisconnectNotify {
       // 主动取消（重连前的收尾 / 非目标设备），不上报断开
       suppressDisconnectNotify = false
+    } else if let continuation = disconnectContinuation {
+      disconnectContinuation = nil
+      continuation.resume(returning: true)
+      if wasConnecting { completeConnection(false) }
     } else if wasConnecting {
-      dispatchOnMain { self.onConnected?(false) }
+      completeConnection(false)
     } else {
-      dispatchOnMain { self.onDisconnected?(true) }
+      disconnectionContinuation?.yield(true)
     }
   }
 
@@ -435,10 +501,4 @@ public final class BluetoothManager: NSObject, CBCentralManagerDelegate, CBPerip
   public func peripheralIsReady(toSendWriteWithoutResponse peripheral: CBPeripheral) {
     flushQueue()
   }
-}
-
-// MARK: - 设备信息结构体
-public struct DeviceInfo: Encodable {
-  public let name: String?
-  public let address: String
 }
