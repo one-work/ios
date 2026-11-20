@@ -37,7 +37,6 @@
 		844BA7AB2B9A488A008F48DB /* AppleSignInComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleSignInComponent.swift; sourceTree = "<group>"; };
 		D888F3DE3007D14F001CEFB6 /* BluetoothComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothComponent.swift; sourceTree = "<group>"; };
 		D89586BC300A0926007E1FF8 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		D8A464DC30A5A83300F3835E /* XCPrinterBluetooth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = XCPrinterBluetooth; path = ../XCPrinterBluetooth; sourceTree = SOURCE_ROOT; };
 		D8D968DB302B0F6E00F97120 /* XcPrinter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XcPrinter.entitlements; sourceTree = "<group>"; };
 		D8D9691C302E063900F97120 /* ScanComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanComponent.swift; sourceTree = "<group>"; };
 		D8F6C710301B52F400DCC732 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -67,7 +66,6 @@
 		844BA77E2B9A4843008F48DB = {
 			isa = PBXGroup;
 			children = (
-				D8A464DC30A5A83300F3835E /* XCPrinterBluetooth */,
 				D8D968DB302B0F6E00F97120 /* XcPrinter.entitlements */,
 				844BA7892B9A4843008F48DB /* Demo */,
 				844BA7882B9A4843008F48DB /* Products */,

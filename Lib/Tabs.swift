@@ -18,19 +18,13 @@ extension HotwireTab {
 
   static let navigation = HotwireTab(
     title: "Home",
-    image: .init(systemName: "arrow.left.arrow.right")!,
+    image: .init(systemName: "house.fill")!,
     url: Demo.current.appendingPathComponent("auth/apps")
   )
 
   static let resources = HotwireTab(
     title: "Help",
-    image: .init(systemName: "questionmark.text.page")!,
+    image: .init(systemName: "questionmark.text.page.fill")!,
     url: URL(string: "https://app-demo.xcprinter.com/README")!
-  )
-
-  static let bugsAndFixes = HotwireTab(
-    title: "Bugs & Fixes",
-    image: .init(systemName: "ladybug")!,
-    url: Demo.current.appendingPathComponent("bugs")
   )
 }

@@ -41,7 +41,7 @@ final class OverflowMenuComponent: BridgeComponent {
 
     viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(
       title: data.label,
-      image: .init(systemName: "ellipsis"),
+      image: .init(systemName: "printer.fill"),
       primaryAction: action
     )
   }
