@@ -47,7 +47,12 @@ extension SceneController: UIWindowSceneDelegate {
     isInitialInterruptionInProgress = false
     didHandleInitialInterruption = true
 
-    // 网络权限没有授权结果回调；系统权限弹窗结束后重新尝试失败的访问。
+    // 网络权限没有授权结果回调；系统权限弹窗结束后重新加载配置并重试失败的访问。
+    Hotwire.loadPathConfiguration(
+      from: [
+        .server(Demo.current.appendingPathComponent("configurations/ios_v1.json"))
+      ]
+    )
     shouldRetryFailedVisit = true
     retryFailedVisitIfPossible()
   }
