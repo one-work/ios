@@ -9,10 +9,6 @@ extension HotwireTab {
       .resources
     ]
 
-    if Demo.current == Demo.local {
-      tabs.append(.bugsAndFixes)
-    }
-
     return tabs
   }()
 
