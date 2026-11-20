@@ -11,8 +11,7 @@ final class SceneController: UIResponder {
   private var isInitialInterruptionInProgress = false
   private var shouldRetryFailedVisit = false
   private var didHandleInitialInterruption = false
-  private var failedVisitRetryHandler: NavigatorDelegate.RetryBlock?
-  private weak var failedVisitErrorPresenter: (any ErrorPresenter)?
+  private var failedVisitRetries: [ObjectIdentifier: (retryHandler: NavigatorDelegate.RetryBlock?, errorPresenter: any ErrorPresenter)] = [:]
 
   // MARK: - Authentication
   private func promptForAuthentication() {
@@ -54,18 +53,20 @@ extension SceneController: UIWindowSceneDelegate {
       ]
     )
     shouldRetryFailedVisit = true
-    retryFailedVisitIfPossible()
+    retryFailedVisitsIfPossible()
   }
 
-  private func retryFailedVisitIfPossible() {
-    guard shouldRetryFailedVisit, let retryHandler = failedVisitRetryHandler else { return }
+  private func retryFailedVisitsIfPossible() {
+    guard shouldRetryFailedVisit, !failedVisitRetries.isEmpty else { return }
     shouldRetryFailedVisit = false
-    failedVisitRetryHandler = nil
 
-    let errorPresenter = failedVisitErrorPresenter
-    failedVisitErrorPresenter = nil
-    retryHandler()
-    errorPresenter?.removeErrorViewController()
+    let retries = failedVisitRetries
+    failedVisitRetries.removeAll()
+
+    for retry in retries.values {
+      retry.retryHandler?()
+      retry.errorPresenter.removeErrorViewController()
+    }
   }
 
   // 给还没加载内容的 WebView 打标记，让 Safari 检查器里能分清是谁
@@ -105,18 +106,16 @@ extension SceneController: NavigatorDelegate {
       promptForAuthentication()
     default:
       if let errorPresenter = visitable as? ErrorPresenter {
-        failedVisitRetryHandler = retryHandler
-        failedVisitErrorPresenter = errorPresenter
+        let visitableID = ObjectIdentifier(visitable)
+        failedVisitRetries[visitableID] = (retryHandler, errorPresenter)
 
         if shouldRetryFailedVisit {
-          retryFailedVisitIfPossible()
+          retryFailedVisitsIfPossible()
           return
         }
 
         errorPresenter.presentError(error) { [weak self] in
-          self?.shouldRetryFailedVisit = false
-          self?.failedVisitRetryHandler = nil
-          self?.failedVisitErrorPresenter = nil
+          self?.failedVisitRetries.removeValue(forKey: visitableID)
           retryHandler?()
         }
       } else {
