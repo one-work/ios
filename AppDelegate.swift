@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   private func configureHotwire() {
+    UserIdentity.shared.startCloudKitSynchronization()
+
     Hotwire.loadPathConfiguration(
       from: [
         .file(Bundle.main.url(forResource: "path-configuration", withExtension: "json")!),
@@ -31,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     )
 
     // Set an optional custom user agent application prefix.
-    Hotwire.config.applicationUserAgentPrefix = "Hotwire"
+    Hotwire.config.applicationUserAgentPrefix = UserIdentity.shared.applicationUserAgentPrefix
 
     // Register bridge components
     Hotwire.registerBridgeComponents([
@@ -62,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
 
       let webView = WKWebView(frame: .zero, configuration: config)
+      UserIdentity.shared.register(webView)
       if #available(iOS 16.4, *) {
         webView.isInspectable = true
       }
