@@ -126,7 +126,22 @@ final class ExternalWebSession: NSObject, SessionDelegate {
   }
 
   func session(_ session: Session, decidePolicyFor navigationAction: WKNavigationAction) -> WebViewPolicyManager.Decision {
-    .allow
+    guard
+      let url = navigationAction.request.url,
+      navigationAction.targetFrame?.isMainFrame == true,
+      navigationAction.request.httpMethod == "GET",
+      navigationAction.navigationType == .other || navigationAction.navigationType == .linkActivated,
+      let navigator
+    else {
+      return .allow
+    }
+
+    let properties = session.pathConfiguration?.properties(for: url) ?? [:]
+    let proposal = VisitProposal(url: url, options: VisitOptions(action: .advance), properties: properties)
+    guard proposal.context == .modal else { return .allow }
+
+    navigator.route(proposal)
+    return .cancel
   }
 
   func sessionWebViewProcessDidTerminate(_ session: Session) {
