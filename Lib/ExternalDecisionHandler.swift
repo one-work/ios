@@ -38,6 +38,7 @@ final class ExternalWebSession: NSObject, SessionDelegate {
   init(navigator: Navigator) {
     self.navigator = navigator
     session = Session(webView: Hotwire.config.makeWebView())
+    session.pathConfiguration = Hotwire.config.pathConfiguration
     super.init()
     session.delegate = self
   }
@@ -60,8 +61,13 @@ final class ExternalWebSession: NSObject, SessionDelegate {
     session.visit(vc, options: options, reload: needsFreshLoad || needsColdBoot)
   }
 
-  // 外部 Session 内的 Turbo 导航：根据 action 执行对应的 UI 操作
+  // 外部 Session 内的 Turbo 导航：modal 交给 Navigator，其他情况保留现有栈操作
   func session(_ session: Session, didProposeVisit proposal: VisitProposal) {
+    if proposal.context == .modal {
+      navigator?.route(proposal)
+      return
+    }
+
     let vc = WebViewController(url: proposal.url, navigator: navigator)
     let navController = session.activeVisitable?.visitableViewController.navigationController
 
