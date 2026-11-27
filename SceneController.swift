@@ -33,6 +33,7 @@ extension SceneController: UIWindowSceneDelegate {
     window?.makeKeyAndVisible()
     tabBarController.load(HotwireTab.all)
 
+    hideNavigationBars()
     tagIdleWebViews()
   }
 
@@ -66,6 +67,15 @@ extension SceneController: UIWindowSceneDelegate {
     for retry in retries.values {
       retry.retryHandler?()
       retry.errorPresenter.removeErrorViewController()
+    }
+  }
+
+  private func hideNavigationBars() {
+    for tab in HotwireTab.all {
+      guard let navigator = tabBarController.navigator(for: tab) else { continue }
+
+      navigator.rootViewController.setNavigationBarHidden(true, animated: false)
+      navigator.modalRootViewController.setNavigationBarHidden(true, animated: false)
     }
   }
 
